@@ -1,5 +1,5 @@
 - Get balance
-  http://blockexplorer.com/q/addressbalance/1HXQPeqiR4kPUZe5fw6Yjiq73EugKW6BkA
+  https://blockexplorer.com/q/addressbalance/1HXQPeqiR4kPUZe5fw6Yjiq73EugKW6BkA
 
 - Create Bitcoin Address + public/private key pair
   - Bitcoin::network[:address_version]= "00"
