@@ -19,3 +19,7 @@ Finally, BPS intends to define a simple API for 3rd-parties to fulfil payments, 
 - Automatically forward payments onto the owner.
 - Private keys can be encrypted in the database, so the host (e.g. Heroku) does not need to be trusted.
 - Provide basic API so 3rd-parties can request a unique bitcoin payment address, and allow the 3rd-party to provide additional information such as a description and their name.
+
+# Roadmap
+
+View some [example prototype screens shots](bitcoin-payment-service/raw/master/doc/mockups/screens.png).
