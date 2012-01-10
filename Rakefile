@@ -4,4 +4,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-Pay::Application.load_tasks
+BPS::Application.load_tasks
