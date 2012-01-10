@@ -17,15 +17,12 @@ end
 
 group :development, :test do
   gem 'ir_b'
-end
-
-group :development do
+  gem 'steak'
 end
 
 group :test do
-  gem 'rspec'
-  gem 'rspec-rails'
   gem 'capybara'
+  gem 'rspec-rails'
   gem 'selenium-webdriver'
   gem 'database_cleaner'
   gem 'launchy'
