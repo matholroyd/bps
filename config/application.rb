@@ -17,7 +17,7 @@ module BPS
     config.filter_parameters += [:password]
 
     config.generators do |g|
-      g.test_framework :rspec, views: false, controllers: false, helpers: false
+      g.test_framework :rspec, views: false
     end
 
     config.assets.enabled = true
