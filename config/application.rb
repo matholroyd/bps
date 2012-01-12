@@ -11,6 +11,8 @@ end
 
 module BPS
   class Application < Rails::Application
+    config.autoload_paths << Rails.root.join("lib").to_s
+
     config.encoding = "utf-8"
     config.filter_parameters += [:password]
 
