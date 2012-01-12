@@ -12,18 +12,20 @@ feature "Blank Slate", %q{
     page.should have_content "Bitcoin Payment Service"
     page.should have_content "This site has not been locked to an owner"
 
-    # # No email
-    # click_button "Send instructions"
-    # page.should have_content "Email cannot be blank"
-    # 
+    # No email
+    click_button "Send setup instructions"
+    page.within "#user_email_input" do
+      page.should have_content "can't be blank"
+    end
+    
     # # Not an email
     # fill "Email", with: "not an email"
-    # click_button "Send instructions"
+    # click_button "Send setup instructions"
     # page.should have_content "not a valid email address"
     # 
     # # Proper email 
     # fill "Email", with: "owen@example.com"
-    # click_button "Send instructions"
+    # click_button "Send setup instructions"
     # 
     # page.should have_content "Email with instructions sent"
     
