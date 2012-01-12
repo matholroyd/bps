@@ -1,9 +1,0 @@
-- Get balance
-  https://blockexplorer.com/q/addressbalance/1HXQPeqiR4kPUZe5fw6Yjiq73EugKW6BkA
-
-- Create Bitcoin Address + public/private key pair
-  - Bitcoin::network[:address_version]= "00"
-  - Bitcoin::Util.generate_address 
-
-- Publish transaction, when know from + to address + from public/private key pair
-  - ??
