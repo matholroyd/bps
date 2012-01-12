@@ -20,6 +20,9 @@
         <h1>Bitcoin Payment Service</h1>
       <% end %>
     </header>
+    <% if flash[:success] %>
+      <p class="flash success"><%= flash[:success] %></p>
+    <% end %>
     <% if flash[:notice] %>
       <p class="flash notice"><%= flash[:notice] %></p>
     <% end %>
