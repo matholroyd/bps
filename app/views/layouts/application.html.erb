@@ -4,6 +4,7 @@
   <title>BPS</title>
 
   <%= stylesheet_link_tag 'application' %>
+  <!--[if lt IE 8]><%= stylesheet_link_tag '/blueprint/ie'%><![endif]-->
   <!--[if IE 6]><%= stylesheet_link_tag 'ie6' %><![endif]-->
   <!--[if IE 7]><%= stylesheet_link_tag 'ie7' %><![endif]-->
   
@@ -11,7 +12,8 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <div id="outer-container">
+  <%= render partial: 'layouts/dev_bar' if Rails.env.development? %>
+  <div class="container">
     
     <header id="header">
       <%= link_to root_path do %>
