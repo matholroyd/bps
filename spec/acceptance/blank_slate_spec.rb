@@ -25,12 +25,10 @@ feature "Blank Slate", %q{
       page.should have_content "is not valid"
     end
     
-    # # Proper email 
-    # fill "Email", with: "owen@example.com"
-    # click_button "Send setup instructions"
-    # 
-    # page.should have_content "Email with instructions sent"
-    
+    # Proper email 
+    fill_in "Email", with: "owen@example.com"
+    click_button "Send setup instructions"
+    page.should have_content "Email with instructions sent"
   end
   
 end

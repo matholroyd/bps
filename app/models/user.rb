@@ -10,6 +10,11 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :email
   validates :email, email: true
   
+  def set_random_password
+    self.password = BPS::Services.random_alphanum(12)
+    self.password_confirmation = self.password
+  end
+  
   def self.authenticate(email, password)
     user = find_by_email(email)
     if user && user.password_hash == BCrypt::Engine.hash_secret(password, user.password_salt)

@@ -11,8 +11,22 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-
-<%= yield %>
-
+  <div id="outer-container">
+    
+    <header id="header">
+      <%= link_to root_path do %>
+        <h1>Bitcoin Payment Service</h1>
+      <% end %>
+    </header>
+    <% if flash[:notice] %>
+      <p class="flash notice"><%= flash[:notice] %></p>
+    <% end %>
+    <% if flash[:error] %>
+      <p class="flash error"><%= flash[:error] %></p>
+    <% end %>    
+    <section id="main">
+      <%= yield %>
+    </section>
+  </div>
 </body>
 </html>
