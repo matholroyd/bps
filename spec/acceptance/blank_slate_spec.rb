@@ -6,7 +6,7 @@ feature "Blank Slate", %q{
   I want the to be led through the setup process and have the site locked to me
 } do
 
-  scenario "Visiting blank site then setting up" do
+  scenario "Blank site allows first user to send setup email to owner" do
     visit "/"
     
     page.should have_content "Bitcoin Payment Service"
@@ -29,6 +29,12 @@ feature "Blank Slate", %q{
     fill_in "Email", with: "owen@example.com"
     click_button "Send setup instructions"
     page.should have_content "Email with instructions sent"
+
+    "owen@example.com".should receive_email(subject: "Setup instuction for Bitcoin Payment Service")
+    email_to("owen@example.com").body.should include("setup your Bitcoin Payment Service")
+
+    click_link_in_email "setup your BPS now", to: "owen@example.com"
+    # page.should have_content "Setup you Bitcoin Payment Service"
   end
   
 end

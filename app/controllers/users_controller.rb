@@ -7,6 +7,7 @@ class UsersController < ApplicationController
     @user = User.new(params[:user])
     @user.set_random_password
     if @user.save
+      UserMailer.setup_instructions(@user).deliver
       flash[:success] = "Email with instructions sent"
       redirect_to root_path
     else
