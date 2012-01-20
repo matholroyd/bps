@@ -34,7 +34,7 @@ feature "Blank Slate", %q{
     email_to("owen@example.com").body.should include("setup your Bitcoin Payment Service")
 
     click_link_in_email "setup your BPS now", to: "owen@example.com"
-    # page.should have_content "Setup you Bitcoin Payment Service"
+    page.should have_content "Setup you Bitcoin Payment Service"
   end
   
 end
