@@ -39,10 +39,32 @@ feature "Blank Slate", %q{
     # Clickling link a second time still works while site has not been setup
     click_link_in_email "setup your BPS now", to: "owen@example.com"
     page.should have_content "Setup you Bitcoin Payment Service"
+
+    # Empty name
+    click_button "Continue"
+    page.within "#site_name_input" do
+      page.should have_content "can't be blank"
+    end
     
+    # Filled out site name
     fill_in "Site name", with: "Owen's BPS"
     click_button "Continue"
 
+    # Empty passwords
+    click_button "Continue"
+    page.within "#user_password_input" do
+      page.should have_content "can't be blank"
+    end
+
+    # Passwords do not match
+    fill_in "Password", with: "aaaaaaa"
+    fill_in "Password confirmation", with: "bbbbbbbbbbb"
+    click_button "Continue"
+    page.within "#user_password_input" do
+      page.should have_content "doesn't match"
+    end
+
+    # Proper password
     fill_in "Password", with: "something secret"
     fill_in "Password confirmation", with: "something secret"
     click_button "Continue"

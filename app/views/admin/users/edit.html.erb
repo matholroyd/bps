@@ -2,6 +2,7 @@
 
 <%= semantic_form_for @user, url: admin_user_path do |f| %>
   <%= f.inputs do %> 
+    <%= hidden_field_tag :force_set_password, true %>
     <%= f.input :password %>
     <%= f.input :password_confirmation %>
   <% end %>
