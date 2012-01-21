@@ -64,6 +64,14 @@ feature "Blank Slate", %q{
       page.should have_content "doesn't match"
     end
 
+    # Passwords too short
+    fill_in "Password", with: "1234567"
+    fill_in "Password confirmation", with: "1234567"
+    click_button "Continue"
+    page.within "#user_password_input" do
+      page.should have_content "too short"
+    end
+
     # Proper password
     fill_in "Password", with: "something secret"
     fill_in "Password confirmation", with: "something secret"
