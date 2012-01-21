@@ -41,9 +41,10 @@ feature "Blank Slate", %q{
     page.should have_content "Setup you Bitcoin Payment Service"
     
     fill_in "Site name", with: "Owen's BPS"
+    click_button "Continue"
+
     fill_in "Password", with: "something secret"
     fill_in "Password confirmation", with: "something secret"
-    click_button "Save"
     
     # page.should have_content "As the owner, your password is really important"
     # page.should have_content "If you lose it, you lose access to you bitcoins"
