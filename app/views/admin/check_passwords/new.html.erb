@@ -1,0 +1,15 @@
+<h1>Verify your password</h1>
+<p>
+  As the owner, your password is really important.<br />
+  If you lose it, you lose access to you bitcoins.<br />
+  Type in your password again, to make sure you know it.
+</p>
+
+<%= semantic_form_for @user, url: admin_user_check_password_path(@user) do |f| %>
+  <%= f.inputs do %> 
+    <%= f.input :password %>
+  <% end %>
+  <%= f.buttons do %>
+    <%= f.commit_button 'Verify' %>
+  <% end %>
+<% end %>

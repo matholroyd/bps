@@ -45,11 +45,12 @@ feature "Blank Slate", %q{
 
     fill_in "Password", with: "something secret"
     fill_in "Password confirmation", with: "something secret"
+    click_button "Continue"
     
-    # page.should have_content "As the owner, your password is really important"
-    # page.should have_content "If you lose it, you lose access to you bitcoins"
-    # page.should have_content "Type in your password again, to make sure you know it"
-    # 
+    page.should have_content "As the owner, your password is really important"
+    page.should have_content "If you lose it, you lose access to you bitcoins"
+    page.should have_content "Type in your password again, to make sure you know it"
+    
     # fill_in "Password", with: "not the right password"
   end
   
