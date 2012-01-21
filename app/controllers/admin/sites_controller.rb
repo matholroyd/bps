@@ -1,28 +1,18 @@
-class Admin::SitesController < ApplicationController
+class Admin::SitesController < Admin::AdminController
   
   def new
     @site = Site.new
   end
   
   def create 
-    @user = find_user 
     @site = Site.new params[:site]
-    if @site.valid? && @user.valid?
-      @site.save
-      @user.save
-      redirect_to root_path
+    if @site.save
+      redirect_to edit_admin_user_path(find_user)
     else
       render :new
     end
   end
-  
-  private 
-  
-  def find_user
-    result = User.first
-    result.update_attributes params[:site].delete(:user)
-    result
-  end
+    
   
   
 end

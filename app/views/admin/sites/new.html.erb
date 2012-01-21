@@ -5,12 +5,7 @@
     <%= f.input :name, label: "Site name" %>
   <% end %>
   
-  <%= f.inputs :for => :user do |user_f| %>
-    <%= user_f.input :password %>
-    <%= user_f.input :password_confirmation %>
-  <% end %>
-  
   <%= f.buttons do %>
-    <%= f.commit_button 'Save' %>
+    <%= f.commit_button 'Continue' %>
   <% end %>
 <% end %>
