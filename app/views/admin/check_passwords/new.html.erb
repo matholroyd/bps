@@ -11,5 +11,8 @@
   <% end %>
   <%= f.buttons do %>
     <%= f.commit_button "Verify" %>
+    <li class="cancel-link">
+      <%= link_to "Reset password", edit_admin_user_path(@user) %>
+    </li> 
   <% end %>
 <% end %>

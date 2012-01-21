@@ -73,8 +73,8 @@ feature "Blank Slate", %q{
     end
 
     # Proper password
-    fill_in "Password", with: "something secret"
-    fill_in "Password confirmation", with: "something secret"
+    fill_in "Password", with: "password 1"
+    fill_in "Password confirmation", with: "password 1"
     click_button "Continue"
     page.should have_content "As the owner, your password is really important"
     page.should have_content "If you lose it, you lose access to you bitcoins"
@@ -87,8 +87,20 @@ feature "Blank Slate", %q{
       page.should have_content "not correct"
     end
 
+    # Owner tries 2nd time
+    click_link "Reset password"
+    fill_in "Password", with: "password 2"
+    fill_in "Password confirmation", with: "password 2"
+    click_button "Continue"
+
+    fill_in "Password", with: "not the right password 2"
+    click_button "Verify"
+    page.within "#check_password_password_input" do
+      page.should have_content "not correct"
+    end
+        
     # Type in proper password
-    fill_in "Password", with: "something secret"
+    fill_in "Password", with: "password 2"
     click_button "Verify"
     page.should have_content "The site is now locked to you"
     page.should have_content "Keep your password safe"
