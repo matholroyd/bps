@@ -3,9 +3,13 @@
 <%= semantic_form_for @site, url: admin_site_path do |f| %>
   <%= f.inputs do %> 
     <%= f.input :name, label: "Site name" %>
-    <%= f.input :password %>
-    <%= f.input :password_confirmation %>
   <% end %>
+  
+  <%= f.inputs :for => :user do |user_f| %>
+    <%= user_f.input :password %>
+    <%= user_f.input :password_confirmation %>
+  <% end %>
+  
   <%= f.buttons do %>
     <%= f.commit_button 'Save' %>
   <% end %>
