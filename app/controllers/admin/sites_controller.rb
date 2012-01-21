@@ -1,5 +1,4 @@
 class Admin::SitesController < Admin::AdminController
-  
   def new
     @site = Site.new
   end
@@ -12,7 +11,8 @@ class Admin::SitesController < Admin::AdminController
       render :new
     end
   end
-    
   
+  def setup_successful
+  end
   
 end

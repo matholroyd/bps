@@ -12,6 +12,7 @@ end
 module BPS
   class Application < Rails::Application
     config.autoload_paths += %W(
+      #{config.root}/app/presenters
       #{config.root}/lib
     )
 

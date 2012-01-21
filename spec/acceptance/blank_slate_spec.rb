@@ -51,7 +51,11 @@ feature "Blank Slate", %q{
     page.should have_content "If you lose it, you lose access to you bitcoins"
     page.should have_content "Type in your password again, to make sure you know it"
     
-    # fill_in "Password", with: "not the right password"
+    fill_in "Password", with: "something secret"
+    click_button "Verify"
+    
+    page.should have_content "The site is now locked to you"
+    page.should have_content "Keep your password safe"
   end
   
 end

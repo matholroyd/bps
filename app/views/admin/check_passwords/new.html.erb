@@ -5,11 +5,11 @@
   Type in your password again, to make sure you know it.
 </p>
 
-<%= semantic_form_for @user, url: admin_user_check_password_path(@user) do |f| %>
+<%= semantic_form_for @check_password, url: admin_user_check_password_path(@user) do |f| %>
   <%= f.inputs do %> 
     <%= f.input :password %>
   <% end %>
   <%= f.buttons do %>
-    <%= f.commit_button 'Verify' %>
+    <%= f.commit_button "Verify" %>
   <% end %>
 <% end %>

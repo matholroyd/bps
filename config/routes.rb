@@ -4,7 +4,9 @@ BPS::Application.routes.draw do
   resources :users, only: [:new, :create]
 
   namespace :admin do
-    resource :site    
+    resource :site do
+      get :setup_successful, on: :member
+    end
     resources :users do
       resource :check_password, only: [:new, :create]
     end
