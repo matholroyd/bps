@@ -1,22 +1,13 @@
 class CheckPassword < Presenter
-  def_delegators :user, :password, :password=
-  
-  def self.model_name
-    result = 'check_password'
-    def result.singular
-      'check_password'
-    end
-    def result.param_key
-      ''
-    end
-    result
+  attr_accessor :password, :user
+
+  validates :user, presence: true
+  validates_each :password do |record, attr, value|
+    record.errors.add(attr, "is not correct") if User.authenticate(record.user.email, value).nil?
   end
   
-  def to_key
-    ['a']
+  def save
+    valid?
   end
-      
-  def user
-    @user ||= User.new
-  end
+  
 end

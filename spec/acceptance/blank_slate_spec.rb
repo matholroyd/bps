@@ -64,7 +64,7 @@ feature "Blank Slate", %q{
       page.should have_content "doesn't match"
     end
 
-    # Passwords too short
+    # Password too short
     fill_in "Password", with: "1234567"
     fill_in "Password confirmation", with: "1234567"
     click_button "Continue"
@@ -76,14 +76,20 @@ feature "Blank Slate", %q{
     fill_in "Password", with: "something secret"
     fill_in "Password confirmation", with: "something secret"
     click_button "Continue"
-    
     page.should have_content "As the owner, your password is really important"
     page.should have_content "If you lose it, you lose access to you bitcoins"
     page.should have_content "Type in your password again, to make sure you know it"
-    
+
+    # Owner forgets password
+    fill_in "Password", with: "not the right password"
+    click_button "Verify"
+    page.within "#check_password_password_input" do
+      page.should have_content "not correct"
+    end
+
+    # Type in proper password
     fill_in "Password", with: "something secret"
     click_button "Verify"
-    
     page.should have_content "The site is now locked to you"
     page.should have_content "Keep your password safe"
   end

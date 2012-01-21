@@ -4,6 +4,11 @@ class Admin::CheckPasswordsController < Admin::AdminController
   end
   
   def create
-   redirect_to setup_successful_admin_site_path
+    @check_password = CheckPassword.new params[:check_password].merge(user: find_user)
+    if @check_password.save
+      redirect_to setup_successful_admin_site_path
+    else
+      render :new
+    end
   end
 end
