@@ -35,6 +35,21 @@ feature "Blank Slate", %q{
 
     click_link_in_email "setup your BPS now", to: "owen@example.com"
     page.should have_content "Setup you Bitcoin Payment Service"
+
+    # Clickling link a second time still works while site has not been setup
+    click_link_in_email "setup your BPS now", to: "owen@example.com"
+    page.should have_content "Setup you Bitcoin Payment Service"
+    
+    fill_in "Site name", with: "Owen's BPS"
+    fill_in "Password", with: "something secret"
+    fill_in "Password confirmation", with: "something secret"
+    click_button "Save"
+    
+    page.should have_content "As the owner, your password is really important"
+    page.should have_content "If you lose it, you lose access to you bitcoins"
+    page.should have_content "Type in your password again, to make sure you know it"
+    
+    fill_in "Password", with: "not the right password"
   end
   
 end
