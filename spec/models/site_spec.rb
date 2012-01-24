@@ -16,12 +16,15 @@ describe Site do
   describe 'locked?' do
     it do
       Site.should_not be_locked_to_owner
+      Site.should     be_unlocked
 
       site = Site.make 
       Site.should_not be_locked_to_owner
+      Site.should     be_unlocked
       
       site.lock_to_owner!
-      Site.should be_locked_to_owner
+      Site.should     be_locked_to_owner
+      Site.should_not be_unlocked
     end
     
   end

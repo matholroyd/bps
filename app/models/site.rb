@@ -13,7 +13,11 @@ class Site < ActiveRecord::Base
   end
   
   def self.locked_to_owner?
-    false || Site.first.andand.locked_to_owner? 
+    !unlocked?
+  end
+
+  def self.unlocked?
+    Site.first.nil? || Site.first.unlocked?
   end
   
   def self.lock_to_owner!
