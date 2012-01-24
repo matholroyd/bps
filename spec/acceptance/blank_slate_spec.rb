@@ -116,6 +116,9 @@ feature "Blank Slate", %q{
     using_session 'other person' do
       visit root_path
       page.should have_content "site has not been locked"
+      
+      visit new_user_path
+      page.should have_button("Send setup instructions")
     end
   end
   
@@ -123,6 +126,9 @@ feature "Blank Slate", %q{
     using_session 'other person' do
       visit root_path
       page.should have_no_content "site has not been locked"
+
+      visit new_user_path
+      page.should have_no_button("Send setup instructions")
     end
   end
 end

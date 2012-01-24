@@ -1,4 +1,6 @@
 class UsersController < ApplicationController 
+  before_filter :ensure_site_unlocked
+  
   def new
     @user = User.new
   end
