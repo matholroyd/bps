@@ -26,6 +26,10 @@ class User < ActiveRecord::Base
     end
   end
   
+  def self.setup?
+    User.first.present?
+  end
+  
   private
   
   def encrypt_password

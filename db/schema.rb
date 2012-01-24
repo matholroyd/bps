@@ -15,6 +15,7 @@ ActiveRecord::Schema.define(:version => 20120121031914) do
 
   create_table "sites", :force => true do |t|
     t.string   "name",       :null => false
+    t.string   "state",      :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
