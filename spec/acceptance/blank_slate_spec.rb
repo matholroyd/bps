@@ -7,7 +7,7 @@ feature "Blank Slate", %q{
 } do
 
   scenario "Blank site allows first user to send setup email to owner" do
-    visit "/"
+    visit root_path
     
     page.should have_content "Bitcoin Payment Service"
     page.should have_content "This site has not been locked to an owner"
@@ -29,12 +29,14 @@ feature "Blank Slate", %q{
     fill_in "Email", with: "owen@example.com"
     click_button "Send setup instructions"
     page.should have_content "Email with instructions sent"
-
+    
     "owen@example.com".should receive_email(subject: "Setup instuction for Bitcoin Payment Service")
     email_to("owen@example.com").body.should include("setup your Bitcoin Payment Service")
 
     click_link_in_email "setup your BPS now", to: "owen@example.com"
     page.should have_content "Setup you Bitcoin Payment Service"
+
+    site_not_locked
 
     # Clickling link a second time still works while site has not been setup
     click_link_in_email "setup your BPS now", to: "owen@example.com"
@@ -98,12 +100,29 @@ feature "Blank Slate", %q{
     page.within "#check_password_password_input" do
       page.should have_content "not correct"
     end
+    
+    site_not_locked
         
     # Type in proper password
     fill_in "Password", with: "password 2"
     click_button "Verify"
     page.should have_content "The site is now locked to you"
     page.should have_content "Keep your password safe"
+    
+    site_locked
   end
   
+  def site_not_locked
+    using_session 'other person' do
+      visit root_path
+      page.should have_content "site has not been locked"
+    end
+  end
+  
+  def site_locked
+    using_session 'other person' do
+      visit root_path
+      page.should have_no_content "site has not been locked"
+    end
+  end
 end

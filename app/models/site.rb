@@ -15,6 +15,10 @@ class Site < ActiveRecord::Base
   def self.locked_to_owner?
     false || Site.first.andand.locked_to_owner? 
   end
+  
+  def self.lock_to_owner!
+    Site.first.lock_to_owner!
+  end
     
   
 end

@@ -8,6 +8,7 @@ class Admin::CheckPasswordsController < Admin::AdminController
     @user = find_user
     @check_password = CheckPassword.new params[:check_password].merge(user: @user)
     if @check_password.save
+      Site.lock_to_owner!
       redirect_to setup_successful_admin_site_path
     else
       render :new

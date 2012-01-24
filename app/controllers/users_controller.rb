@@ -9,7 +9,7 @@ class UsersController < ApplicationController
     if @user.save
       UserMailer.setup_instructions(@user).deliver
       flash[:success] = "Email with instructions sent"
-      redirect_to root_path
+      redirect_to new_user_path
     else
       flash.now[:error] = "There was a problem with the user"
       render 'new'
