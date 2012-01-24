@@ -1,4 +1,5 @@
 class Admin::SitesController < Admin::AdminController
+  
   def new
     @site = Site.new
   end

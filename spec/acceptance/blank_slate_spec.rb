@@ -119,6 +119,10 @@ feature "Blank Slate", %q{
       
       visit new_user_path
       page.should have_button("Send setup instructions")
+
+      visit owner_setup_site_path
+      page.should have_content("Site name")
+      page.should have_button("Continue")
     end
   end
   
@@ -129,6 +133,10 @@ feature "Blank Slate", %q{
 
       visit new_user_path
       page.should have_no_button("Send setup instructions")
+
+      visit owner_setup_site_path
+      page.should have_no_content("Site name")
+      page.should have_no_button("Continue")
     end
   end
 end
