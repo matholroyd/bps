@@ -14,24 +14,26 @@
 <body>
   <%= render partial: 'layouts/dev_bar' if Rails.env.development? %>
   <div class="container">
+    <div class="prepend-2 span-20 append-2 last">
     
-    <header id="header">
-      <%= link_to root_path do %>
-        <h1>Bitcoin Payment Service</h1>
+      <header id="header">
+        <%= link_to root_path do %>
+          <h1>Bitcoin Payment Service</h1>
+        <% end %>
+      </header>
+      <% if flash[:success] %>
+        <p class="flash success"><%= flash[:success] %></p>
       <% end %>
-    </header>
-    <% if flash[:success] %>
-      <p class="flash success"><%= flash[:success] %></p>
-    <% end %>
-    <% if flash[:notice] %>
-      <p class="flash notice"><%= flash[:notice] %></p>
-    <% end %>
-    <% if flash[:error] %>
-      <p class="flash error"><%= flash[:error] %></p>
-    <% end %>    
-    <section id="main">
-      <%= yield %>
-    </section>
+      <% if flash[:notice] %>
+        <p class="flash notice"><%= flash[:notice] %></p>
+      <% end %>
+      <% if flash[:error] %>
+        <p class="flash error"><%= flash[:error] %></p>
+      <% end %>    
+      <section id="main">
+        <%= yield %>
+      </section>
+    </div>
   </div>
 </body>
 </html>
