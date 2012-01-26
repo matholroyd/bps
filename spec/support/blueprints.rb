@@ -8,6 +8,7 @@ Sham.title { Faker::Lorem.sentence }
 Sham.body  { Faker::Lorem.paragraph }
 
 User.blueprint do
+  name
   email
   password               { 'super secret' }
   password_confirmation  { 'super secret' }
