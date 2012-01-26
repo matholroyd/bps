@@ -12,6 +12,7 @@ end
 module BPS
   class Application < Rails::Application
     config.autoload_paths += %W(
+      #{config.root}/app/presenters
       #{config.root}/lib
     )
 
@@ -24,5 +25,10 @@ module BPS
 
     config.assets.enabled = true
     config.assets.version = '1.0'
+    
+    config.action_mailer.default_url_options = {
+      host: "localhost",
+      port: 3000
+    }
   end
 end

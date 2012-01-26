@@ -1,0 +1,11 @@
+<h1>Setup you Bitcoin Payment Service</h1>
+
+<%= semantic_form_for @site, url: admin_site_path do |f| %>
+  <%= f.inputs do %> 
+    <%= f.input :name, label: "Site name" %>
+  <% end %>
+  
+  <%= f.buttons do %>
+    <%= f.commit_button 'Continue' %>
+  <% end %>
+<% end %>

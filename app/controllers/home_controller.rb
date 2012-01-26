@@ -1,6 +1,8 @@
 class HomeController < ApplicationController
   def index
-    unless User.exists?
+    if Site.locked_to_owner?
+      # Display home page as normal
+    else
       redirect_to new_user_path
     end
   end

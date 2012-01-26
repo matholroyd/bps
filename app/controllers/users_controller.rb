@@ -1,4 +1,6 @@
 class UsersController < ApplicationController 
+  before_filter :ensure_site_unlocked
+  
   def new
     @user = User.new
   end
@@ -7,11 +9,13 @@ class UsersController < ApplicationController
     @user = User.new(params[:user])
     @user.set_random_password
     if @user.save
+      UserMailer.setup_instructions(@user).deliver
       flash[:success] = "Email with instructions sent"
-      redirect_to root_path
+      redirect_to new_user_path
     else
       flash.now[:error] = "There was a problem with the user"
       render 'new'
     end
   end
+  
 end
