@@ -9,8 +9,8 @@ Sham.body  { Faker::Lorem.paragraph }
 
 User.blueprint do
   email
-  password               { 'super secret'}
-  password_confirmation  { 'super secret'}
+  password               { 'super secret' }
+  password_confirmation  { 'super secret' }
 end
 
 Site.blueprint do
