@@ -6,7 +6,7 @@ describe User do
       User.make
     end
 
-    %w{email password}.each do |field|
+    %w{email password name}.each do |field|
       it "requires #{field}" do
         User.make_unsaved(field => nil).should_not be_valid
       end
