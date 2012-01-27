@@ -1,5 +1,6 @@
 class Bps.Models.Payment extends Backbone.Model
   paramRoot: 'payment'
+  urlRoot: '/payments'
 
   defaults:
     bitcoin_address: null

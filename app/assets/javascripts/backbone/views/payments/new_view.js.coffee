@@ -19,22 +19,23 @@ class Bps.Views.Payments.NewView extends Backbone.View
   save: (e) ->
     e.preventDefault()
     e.stopPropagation()
-  
-  #   @model.unset("errors")
-  # 
-  #   @collection.create(@model.toJSON(),
-  #     success: (payment) =>
-  #       @model = payment
-  #       window.location.hash = "/#{@model.id}"
-  # 
-  #     error: (post, jqXHR) =>
-  #       @model.set({errors: $.parseJSON(jqXHR.responseText)})
-  #   )
+    @model.unset("errors")
+    
+    @model.save(@model.toJSON(), {
+      success: (payment) =>
+        @model = payment
+        window.location.hash = "/finish"
+        new Bps.Views.Payments.FinishView(model: @model, el: "#payments", user_full_name: @user_full_name).render()
+      errors: (post, jqXHR) =>
+        @model.set({errors: $.parseJSON(jqXHR.responseText)})
+    })
+    
 
   render: ->
     hash = @model.toJSON()
     hash.user_full_name = @user_full_name
     $(@el).html(@template(hash))
+
     this.$("form").backboneLink(@model)
   
     return this

@@ -12,6 +12,18 @@ class PaymentsController < ApplicationController
   def new
   end
   
+  def create
+    @payment = Payment.new(params[:payment])
+    @payment.bitcoin_address = Bitcoin.random_address
+
+    if @payment.save
+      render json: @payment, status: :created
+    else
+      render json: @payment.errors, status: :unprocessable_entity 
+    end
+    
+  end
+  
   private 
   
   def find_user
