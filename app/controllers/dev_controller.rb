@@ -1,5 +1,3 @@
-require "#{Rails.root}/spec/support/blueprints"
-
 class DevController < ApplicationController
   if Rails.env.development?
     
@@ -11,9 +9,18 @@ class DevController < ApplicationController
     
     def setup_site
       Site.destroy_all
-      Site.make
+      site = Site.new name: "Bob's BPS"
+      DBC.assert(site.save)
+      
       User.destroy_all
-      User.make
+      user = User.new( 
+        full_name: "Bob Smith", 
+        email: "bob@smith.com", 
+        password: "secretsecret",
+        password_confirmation: "secretsecret"
+      )
+      DBC.assert(user.save)
+      
       Site.first.lock_to_owner!
       redirect_to root_path
     end
