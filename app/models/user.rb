@@ -1,10 +1,10 @@
 class User < ActiveRecord::Base
-  attr_accessible :email, :password, :password_confirmation
+  attr_accessible :full_name, :email, :password, :password_confirmation
   
   attr_accessor :password
   before_save :encrypt_password
   
-  validates_presence_of :password, :on => :create
+  validates_presence_of :password, on: :create
   validates_confirmation_of :password
   validates :password, length: {minimum: 8},  if: "password.present?"
 

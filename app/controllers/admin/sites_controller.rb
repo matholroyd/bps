@@ -7,7 +7,7 @@ class Admin::SitesController < Admin::AdminController
   def create 
     @site = Site.new params[:site]
     if @site.save
-      redirect_to edit_admin_user_path(find_user)
+      redirect_to edit_admin_user_path(current_user)
     else
       render :new
     end
