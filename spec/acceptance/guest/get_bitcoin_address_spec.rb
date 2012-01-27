@@ -18,6 +18,13 @@ feature "Get bitcoin address", %q{
     fill_in 'Name', with: "Faye Smith"
     fill_in 'Email', with: "faye@smith.com"
     click_button "Finish payment"
-    
+
+    page.should have_content "send your payment to the following address"
+    page.should have_content last_bitcoin_address
+  end
+  
+  def last_bitcoin_address
+    Payment.count.should > 0
+    Payment.last.bitcoin_address
   end
 end
