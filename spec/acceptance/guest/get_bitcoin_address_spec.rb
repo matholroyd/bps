@@ -8,10 +8,8 @@ feature "Get bitcoin address", %q{
 
   let!(:owner) { site_setup_and_locked_to_owner }
 
-  scenario "Guest request a bitcoin address so send bitcoins to the owner" do
+  scenario "Guest request a bitcoin address so send bitcoins to the owner", js: true do
     visit root_path
-    
     page.should have_content "This site is an online payment service for #{owner.full_name}."
-    
   end
 end
