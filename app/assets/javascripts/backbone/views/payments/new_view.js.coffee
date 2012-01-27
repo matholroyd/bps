@@ -26,16 +26,26 @@ class Bps.Views.Payments.NewView extends Backbone.View
         @model = payment
         window.location.hash = "/finish"
         new Bps.Views.Payments.FinishView(model: @model, el: "#payments", user_full_name: @user_full_name).render()
-      errors: (post, jqXHR) =>
+      error: (post, jqXHR) =>
         @model.set({errors: $.parseJSON(jqXHR.responseText)})
     })
     
 
-  render: ->
+  render: ->    
     hash = @model.toJSON()
     hash.user_full_name = @user_full_name
     $(@el).html(@template(hash))
 
+    if @model.get('errors')?
+      @displayErrors @model.get('errors')
+      
     this.$("form").backboneLink(@model)
   
     return this
+    
+  displayErrors: (errors) ->
+    addError = (field) ->
+     $("#payment_#{field}_input").addClass('error')
+     $("#payment_#{field}_input").append("<p class=\"inline-errors\">#{errors[field]}</p>")
+    
+    addError field for field in _.keys(errors)

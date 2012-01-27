@@ -12,8 +12,14 @@ feature "Get bitcoin address", %q{
     visit root_path
     page.should have_content "This site is an online payment service for #{owner.full_name}."
     click_link "Make payment"
-    
+
     page.should have_content "To make a payment to #{owner.full_name}"
+  
+    # Give fill out nothing
+    click_button "Finish payment"
+    page.should have_content "can't be blank"
+    
+    # Fill out description and other fields
     fill_in 'Description', with: "Some money for dinner last night"
     fill_in 'Name', with: "Faye Smith"
     fill_in 'Email', with: "faye@smith.com"

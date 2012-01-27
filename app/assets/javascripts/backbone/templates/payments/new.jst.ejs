@@ -4,15 +4,15 @@
 <form id="new-payment" name="payment" class="formtastic">
   <fieldset class="inputs">
     <ol>
-      <li class="input">
+      <li class="input" id="payment_description_input">
         <label class="label" for="description">Description:</label>
         <textarea name="description" id="description"><%= description %></textarea>
       </li>
-      <li class="input">
+      <li class="input" id="payment_namen_input">
         <label class="label" for="name">Name:</label>
         <input type="text" name="name" id="name" value="<%= name %>" >
       </li>
-      <li class="input">
+      <li class="input" id="payment_email_input">
         <label class="label" for="email">Email:</label>
         <input type="email" name="email" id="email" value="<%= email %>" >
       </li>
