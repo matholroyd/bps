@@ -1,0 +1,19 @@
+<h1>Make a payment</h1>
+<p>To make a payment to <%= user_full_name %>, please fill out the details below.</p>
+
+<form id="new-payment" name="payment">
+  <div class="field">
+    <label for="description">Description:</label>
+    <input type="text" name="description" id="description" value="<%= description %>" >
+  </div>
+
+  <div class="field">
+    <label for="name">Name:</label>
+    <input type="text" name="name" id="name" value="<%= name %>" >
+  </div>
+
+  <div class="actions">
+    <input type="submit" value="Finish payment" />
+  </div>
+
+</form>

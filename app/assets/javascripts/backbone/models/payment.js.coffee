@@ -3,6 +3,8 @@ class Bps.Models.Payment extends Backbone.Model
 
   defaults:
     bitcoin_address: null
+    description: "something"
+    name: "fsdfas"
 
 class Bps.Collections.PaymentsCollection extends Backbone.Collection
   model: Bps.Models.Payment
