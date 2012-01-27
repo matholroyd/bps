@@ -14,5 +14,10 @@ feature "Get bitcoin address", %q{
     click_link "Make payment"
     
     page.should have_content "To make a payment to #{owner.full_name}"
+    fill_in 'Description', with: "Some money for dinner last night"
+    fill_in 'Name', with: "Faye Smith"
+    fill_in 'Email', with: "faye@smith.com"
+    click_button "Finish payment"
+    
   end
 end
