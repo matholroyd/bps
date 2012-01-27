@@ -3,8 +3,12 @@ class Bps.Routers.PaymentsRouter extends Backbone.Router
     @user_full_name = options.user_full_name
     
   routes:
+    "index"     : "index"
     "/new"      : "newPayment"
-    ".*"        : "newPayment"
+    ".*"        : "index"
+
+  index: ->
+    new Bps.Views.Payments.IndexView(el: "#payments", user_full_name: @user_full_name).render()
 
   newPayment: ->
     new Bps.Views.Payments.NewView(el: "#payments", user_full_name: @user_full_name).render()

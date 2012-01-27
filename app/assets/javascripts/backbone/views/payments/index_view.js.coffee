@@ -1,7 +1,7 @@
 Bps.Views.Payments ||= {}
 
-class Bps.Views.Payments.NewView extends Backbone.View
-  template: JST["backbone/templates/payments/new"]
+class Bps.Views.Payments.IndexView extends Backbone.View
+  template: JST["backbone/templates/payments/index"]
 
   # events:
   #   "submit #new-post": "save"
