@@ -21,4 +21,5 @@ end
 
 Payment.blueprint do
   bitcoin_address
+  description { Sham.body }
 end
