@@ -5,9 +5,9 @@ class BPS.Routers.PaymentsRouter extends Backbone.Router
     @user_full_name = options.user_full_name
     
   routes:
-    "index"     : "index"
-    "/new"      : "newPayment"
-    "/:id"      : "show"
+    "index"              : "index"
+    "/payments/new"      : "newPayment"
+    "/payments/:id"      : "show"
     ".*"        : "index"
 
   index: ->
@@ -23,4 +23,7 @@ class BPS.Routers.PaymentsRouter extends Backbone.Router
       success: ->
         @view = new BPS.Views.Payments.ShowView(model: payment)
         $("#payments").html(@view.render().el)
-    
+      error: ->
+        PaymentsRouter.prototype.navigate("", true)
+        
+        

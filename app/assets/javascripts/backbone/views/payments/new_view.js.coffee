@@ -22,7 +22,7 @@ class BPS.Views.Payments.NewView extends Backbone.View
     @collection.create(@model.toJSON(),
       success: (post) =>
         @model = post
-        window.location.hash = "/#{@model.id}"
+        window.location.hash = "/payments/#{@model.id}"
 
       error: (post, jqXHR) =>
         @model.set({errors: $.parseJSON(jqXHR.responseText)})
