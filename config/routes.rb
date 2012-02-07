@@ -5,7 +5,7 @@ BPS::Application.routes.draw do
   get "log_in" => "sessions#new", as: "log_in"
   get "setup_site" => "sessions#owner_setup_site", as: "owner_setup_site"
 
-  resources :payments, only: [:index, :new, :create]
+  resources :payments, only: [:index, :new, :create, :show]
   resources :users, only: [:new, :create]
 
   namespace :admin do

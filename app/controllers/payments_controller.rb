@@ -12,6 +12,11 @@ class PaymentsController < ApplicationController
   def new
   end
   
+  def show
+    @payment = Payment.find(params[:id])
+    render json: @payment
+  end
+  
   def create
     @payment = Payment.new(params[:payment])
     @payment.bitcoin_address = Bitcoin.random_address

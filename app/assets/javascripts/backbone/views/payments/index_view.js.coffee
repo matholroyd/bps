@@ -1,6 +1,6 @@
-Bps.Views.Payments ||= {}
+BPS.Views.Payments ||= {}
 
-class Bps.Views.Payments.IndexView extends Backbone.View
+class BPS.Views.Payments.IndexView extends Backbone.View
   template: JST["backbone/templates/payments/index"]
 
   constructor: (options) ->
