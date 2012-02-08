@@ -17,6 +17,9 @@ module BPS
       #{config.root}/lib
     )
 
+    config.assets.enabled = true
+    config.assets.version = '1.0'    
+
     config.encoding = "utf-8"
     config.filter_parameters += [:password]
 
@@ -24,8 +27,6 @@ module BPS
       g.test_framework :rspec, views: false
     end
 
-    config.assets.enabled = true
-    config.assets.version = '1.0'
     
     config.action_mailer.default_url_options = {
       host: "localhost",

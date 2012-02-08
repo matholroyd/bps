@@ -14,7 +14,7 @@ class PaymentsController < ApplicationController
   
   def show
     @payment = Payment.find(params[:id])
-    render json: @payment
+    render json: @payment.to_json(only: Payment.safe_fields)
   end
   
   def create
@@ -22,7 +22,7 @@ class PaymentsController < ApplicationController
     @payment.bitcoin_address = Bitcoin.random_address
 
     if @payment.save
-      render json: @payment, status: :created
+      render json: @payment.to_json(only: Payment.safe_fields), status: :created
     else
       render json: @payment.errors, status: :unprocessable_entity 
     end

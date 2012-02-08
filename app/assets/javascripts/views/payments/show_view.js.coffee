@@ -1,7 +1,7 @@
 BPS.Views.Payments ||= {}
 
 class BPS.Views.Payments.ShowView extends Backbone.View
-  template: JST["backbone/templates/payments/show"]
+  template: JST["templates/payments/show"]
 
   render:  ->
     $(@el).html(@template(@model.toJSON()))

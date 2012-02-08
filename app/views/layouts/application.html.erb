@@ -12,13 +12,12 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <%= render partial: 'layouts/dev_bar' if Rails.env.development? %>
   <div class="container">
-    <div class="prepend-2 span-20 append-2 last">
+    <div class="prepend-3 span-15 append-6 last">
     
       <header id="header">
         <%= link_to root_path do %>
-          <h1>Bitcoin Payment Service</h1>
+          <h2>Bitcoin Payment Service</h2>
         <% end %>
       </header>
       <% if flash[:success] %>
@@ -33,6 +32,9 @@
       <section id="main">
         <%= yield %>
       </section>
+      <footer>
+        <%= render partial: 'layouts/dev_bar' if Rails.env.development? %>
+      </footer>
     </div>
   </div>
 </body>
