@@ -18,7 +18,7 @@ class SessionsController < ApplicationController
       session[:user_id] = User.first.id
       redirect_to new_admin_site_path
     else
-      flash[:alert] = "The site has been locked!"
+      flash[:error] = "The site has been locked!"
       redirect_to root_path
     end
   end

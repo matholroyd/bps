@@ -1,17 +1,14 @@
-Bps.Views.Payments ||= {}
+BPS.Views.Payments ||= {}
 
-class Bps.Views.Payments.NewView extends Backbone.View
-  template: JST["backbone/templates/payments/new"]
+class BPS.Views.Payments.NewView extends Backbone.View
+  template: JST["templates/payments/new"]
 
   events:
     "submit #new-payment": "save"
 
   constructor: (options) ->
     super(options)
-
-    @user_full_name = options.user_full_name
-    @model = new Bps.Models.Payment   
-      
+    @model = new @collection.model()
     @model.bind("change:errors", () =>
       this.render()
     )
@@ -19,21 +16,21 @@ class Bps.Views.Payments.NewView extends Backbone.View
   save: (e) ->
     e.preventDefault()
     e.stopPropagation()
+
     @model.unset("errors")
-    
-    @model.save(@model.toJSON(), {
-      success: (payment) =>
-        @model = payment
-        window.location.hash = "/finish"
-        new Bps.Views.Payments.FinishView(model: @model, el: "#payments", user_full_name: @user_full_name).render()
+
+    @collection.create(@model.toJSON(),
+      success: (post) =>
+        @model = post
+        window.location.hash = "/payments/#{@model.id}"
+
       error: (post, jqXHR) =>
         @model.set({errors: $.parseJSON(jqXHR.responseText)})
-    })
-    
+    )    
 
-  render: ->    
+  render: (user_full_name) ->    
     hash = @model.toJSON()
-    hash.user_full_name = @user_full_name
+    hash.user_full_name = user_full_name
     $(@el).html(@template(hash))
 
     if @model.get('errors')?

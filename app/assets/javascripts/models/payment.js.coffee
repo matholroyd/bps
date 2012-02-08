@@ -1,4 +1,4 @@
-class Bps.Models.Payment extends Backbone.Model
+class BPS.Models.Payment extends Backbone.Model
   paramRoot: 'payment'
   urlRoot: '/payments'
 
@@ -8,6 +8,6 @@ class Bps.Models.Payment extends Backbone.Model
     name: null
     email: null
 
-class Bps.Collections.PaymentsCollection extends Backbone.Collection
-  model: Bps.Models.Payment
+class BPS.Collections.PaymentsCollection extends Backbone.Collection
+  model: BPS.Models.Payment
   url: '/payments'
