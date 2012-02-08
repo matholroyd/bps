@@ -9,6 +9,8 @@ if defined?(Bundler)
   # Bundler.require(:default, :assets, Rails.env)
 end
 
+require 'ejs'
+
 yaml = ERB.new(File.expand_path('../config.yml', __FILE__)).result
 AppConfig = YAML.load_file(yaml)[Rails.env]
 

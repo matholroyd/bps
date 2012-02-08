@@ -11,7 +11,6 @@ Capybara.default_driver = :rack_test
 Capybara.javascript_driver = :selenium
 Capybara.server_boot_timeout = 50
 
-
 RSpec.configure do |config|
-  config.include Capybara, type: :acceptance
+  config.include Capybara::DSL, type: :acceptance
 end
