@@ -20,15 +20,11 @@
           <h2>Bitcoin Payment Service</h2>
         <% end %>
       </header>
-      <% if flash[:success] %>
-        <p class="flash success"><%= flash[:success] %></p>
+      <% [:success, :notice, :error].each do |flash_type| %>
+        <% if flash[flash_type] %>
+          <p class="flash <%= flash_type.to_s %>"><%= flash[flash_type] %></p>
+        <% end %>
       <% end %>
-      <% if flash[:notice] %>
-        <p class="flash notice"><%= flash[:notice] %></p>
-      <% end %>
-      <% if flash[:error] %>
-        <p class="flash error"><%= flash[:error] %></p>
-      <% end %>    
       <section id="main">
         <%= yield %>
       </section>
