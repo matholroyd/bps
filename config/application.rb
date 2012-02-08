@@ -17,6 +17,10 @@ module BPS
       #{config.root}/lib
     )
 
+    # http://stackoverflow.com/questions/7294479/assets-pipeline-when-updating-to-rails-3-1-on-heroku
+    # This is need for Heroku 
+    config.assets.initialize_on_precompile = false
+    
     config.assets.enabled = true
     config.assets.version = '1.0'    
 
@@ -27,6 +31,11 @@ module BPS
       g.test_framework :rspec, views: false
     end
 
+    config.assets.precompile += [
+      'ie.css',
+      'ie6.css',
+      'ie7.css' 
+    ]
     
     config.action_mailer.default_url_options = {
       host: "localhost",

@@ -23,6 +23,22 @@ Finally, BPS intends to define a simple API for 3rd-parties to fulfil payments, 
 - Private keys can be encrypted in the database, so the host (e.g. Heroku) does not need to be trusted.
 - Provide basic API so 3rd-parties can request a unique bitcoin payment address, and allow the 3rd-party to provide additional information such as a description and their name.
 
+# Deploying
+
+## Heroku
+
+     heroku create <app-name> --stack cedar 
+     
+There are a bunch of free add-ons that need to be enabled:
+
+     heroku addons:add mailgun:starter
+     heroku addons:add ssl:piggyback
+     heroku addons:add pgbackups:auto-month
+     heroku addons:add scheduler:standard
+     
+
+     
+
 # Roadmap
 
 View some [example prototype screens shots](bitcoin-payment-service/raw/master/doc/mockups/screens.png).
