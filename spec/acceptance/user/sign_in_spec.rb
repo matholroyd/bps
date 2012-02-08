@@ -7,8 +7,9 @@ feature "Sign in", %q{
 } do
 
   let!(:user) { User.make }
+  let!(:site) { Site.make.tap(&:lock_to_owner!) }
 
-  scenario "Blank site allows first user to send setup email to owner" do
+  scenario "Blank site allows first user to send setup email to owner", js: true do
     visit root_path
     
     click_link "admin"
@@ -38,7 +39,7 @@ feature "Sign in", %q{
     fill_in "Password", with: "super secret"
     click_button "Sign in"
 
-    # page.should have_content "Admin section"
+    page.should have_content "Admin dashboard"
   end
   
 end

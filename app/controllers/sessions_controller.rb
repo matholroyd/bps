@@ -7,7 +7,7 @@ class SessionsController < ApplicationController
     @session = Session.new params[:session]
     if @session.valid?
       session[:user_id] = @session.user.id
-      redirect_to root_url, :notice => "Logged in!"
+      redirect_to admin_dashboard_path, :notice => "Logged in!"
     else
       flash.now.alert = "Sign in details are incorrect"
       render "new"

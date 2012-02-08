@@ -7,6 +7,7 @@ BPS::Application.routes.draw do
   resource :session
 
   namespace :admin do
+    match "/dashboard", to: "dashboard#index"
     resource :site do
       get :setup_successful, on: :member
     end
@@ -17,7 +18,7 @@ BPS::Application.routes.draw do
   
   # Actions handy when developing
   if Rails.env.development?
-    %w{blank_slate setup_site}.each do |action|
+    %w{blank_slate setup_site sign_in}.each do |action|
       match "dev/#{action}" => "dev##{action}", as: "#{action}_dev"
     end
   end

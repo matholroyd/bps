@@ -1,6 +1,8 @@
 class Admin::AdminController < ApplicationController
   before_filter :ensure_signed_in
 
+  layout 'admin'
+
   protected 
   
   def ensure_signed_in

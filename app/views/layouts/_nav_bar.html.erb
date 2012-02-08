@@ -1,0 +1,7 @@
+<nav id="nav">
+  <% if current_user %>
+    <%= link_to "sign out", session_path, method: :delete %>
+  <% else %>
+    <%= link_to "admin", new_session_path %>
+  <% end %>
+</nav>
