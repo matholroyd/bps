@@ -10,7 +10,7 @@ class BPS.Views.Payments.NewView extends Backbone.View
     super(options)
     @model = new @collection.model()
     @model.bind("change:errors", () =>
-      this.render()
+      this.render(options.user_full_name)
     )
   
   save: (e) ->

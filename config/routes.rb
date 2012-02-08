@@ -1,12 +1,10 @@
 BPS::Application.routes.draw do
   root to: "payments#index"
-  get "log_out" => "sessions#destroy", as: "log_out"
-  get "log_in" => "sessions#new", as: "log_in"
-  get "log_in" => "sessions#new", as: "log_in"
   get "setup_site" => "sessions#owner_setup_site", as: "owner_setup_site"
 
   resources :payments, only: [:index, :new, :create, :show]
   resources :users, only: [:new, :create]
+  resource :session
 
   namespace :admin do
     resource :site do

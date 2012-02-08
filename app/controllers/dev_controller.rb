@@ -15,9 +15,9 @@ class DevController < ApplicationController
       User.destroy_all
       user = User.new( 
         full_name: "Bob Smith", 
-        email: "bob@smith.com", 
-        password: "secretsecret",
-        password_confirmation: "secretsecret"
+        email: "bob@example.com", 
+        password: "super secret",
+        password_confirmation: "super secret"
       )
       DBC.assert(user.save)
       

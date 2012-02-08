@@ -14,8 +14,10 @@
 <body>
   <div class="container">
     <div class="prepend-3 span-15 append-6 last">
-    
       <header id="header">
+        <nav id="nav">
+          <%= link_to "admin", new_session_path %>
+        </nav>
         <figure>
           <img src="<%= gravatar_url %>"></img>
         </figure>
@@ -29,7 +31,7 @@
           </h2>
         <% end %>
       </header>
-      <% [:success, :notice, :error].each do |flash_type| %>
+      <% [:success, :notice, :error, :alert].each do |flash_type| %>
         <% if flash[flash_type] %>
           <p class="flash <%= flash_type.to_s %>"><%= flash[flash_type] %></p>
         <% end %>

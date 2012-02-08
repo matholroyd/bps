@@ -14,7 +14,7 @@ class BPS.Routers.PaymentsRouter extends Backbone.Router
     new BPS.Views.Payments.IndexView(el: "#payments").render(@user_full_name)
 
   newPayment: ->
-    @view = new BPS.Views.Payments.NewView(collection: @payments)
+    @view = new BPS.Views.Payments.NewView(collection: @payments, user_full_name: @user_full_name)
     $("#payments").html(@view.render(@user_full_name).el)
     
   show: (id) ->

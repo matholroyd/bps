@@ -4,6 +4,12 @@
 
 #header {
   overflow:hidden;
+  position: relative;
+  #nav {
+    position: absolute;
+    top:0px;
+    right: 0px;
+  }
   figure {
     overflow:hidden;
     width: 50px;

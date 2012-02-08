@@ -1,0 +1,7 @@
+<h1>Admin sign in</h1>
+<%= semantic_form_for @session do |f| %>
+  <%= f.inputs :email, :password %>
+  <%= f.buttons do %>
+    <%= f.commit_button "Sign in" %>
+  <% end %>
+<% end %>

@@ -1,14 +1,15 @@
 class SessionsController < ApplicationController
   def new
+    @session = Session.new
   end
 
   def create
-    user = User.authenticate(params[:email], params[:password])
-    if user
-      session[:user_id] = user.id
+    @session = Session.new params[:session]
+    if @session.valid?
+      session[:user_id] = @session.user.id
       redirect_to root_url, :notice => "Logged in!"
     else
-      flash.now.alert = "Invalid email or password"
+      flash.now.alert = "Sign in details are incorrect"
       render "new"
     end
   end
