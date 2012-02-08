@@ -1,0 +1,14 @@
+defaults: &DEFAULTS
+  domain: bps.herokuapp.com
+  port: 80
+
+development:
+  <<: *DEFAULTS
+  domain: localhost
+  port: 3000
+
+test:
+  <<: *DEFAULTS
+
+production:
+  <<: *DEFAULTS

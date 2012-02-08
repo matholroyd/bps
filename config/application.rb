@@ -9,6 +9,9 @@ if defined?(Bundler)
   # Bundler.require(:default, :assets, Rails.env)
 end
 
+yaml = ERB.new(File.expand_path('../config.yml', __FILE__)).result
+AppConfig = YAML.load_file(yaml)[Rails.env]
+
 module BPS
   class Application < Rails::Application
     config.autoload_paths += %W(
@@ -38,8 +41,8 @@ module BPS
     ]
     
     config.action_mailer.default_url_options = {
-      host: "localhost",
-      port: 3000
+      host: AppConfig['domain'],
+      port: AppConfig['port']
     }
   end
 end
