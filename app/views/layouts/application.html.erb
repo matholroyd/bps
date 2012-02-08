@@ -17,7 +17,13 @@
     
       <header id="header">
         <%= link_to root_path do %>
-          <h2>Bitcoin Payment Service</h2>
+          <h2>
+            <% if Site.locked_to_owner? %>
+              <%= Site.data.name %>
+            <% else %>
+              Bitcoin Payment Service
+            <% end %>
+          </h2>
         <% end %>
       </header>
       <% [:success, :notice, :error].each do |flash_type| %>

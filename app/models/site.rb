@@ -1,6 +1,8 @@
 class Site < ActiveRecord::Base
   include AASM
-  validates_presence_of :name
+
+  validates :name,  presence: true
+  validates :state, presence: true
 
   aasm_column :state
   aasm_initial_state :unlocked
@@ -24,5 +26,8 @@ class Site < ActiveRecord::Base
     Site.first.lock_to_owner!
   end
     
+  def self.data
+    Site.first
+  end
   
 end

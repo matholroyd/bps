@@ -1,9 +1,10 @@
-<h1>Set your password</h1>
+<h1>Update your account</h1>
 
 <%= semantic_form_for @user, url: admin_user_path do |f| %>
   <%= f.inputs do %> 
     <%= hidden_field_tag :force_set_password, true %>
     <%= f.input :full_name %>
+    <%= f.input :email %>
     <%= f.input :password %>
     <%= f.input :password_confirmation %>
   <% end %>

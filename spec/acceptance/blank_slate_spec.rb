@@ -52,13 +52,17 @@ feature "Blank Slate", %q{
     fill_in "Site name", with: "Owen's BPS"
     click_button "Continue"
 
-    # Empty passwords
+    # Empty fields
     click_button "Continue"
+    page.within "#user_full_name_input" do
+      page.should have_content "can't be blank"
+    end
     page.within "#user_password_input" do
       page.should have_content "can't be blank"
     end
 
     # Passwords do not match
+    fill_in "Full name", with: "Bob Smith"
     fill_in "Password", with: "aaaaaaa"
     fill_in "Password confirmation", with: "bbbbbbbbbbb"
     click_button "Continue"

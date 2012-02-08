@@ -1,6 +1,7 @@
 class Admin::UsersController < Admin::AdminController  
   def edit
     @user = find_user
+    @user.full_name = "" if @user.full_name == User::DefaultFullName
   end
   
   def update

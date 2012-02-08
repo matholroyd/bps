@@ -8,6 +8,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(params[:user])
     @user.set_random_password
+    @user.set_default_full_name
     if @user.save
       UserMailer.setup_instructions(@user).deliver
       flash[:success] = "Email with instructions sent"

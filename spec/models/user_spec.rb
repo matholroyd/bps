@@ -6,11 +6,17 @@ describe User do
       User.make
     end
 
-    %w{email password}.each do |field|
+    %w{full_name email password}.each do |field|
       it "requires #{field}" do
         User.make_unsaved(field => nil).should_not be_valid
       end
     end
+    
+    it 'must have unique email' do
+      user = User.make
+      User.make_unsaved(email: user.email).should_not be_valid
+    end
+    
   end
   
   describe 'setup?' do
