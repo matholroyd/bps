@@ -3,6 +3,12 @@
 }
 
 #header {
+  overflow:hidden;
+  figure {
+    width: 96px;
+    height:96px;
+    float:left;
+  }
   padding-top:18px;
   a {
     text-decoration: none;

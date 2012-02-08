@@ -16,6 +16,11 @@
     <div class="prepend-3 span-15 append-6 last">
     
       <header id="header">
+        <figure>
+          <% if Site.locked_to_owner? %>
+            <img src="<%= gravatar_url(User.first) %>"></img>
+          <% end %>
+        </figure>
         <%= link_to root_path do %>
           <h2>
             <% if Site.locked_to_owner? %>
