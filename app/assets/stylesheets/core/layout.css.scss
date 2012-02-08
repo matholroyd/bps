@@ -5,14 +5,18 @@
 #header {
   overflow:hidden;
   figure {
-    width: 96px;
-    height:96px;
+    overflow:hidden;
+    width: 50px;
+    height:50px;
     float:left;
+    margin-right: 10px;
+    border: 1px solid #b0b0b0;
   }
   padding-top:18px;
   a {
     text-decoration: none;
   }
+  margin-bottom:18px
 }
 
 #footer {
