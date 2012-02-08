@@ -17,9 +17,7 @@
     
       <header id="header">
         <figure>
-          <% if Site.locked_to_owner? %>
-            <img src="<%= gravatar_url(User.first) %>"></img>
-          <% end %>
+          <img src="<%= gravatar_url %>"></img>
         </figure>
         <%= link_to root_path do %>
           <h2>
