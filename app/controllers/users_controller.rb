@@ -6,7 +6,7 @@ class UsersController < ApplicationController
   end
   
   def create
-    @user = User.new(params[:user])
+    @user = User.first_or_create(params[:user])
     @user.set_random_password
     @user.set_default_full_name
     if @user.save
