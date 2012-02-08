@@ -1,10 +1,12 @@
 defaults: &DEFAULTS
   domain: bps.herokuapp.com
-  port: 80
+  email_domain: bps.herokuapp.com
+  protocol: https
 
 development:
   <<: *DEFAULTS
   domain: localhost
+  protocol: http
   port: 3000
 
 test:

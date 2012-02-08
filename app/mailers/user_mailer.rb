@@ -16,7 +16,7 @@ class UserMailer < ActionMailer::Base
 
     default_opts = {
       :to      => user.email,
-      :from    => "someone@smith.com",
+      :from    => "no_reply@#{AppConfig["email_domain"]}",
     }
     super(default_opts.merge(opts)) do |format|
       format.html

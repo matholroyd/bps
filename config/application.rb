@@ -41,8 +41,8 @@ module BPS
     ]
     
     config.action_mailer.default_url_options = {
-      host: AppConfig['domain'],
-      port: AppConfig['port']
+      host:     AppConfig['domain'],
+      protocol: AppConfig['protocol']
     }
   end
 end
