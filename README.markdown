@@ -1,6 +1,6 @@
 # Bitcoin Payment Service (BPS)
 
-**NOTE - this is app is very much a work-in-progress**
+**NOTE - this app is very much a work-in-progress**
 
 BPS is an open source web app that allows anyone to make bitcoin payments to the owner of the BPS.  The idea is that each person runs their own copy of this web app under an easy-to-remember domain name (something like "pay.bobsmith.com"). The web app is compatible with [Heroku](http://heroku.com) and can be **hosted for free**.
 
