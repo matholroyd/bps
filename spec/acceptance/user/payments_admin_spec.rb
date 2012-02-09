@@ -42,10 +42,12 @@ feature "Payments administration", %q{
     
     page.should have_no_content "No payments have been initiated" 
     within "#payments" do
-      page.should have_content bitcoin_address
+      page.should have_content "Some money for dinner last night"
       page.should have_content "Faye Smith"
       page.should have_content "faye@smith.com"
-      page.should have_content "Some money for dinner last night"
+
+      click_link "details"
+      page.should have_content bitcoin_address
     end
   end
   

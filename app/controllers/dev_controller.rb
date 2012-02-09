@@ -40,7 +40,12 @@ class DevController < ApplicationController
     end
     
     def add_payment
-      Payment.create! description: "Something nice", bitcoin_address: Bitcoin.random_address
+      Payment.create!(
+        description: "1x socks\n2x red shirts - medium size", 
+        bitcoin_address: Bitcoin.random_address,
+        name: "Bob Smith",
+        email: "bob@example.com"
+      ) 
       redirect_to admin_dashboard_path
     end
     

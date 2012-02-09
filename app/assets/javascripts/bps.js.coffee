@@ -9,3 +9,10 @@ window.BPS =
   Collections: {}
   Routers: {}
   Views: {}
+  simple_format: (text) ->
+    lines = text.split("\n")
+    break_lines = (formatted, line) ->
+      "#{formatted}<br>#{line}"
+  
+    _.reduce(_.rest(lines), break_lines, _.first(lines))
+  
