@@ -1,0 +1,38 @@
+body.admin {
+
+  #dashboard {
+    ol {
+      list-style-type: none;
+      padding-left: 0;
+      li {
+        padding-left: 0;
+      }
+    }
+    #payments {
+      article {
+        position:relative;
+        border-top: 1px solid #aaa;
+        a {
+          position:absolute;
+          top:0;
+          right:0;
+          background:#fff;
+        }
+        .email {
+          font-size:0.9em;
+        }
+        .name {
+          font-weight:bold;
+        }
+        .email {
+          font-weight:200;
+        }
+        .details {
+          height: 18px;
+          overflow:hidden;
+        }
+      }
+    }
+  }
+
+}

@@ -5,8 +5,7 @@
  *= require_self
  *= require ./reset
  *= require ./blueprint/screen
- *= require ./core/formtastic_changes
- *= require ./core/layout
  *= require formtastic
+ *= require_tree ./core
  *= require_tree ./public
 */

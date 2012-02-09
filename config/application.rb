@@ -37,10 +37,11 @@ module BPS
     end
 
     config.assets.precompile += [
+      'admin.css',
       'ie.css',
       'ie6.css',
       'ie7.css',
-      'admin.js' 
+      'admin.js'
     ]
     
     config.action_mailer.default_url_options = {
