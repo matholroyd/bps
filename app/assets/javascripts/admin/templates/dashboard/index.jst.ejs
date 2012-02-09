@@ -16,14 +16,14 @@
         <% payments.forEach(function(payment) { %>
           <li>
             <article>
-              <a class="show_details"  href="#">details</a>
+              <header>#<%= payment.get('id') %></header>
               <div class="payer">
                 <span class="name"><%= payment.get('name') %></span>
                 <span class="email"><%= payment.get('email') %></span>
               </div>
+              <address class="bitcoin_address"><%= payment.get('bitcoin_address') %></address>
               <div class="details">
                 <%= BPS.simple_format(payment.get('description')) %>
-                <address class="bitcoin_address"><%= payment.get('bitcoin_address') %></address>
               </div>
             </article>
           </li>

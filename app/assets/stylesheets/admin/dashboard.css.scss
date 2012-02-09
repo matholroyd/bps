@@ -12,11 +12,14 @@ body.admin {
       article {
         position:relative;
         border-top: 1px solid #aaa;
-        a {
+        header {
           position:absolute;
           top:0;
-          right:0;
+          left:-60px;
+          width:50px;
+          text-align:right;
           background:#fff;
+          color:#0a0;
         }
         .email {
           font-size:0.9em;
@@ -26,10 +29,6 @@ body.admin {
         }
         .email {
           font-weight:200;
-        }
-        .details {
-          height: 18px;
-          overflow:hidden;
         }
       }
     }

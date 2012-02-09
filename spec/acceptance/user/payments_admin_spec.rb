@@ -34,7 +34,7 @@ feature "Payments administration", %q{
       fill_in 'Email', with: "faye@smith.com"
       click_button "Finish payment"
       
-      bitcoin_address = page.find(".payment .bitcoin_address").text
+      bitcoin_address = page.find(".bitcoin_address").text
     end
     
     # Reload page
@@ -45,8 +45,6 @@ feature "Payments administration", %q{
       page.should have_content "Some money for dinner last night"
       page.should have_content "Faye Smith"
       page.should have_content "faye@smith.com"
-
-      click_link "details"
       page.should have_content bitcoin_address
     end
   end
