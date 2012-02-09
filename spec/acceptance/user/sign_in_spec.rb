@@ -9,7 +9,7 @@ feature "Sign in", %q{
   let!(:user) { User.make }
   let!(:site) { Site.make.tap(&:lock_to_owner!) }
 
-  scenario "Blank site allows first user to send setup email to owner", js: true do
+  scenario "Signing in gives access to admin", js: true do
     visit root_path
     
     click_link "admin"
