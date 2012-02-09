@@ -9,6 +9,12 @@
     position: absolute;
     top:0px;
     right: 0px;
+    ul {
+      li {
+        float:left;
+        margin-left:20px;
+      }
+    }
   }
   figure {
     overflow:hidden;

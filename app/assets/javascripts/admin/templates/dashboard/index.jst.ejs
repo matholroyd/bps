@@ -1,1 +1,31 @@
 <h1>Admin dashboard</h1>
+
+<section id="transactions" class="span-10">
+  <h2>Transactions</h2>
+  <p>No transactions have been recorded</p>
+  <ol>
+    <li></li>
+  </ol>
+</section>
+
+<section id="payments" class="span-8 last">
+  <h2>Payments</h2>
+  <% if(payments !== undefined && payments.length > 0) { %>
+    <ol>
+      <% payments.forEach(function(payment) { %>
+        <li>
+          <article>
+            <address class="bitcoin_address"><%= payment.get('bitcoin_address') %></address>
+            <p class="description"><%= payment.get('description') %></p>
+            <p>
+              <span class="name"><%= payment.get('name') %></span>
+              <span class="email"><%= payment.get('email') %></span>
+            </p>
+          </article>
+        </li>
+      <% }); %>
+    </ol>
+  <% } else { %>
+    <p>No payments have been initiated</p>
+  <% } %>
+</section> 
