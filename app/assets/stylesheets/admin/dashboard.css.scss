@@ -23,12 +23,40 @@ body.admin {
         }
         .email {
           font-size:0.9em;
+          font-weight:200;
         }
         .name {
           font-weight:bold;
         }
-        .email {
-          font-weight:200;
+        .details {
+          position:relative;
+          .show_keys {
+            position:absolute;
+            top:0; 
+            right: -110px;
+            width:100px;
+          }
+          .keys {
+            display:none;
+            code {
+              color:#a00;
+              display: block;
+              position:relative;
+              word-wrap: break-word;
+              span {
+                position:absolute;
+                top:0;
+                text-align:right;
+                left:-110px;
+                width:100px;
+              }
+              
+            }
+            code.public {
+              color:#0a0;
+            }
+            
+          }
         }
       }
     }

@@ -21,8 +21,21 @@
                 <span class="name"><%= payment.get('payer') %></span>
                 <span class="email"><%= payment.get('email') %></span>
               </div>
-              <address class="bitcoin_address"><%= payment.get('bitcoin_address').address %></address>
               <div class="details">
+                <a href="#" class="show_keys">show keys</a>
+                <address class="bitcoin_address">
+                  <%= payment.get('bitcoin_address').address %>
+                </address>
+                <div class="keys">
+                  <code>
+                    <span>Private</span>
+                    <%= payment.get('bitcoin_address').private_key %>
+                  </code>
+                  <code class="public">
+                    <span>Public</span>
+                    <%= payment.get('bitcoin_address').public_key %>
+                  </code>
+                </div>
                 <%= BPS.simple_format(payment.get('description')) %>
               </div>
             </article>
