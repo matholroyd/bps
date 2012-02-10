@@ -51,12 +51,12 @@ feature "Payments administration", %q{
     # No money come in yet
     page.should have_content "No payments have been recorded"
     
-    # send_bitcoins to: bitcoin_address, amount: 12.34
-    # click_link "dashboard"
-    #     
-    # within '#transactions' do
-    #   page.should have_content "12.34 BTC"
-    # end
+    send_bitcoins to: bitcoin_address, amount: 12.34
+    click_link "dashboard"
+        
+    within '#payments' do
+      page.should have_content "12.34"
+    end
     
   end
   
