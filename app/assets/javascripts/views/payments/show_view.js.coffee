@@ -5,5 +5,4 @@ class BPS.Views.Payments.ShowView extends Backbone.View
 
   render:  ->
     $(@el).html(@template(@model.toJSON()))
-    debugger
     return this
