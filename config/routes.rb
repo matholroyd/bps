@@ -19,7 +19,7 @@ BPS::Application.routes.draw do
   
   # Actions handy when developing
   if Rails.env.development?
-    %w{blank_slate setup_site sign_in add_payment}.each do |action|
+    %w{blank_slate setup_site sign_in add_bitcoin_address add_payment}.each do |action|
       match "dev/#{action}" => "dev##{action}", as: "#{action}_dev"
     end
   end

@@ -1,15 +1,16 @@
 #dev-bar {
+  font-family: 'Courier New', monospace;
+  text-align:center;
   margin:0 auto;
-  width:400px;
-  h2 {
-    font-size: 12px;
-    float:left;
-    padding: 5px;
-  }
   overflow:hidden;
-  ul li { 
-    float:left;
-    display:block;
-    padding: 5px;
+  strong {
+    font-size: 12px;
+  }
+  ul {
+    display:inline;
+    li { 
+      display:inline;
+      padding: 3px;
+    }
   }
 }
