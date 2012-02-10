@@ -3,6 +3,8 @@ class Payment < ActiveRecord::Base
   
   validates :bitcoin_address, presence: true
   validates :description,     presence: true
+
+  default_scope order: 'updated_at DESC'
   
   def as_json(options={})
     {
