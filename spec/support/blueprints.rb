@@ -28,5 +28,5 @@ end
 
 Payment.blueprint do
   bitcoin_address
-  description { Sham.body }
+  amount { rand * 10 }
 end
