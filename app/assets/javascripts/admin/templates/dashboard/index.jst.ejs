@@ -9,18 +9,14 @@
     </ol>
   </section>
 
-  <section id="payments" class="span-8 last">
-    <h2>Payments</h2>
+  <section id="bitcoin_addresses" class="span-8 last">
+    <h2>Bitcoin addresses</h2>
     <% if(payments !== undefined && payments.length > 0) { %>
       <ol>
         <% payments.forEach(function(payment) { %>
           <li>
             <article>
               <header>#<%= payment.get('id') %></header>
-              <div class="payer">
-                <span class="name"><%= payment.get('payer') %></span>
-                <span class="email"><%= payment.get('email') %></span>
-              </div>
               <div class="details">
                 <a href="#" class="show_keys">show keys</a>
                 <address class="bitcoin_address">
@@ -43,7 +39,7 @@
         <% }); %>
       </ol>
     <% } else { %>
-      <p>No payments have been initiated</p>
+      <p>No bitcoin addresses have been generated</p>
     <% } %>
   </section> 
 </div>

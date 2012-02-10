@@ -1,20 +1,12 @@
 <h1>Make a payment</h1>
 <p>To make a payment to <%= user_full_name %>, please fill out the details below.</p>
 
-<form id="new-payment" name="payment" class="formtastic">
+<form id="new-payment" class="formtastic">
   <fieldset class="inputs">
     <ol>
       <li class="input" id="payment_description_input">
         <label class="label" for="description">Description:</label>
         <textarea name="description" id="description"><%= description %></textarea>
-      </li>
-      <li class="input" id="payment_namen_input">
-        <label class="label" for="payer">Your name:</label>
-        <input type="text" name="payer" id="payer" value="<%= payer %>" >
-      </li>
-      <li class="input" id="payment_email_input">
-        <label class="label" for="email">Email:</label>
-        <input type="email" name="email" id="email" value="<%= email %>" >
       </li>
     </ol>
   </fieldset>

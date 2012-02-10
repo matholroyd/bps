@@ -4,7 +4,7 @@ class BPS.Admin.Views.Dashboard.Index extends Backbone.View
   template: JST["admin/templates/dashboard/index"]
 
   events:
-    'click #payments .show_keys': 'show_keys'
+    'click #bitcoin_addresses .show_keys': 'show_keys'
 
   render: (payments) ->
     $(@el).html(@template(payments: payments))

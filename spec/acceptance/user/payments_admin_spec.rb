@@ -15,14 +15,14 @@ feature "Payments administration", %q{
     page.should have_content "Transactions"
     page.should have_content "No transactions have been recorded"
 
-    page.should have_content "Payments"
-    page.should have_content "No payments have been initiated"
+    page.should have_content "Bitcoin addresses"
+    page.should have_content "No bitcoin addresses have been generated"
   end
 
   scenario "Payments initiated and paid", js: true do
     sign_in user
     
-    page.should have_content "No payments have been initiated"
+    page.should have_content "No bitcoin addresses have been generated"
     bitcoin_address = nil
     
     using_session 'payer' do
@@ -30,8 +30,6 @@ feature "Payments administration", %q{
       click_link "Make payment"
       
       fill_in 'Description', with: "Some money for dinner last night"
-      fill_in 'Your name', with: "Faye Smith"
-      fill_in 'Email', with: "faye@smith.com"
       click_button "Finish payment"
       
       bitcoin_address = page.find(".bitcoin_address").text
@@ -40,11 +38,9 @@ feature "Payments administration", %q{
     # Reload page
     click_link "dashboard"
     
-    page.should have_no_content "No payments have been initiated" 
-    within "#payments" do
+    page.should have_no_content "No bitcoin addresses have been generated" 
+    within "#bitcoin_addresses" do
       page.should have_content "Some money for dinner last night"
-      page.should have_content "Faye Smith"
-      page.should have_content "faye@smith.com"
       page.should have_content bitcoin_address
       
       click_link 'show keys'

@@ -15,14 +15,13 @@ feature "Get bitcoin address", %q{
 
     page.should have_content "To make a payment to #{owner.full_name}"
   
-    # Give fill out nothing
+    # Blank description
+    fill_in 'Description', with: ""
     click_button "Finish payment"
     page.should have_content "can't be blank"
     
     # Fill out description and other fields
     fill_in 'Description', with: "Some money for dinner last night"
-    fill_in 'Your name', with: "Faye Smith"
-    fill_in 'Email', with: "faye@smith.com"
     click_button "Finish payment"
 
     page.should have_content "send your payment to the following address"

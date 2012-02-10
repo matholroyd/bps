@@ -1,9 +1,27 @@
+@import "../config";
+
 .formtastic {
+  .input, .buttons {
+    padding-left:5%;
+  }
+  .input {
+    .label {
+      display:block;
+      float:none;
+      width:100%;
+    }
+    .label, input, textarea, p.inline-errors {
+      width: 90%;
+    }
+  }
   textarea {
-    height: 4*18px;
+    padding: ($baseline / 2 - 1px);
   }
   .input.error {
     margin-top: 0;
+    .inline-errors {
+      margin:0;
+    }
   }
   .password input[type="password"] {
     width: 40%;
