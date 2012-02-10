@@ -1,0 +1,9 @@
+@import "../config";
+
+form#new-payment {
+  #payment_description_input {
+    textarea {
+      height: 8*$baseline;
+    }
+  }
+}

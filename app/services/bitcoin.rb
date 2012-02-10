@@ -4,7 +4,13 @@ class Bitcoin
 
   class << self
     def random_address
-      "1" + (1..33).collect { |a| Services.random_char(Base58Chars) }.join
+      BitcoinAddress.new address: ("1" + random_base58(33)),
+        private_key: random_base58(64),
+        public_key: random_base58(130)
+    end
+    
+    def random_base58(length)
+      (1..length).collect { |a| Services.random_char(Base58Chars) }.join
     end
   end
 end

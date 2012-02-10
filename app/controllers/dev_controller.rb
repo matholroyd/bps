@@ -4,7 +4,7 @@ class DevController < ApplicationController
     def blank_slate(options = {redirect: true})
       User.destroy_all
       Site.destroy_all
-      Payment.destroy_all
+      BitcoinAddress.destroy_all
       
       if options[:redirect]
         redirect_to root_path
@@ -40,12 +40,10 @@ class DevController < ApplicationController
     end
     
     def add_payment
-      Payment.create!(
-        description: "1x socks\n2x red shirts - medium size", 
-        bitcoin_address: Bitcoin.random_address,
-        name: "Bob Smith",
-        email: "bob@example.com"
-      ) 
+      bitcoin = Bitcoin.random_address
+      bitcoin.description = "1x socks\n2x red shirts - medium size"
+      bitcoin.save!
+
       redirect_to admin_dashboard_path
     end
     

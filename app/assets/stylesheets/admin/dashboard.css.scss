@@ -8,7 +8,7 @@ body.admin {
         padding-left: 0;
       }
     }
-    #payments {
+    #bitcoin_addresses {
       article {
         position:relative;
         border-top: 1px solid #aaa;
@@ -19,16 +19,43 @@ body.admin {
           width:50px;
           text-align:right;
           background:#fff;
-          color:#0a0;
+          color:#FF7F00;
         }
         .email {
-          font-size:0.9em;
+          font-weight:200;
         }
         .name {
           font-weight:bold;
         }
-        .email {
-          font-weight:200;
+        .details {
+          position:relative;
+          .show_keys {
+            position:absolute;
+            top:0; 
+            right: -110px;
+            width:100px;
+          }
+          .keys {
+            display:none;
+            code {
+              color:#a00;
+              display: block;
+              position:relative;
+              word-wrap: break-word;
+              span {
+                position:absolute;
+                top:0;
+                text-align:right;
+                left:-110px;
+                width:100px;
+              }
+              
+            }
+            code.public {
+              color:#080;
+            }
+            
+          }
         }
       }
     }
