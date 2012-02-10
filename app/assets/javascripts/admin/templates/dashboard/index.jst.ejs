@@ -32,7 +32,9 @@
                     <%= bitcoin_address.get('public_key') %>
                   </code>
                 </div>
-                <%= BPS.simple_format(bitcoin_address.get('description')) %>
+                <div class="description">
+                  <%= BPS.simple_format(bitcoin_address.get('description')) %>
+                </div>
               </div>
             </article>
           </li>

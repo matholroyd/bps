@@ -35,6 +35,9 @@ body.admin {
             right: -110px;
             width:100px;
           }
+          .description {
+            font-family: Palatino, 'Times New Roman', serif;
+          }
           .keys {
             display:none;
             code {
@@ -54,7 +57,6 @@ body.admin {
             code.public {
               color:#080;
             }
-            
           }
         }
       }
