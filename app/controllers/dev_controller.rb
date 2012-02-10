@@ -43,7 +43,7 @@ class DevController < ApplicationController
     end
    
     def add_bitcoin_address(options = {redirect: true})
-      sign_in unless Site.locked_to_owner?
+      sign_in redirect: false unless Site.locked_to_owner?
       
       bitcoin = Bitcoin.random_address
       bitcoin.description = "1x socks\n2x red shirts - medium size"
@@ -54,11 +54,14 @@ class DevController < ApplicationController
       end
     end
     
-    def add_payment
+    def add_payment(options = {redirect: true})
       add_bitcoin_address unless BitcoinAddress.count > 0
+      Payment.create! bitcoin_address: BPS::Services.random(BitcoinAddress), 
+        amount: (rand * 100)
       
-      
-      
+      if options[:redirect]
+        redirect_to admin_dashboard_path
+      end
     end
   end
 end
