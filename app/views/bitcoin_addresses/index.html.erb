@@ -1,0 +1,10 @@
+<div id="bitcoin_addresses"></div>
+
+<script type="text/javascript">
+  $(function() {
+    // Blog is the app name
+    window.router = new BPS.Routers.BitcoinAddressesRouter({user_full_name: <%= @user.full_name.to_json.html_safe %>});
+    Backbone.history.start();
+  });
+</script>
+

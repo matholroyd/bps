@@ -17,6 +17,7 @@ ActiveRecord::Schema.define(:version => 20120209111131) do
     t.string   "address",     :null => false
     t.string   "private_key", :null => false
     t.string   "public_key",  :null => false
+    t.text     "description", :null => false
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
   end

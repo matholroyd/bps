@@ -3,7 +3,7 @@ class BPS.Models.BitcoinAddress extends Backbone.Model
   urlRoot: '/bitcoin_addresses'
 
   defaults:
-    address: null
+    description: "# Payment for\n\n\n# Your details – optional\nName:\n\n\n# Other details – optional\n"
 
 class BPS.Collections.BitcoinAddressesCollection extends Backbone.Collection
   model: BPS.Models.BitcoinAddress

@@ -6,8 +6,8 @@ class BPS.Admin.Views.Dashboard.Index extends Backbone.View
   events:
     'click #bitcoin_addresses .show_keys': 'show_keys'
 
-  render: (payments) ->
-    $(@el).html(@template(payments: payments))
+  render: (bitcoin_addresses) ->
+    $(@el).html(@template(bitcoin_addresses: bitcoin_addresses))
    
     return this
     

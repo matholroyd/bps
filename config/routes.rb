@@ -1,14 +1,14 @@
 BPS::Application.routes.draw do
-  root to: "payments#index"
+  root to: "bitcoin_addresses#index"
   get "setup_site" => "sessions#owner_setup_site", as: "owner_setup_site"
 
-  resources :payments, only: [:index, :new, :create, :show]
+  resources :bitcoin_addresses, only: [:index, :new, :create, :show]
   resources :users, only: [:new, :create]
   resource :session
 
   namespace :admin do
     match "/dashboard", to: "dashboard#index"
-    resources :payments
+    resources :bitcoin_addresses
     resources :users do
       resource :check_password, only: [:new, :create]
     end

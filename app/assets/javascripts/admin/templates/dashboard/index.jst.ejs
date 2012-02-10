@@ -11,28 +11,28 @@
 
   <section id="bitcoin_addresses" class="span-8 last">
     <h2>Bitcoin addresses</h2>
-    <% if(payments !== undefined && payments.length > 0) { %>
+    <% if(bitcoin_addresses !== undefined && bitcoin_addresses.length > 0) { %>
       <ol>
-        <% payments.forEach(function(payment) { %>
+        <% bitcoin_addresses.forEach(function(bitcoin_address) { %>
           <li>
             <article>
-              <header>#<%= payment.get('id') %></header>
+              <header>#<%= bitcoin_address.get('id') %></header>
               <div class="details">
                 <a href="#" class="show_keys">show keys</a>
                 <address class="bitcoin_address">
-                  <%= payment.get('bitcoin_address').address %>
+                  <%= bitcoin_address.get('bitcoin_address').address %>
                 </address>
                 <div class="keys">
                   <code>
                     <span>Private</span>
-                    <%= payment.get('bitcoin_address').private_key %>
+                    <%= bitcoin_address.get('bitcoin_address').private_key %>
                   </code>
                   <code class="public">
                     <span>Public</span>
-                    <%= payment.get('bitcoin_address').public_key %>
+                    <%= bitcoin_address.get('bitcoin_address').public_key %>
                   </code>
                 </div>
-                <%= BPS.simple_format(payment.get('description')) %>
+                <%= BPS.simple_format(bitcoin_address.get('description')) %>
               </div>
             </article>
           </li>

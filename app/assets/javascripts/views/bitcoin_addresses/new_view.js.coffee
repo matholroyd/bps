@@ -1,10 +1,10 @@
-BPS.Views.Payments ||= {}
+BPS.Views.BitcoinAddresses ||= {}
 
-class BPS.Views.Payments.NewView extends Backbone.View
-  template: JST["templates/payments/new"]
+class BPS.Views.BitcoinAddresses.NewView extends Backbone.View
+  template: JST["templates/bitcoin_addresses/new"]
 
   events:
-    "submit #new-payment": "save"
+    "submit #new-bitcoin-address": "save"
 
   constructor: (options) ->
     super(options)
@@ -22,7 +22,7 @@ class BPS.Views.Payments.NewView extends Backbone.View
     @collection.create(@model.toJSON(),
       success: (post) =>
         @model = post
-        window.location.hash = "/payments/#{@model.id}"
+        window.location.hash = "/bitcoin_addresses/#{@model.id}"
 
       error: (post, jqXHR) =>
         @model.set({errors: $.parseJSON(jqXHR.responseText)})
@@ -42,7 +42,7 @@ class BPS.Views.Payments.NewView extends Backbone.View
     
   displayErrors: (errors) ->
     addError = (field) ->
-     $("#payment_#{field}_input").addClass('error')
-     $("#payment_#{field}_input").append("<p class=\"inline-errors\">#{errors[field]}</p>")
+     $("#bitcoin_address_#{field}_input").addClass('error')
+     $("#bitcoin_address_#{field}_input").append("<p class=\"inline-errors\">#{errors[field]}</p>")
     
     addError field for field in _.keys(errors)
