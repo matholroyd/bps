@@ -11,7 +11,9 @@ module BitcoinHelpers
     DBC.require(options[:to])
     DBC.require(options[:amount])
     
+    ba = BitcoinAddress.find_by_address options[:to]
     
+    Payment.make amount: options[:amount],  bitcoin_address: ba
   end
 end
 
