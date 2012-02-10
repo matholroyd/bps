@@ -20,16 +20,16 @@
               <div class="details">
                 <a href="#" class="show_keys">show keys</a>
                 <address class="bitcoin_address">
-                  <%= bitcoin_address.get('bitcoin_address').address %>
+                  <%= bitcoin_address.get('address') %>
                 </address>
                 <div class="keys">
                   <code>
                     <span>Private</span>
-                    <%= bitcoin_address.get('bitcoin_address').private_key %>
+                    <%= bitcoin_address.get('private_key') %>
                   </code>
                   <code class="public">
                     <span>Public</span>
-                    <%= bitcoin_address.get('bitcoin_address').public_key %>
+                    <%= bitcoin_address.get('public_key') %>
                   </code>
                 </div>
                 <%= BPS.simple_format(bitcoin_address.get('description')) %>

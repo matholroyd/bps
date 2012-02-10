@@ -29,7 +29,7 @@ feature "Get bitcoin address", %q{
   end
   
   def last_bitcoin_address
-    Payment.count.should > 0
-    Payment.last.bitcoin_address
+    BitcoinAddress.count.should > 0
+    BitcoinAddress.last
   end
 end

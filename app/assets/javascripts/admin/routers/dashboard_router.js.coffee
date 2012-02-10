@@ -1,15 +1,15 @@
 class BPS.Admin.Routers.Dashboard extends Backbone.Router
   initialize: ->
-    @payments = new BPS.Admin.Collections.PaymentsCollection()
-    @payments.reset []
+    @bitcoin_addresses = new BPS.Admin.Collections.BitcoinAddressesCollection()
+    @bitcoin_addresses.reset []
 
   routes:
     "index"     : "index"
     ".*"        : "index"
 
   index: ->
-    payments = @payments
-    payments.fetch
+    bitcoin_addresses = @bitcoin_addresses
+    bitcoin_addresses.fetch
       success: ->
-        new BPS.Admin.Views.Dashboard.Index(el: "#admin").render(payments)
+        new BPS.Admin.Views.Dashboard.Index(el: "#admin").render(bitcoin_addresses)
         

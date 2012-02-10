@@ -9,7 +9,7 @@ feature "Payments administration", %q{
   let!(:user) { User.make }
   let!(:site) { Site.make.tap(&:lock_to_owner!) }
 
-  scenario "No payments of any kind", js: true do
+  scenario "No bitcoin addresses or transactions", js: true do
     sign_in user
     
     page.should have_content "Transactions"
