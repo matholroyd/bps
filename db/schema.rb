@@ -11,7 +11,24 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120121031914) do
+ActiveRecord::Schema.define(:version => 20120209111131) do
+
+  create_table "bitcoin_addresses", :force => true do |t|
+    t.string   "address",     :null => false
+    t.string   "private_key", :null => false
+    t.string   "public_key",  :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  create_table "payments", :force => true do |t|
+    t.integer  "bitcoin_address_id", :null => false
+    t.string   "email"
+    t.string   "payer"
+    t.text     "description"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+  end
 
   create_table "sites", :force => true do |t|
     t.string   "name",       :null => false
@@ -21,7 +38,7 @@ ActiveRecord::Schema.define(:version => 20120121031914) do
   end
 
   create_table "users", :force => true do |t|
-    t.string   "full_name"
+    t.string   "full_name",     :null => false
     t.string   "email",         :null => false
     t.string   "password_hash", :null => false
     t.string   "password_salt", :null => false

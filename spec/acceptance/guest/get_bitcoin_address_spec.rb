@@ -21,12 +21,12 @@ feature "Get bitcoin address", %q{
     
     # Fill out description and other fields
     fill_in 'Description', with: "Some money for dinner last night"
-    fill_in 'Name', with: "Faye Smith"
+    fill_in 'Your name', with: "Faye Smith"
     fill_in 'Email', with: "faye@smith.com"
     click_button "Finish payment"
 
     page.should have_content "send your payment to the following address"
-    page.should have_content last_bitcoin_address
+    page.should have_content last_bitcoin_address.address
   end
   
   def last_bitcoin_address

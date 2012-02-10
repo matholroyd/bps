@@ -5,7 +5,7 @@ class BPS.Models.Payment extends Backbone.Model
   defaults:
     bitcoin_address: null
     description: null
-    name: null
+    payer: null
     email: null
 
 class BPS.Collections.PaymentsCollection extends Backbone.Collection

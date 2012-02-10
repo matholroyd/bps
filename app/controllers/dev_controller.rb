@@ -43,7 +43,7 @@ class DevController < ApplicationController
       Payment.create!(
         description: "1x socks\n2x red shirts - medium size", 
         bitcoin_address: Bitcoin.random_address,
-        name: "Bob Smith",
+        payer: "Bob Smith",
         email: "bob@example.com"
       ) 
       redirect_to admin_dashboard_path

@@ -30,7 +30,7 @@ feature "Payments administration", %q{
       click_link "Make payment"
       
       fill_in 'Description', with: "Some money for dinner last night"
-      fill_in 'Name', with: "Faye Smith"
+      fill_in 'Your name', with: "Faye Smith"
       fill_in 'Email', with: "faye@smith.com"
       click_button "Finish payment"
       
@@ -46,6 +46,10 @@ feature "Payments administration", %q{
       page.should have_content "Faye Smith"
       page.should have_content "faye@smith.com"
       page.should have_content bitcoin_address
+      
+      click_link 'show keys'
+      page.should have_content public_key(bitcoin_address)
+      page.should have_content private_key(bitcoin_address)
     end
   end
   
