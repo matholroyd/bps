@@ -51,6 +51,17 @@ feature "Payments administration", %q{
       page.should have_content public_key(bitcoin_address)
       page.should have_content private_key(bitcoin_address)
     end
+    
+    # No money come in yet
+    page.should have_content "No transactions have been recorded"
+    
+    # send_bitcoins to: bitcoin_address, amount: 12.34
+    # click_link "dashboard"
+    #     
+    # within '#transactions' do
+    #   page.should have_content "12.34 BTC"
+    # end
+    
   end
   
 end
