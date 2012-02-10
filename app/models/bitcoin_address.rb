@@ -1,4 +1,8 @@
 class BitcoinAddress < ActiveRecord::Base
+  validates :address,     presence: true
+  validates :public_key,  presence: true
+  validates :private_key, presence: true
+  
   def as_json(options={})
     {
       id:           id, 

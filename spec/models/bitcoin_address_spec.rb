@@ -1,5 +1,15 @@
 require 'spec_helper'
 
 describe BitcoinAddress do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe 'validations' do
+    it 'blueprint should be valid' do
+      BitcoinAddress.make
+    end
+
+    %w{address public_key private_key}.each do |field|
+      it "requires #{field}" do
+        BitcoinAddress.make_unsaved(field => nil).should_not be_valid
+      end
+    end
+  end
 end
