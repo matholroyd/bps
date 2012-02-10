@@ -23,6 +23,7 @@ BitcoinAddress.blueprint do
   address      { Bitcoin.random_address.address }
   private_key  { Bitcoin.random_address.private_key }
   public_key   { Bitcoin.random_address.public_key }
+  description  { Sham.body }
 end
 
 Payment.blueprint do

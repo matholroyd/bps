@@ -6,7 +6,7 @@ describe BitcoinAddress do
       BitcoinAddress.make
     end
 
-    %w{address public_key private_key}.each do |field|
+    %w{address public_key private_key description}.each do |field|
       it "requires #{field}" do
         BitcoinAddress.make_unsaved(field => nil).should_not be_valid
       end
