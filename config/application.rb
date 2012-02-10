@@ -38,6 +38,7 @@ module BPS
 
     config.assets.precompile += [
       'admin.css',
+      'config.css',
       'ie.css',
       'ie6.css',
       'ie7.css',
