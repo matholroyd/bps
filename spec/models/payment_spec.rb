@@ -6,7 +6,7 @@ describe Payment do
       Payment.make
     end
 
-    %w{bitcoin_address description}.each do |field|
+    %w{bitcoin_address amount}.each do |field|
       it "requires #{field}" do
         Payment.make_unsaved(field => nil).should_not be_valid
       end

@@ -23,12 +23,10 @@ ActiveRecord::Schema.define(:version => 20120209111131) do
   end
 
   create_table "payments", :force => true do |t|
-    t.integer  "bitcoin_address_id", :null => false
-    t.string   "email"
-    t.string   "payer"
-    t.text     "description"
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
+    t.integer  "bitcoin_address_id",                                :null => false
+    t.decimal  "amount",             :precision => 16, :scale => 8, :null => false
+    t.datetime "created_at",                                        :null => false
+    t.datetime "updated_at",                                        :null => false
   end
 
   create_table "sites", :force => true do |t|
