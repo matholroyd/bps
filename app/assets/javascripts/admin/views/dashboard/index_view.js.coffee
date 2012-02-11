@@ -12,5 +12,5 @@ class BPS.Admin.Views.Dashboard.Index extends Backbone.View
     return this
     
   show_keys: (event) ->
-    $(event.target).parent().children('.keys').toggle()
+    $(event.target).closest('li').children('.keys').toggle()
 

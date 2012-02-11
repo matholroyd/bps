@@ -3,62 +3,60 @@ body.admin {
   #dashboard {
     ol {
       list-style-type: none;
-      padding-left: 0;
+      padding: 0;
+      margin:0;
       li {
         padding-left: 0;
+        overflow:hidden;
+        hr {
+          margin-bottom:0;
+        }
+        header {
+          position:relative;
+          .id {
+            color:#FF7F00;
+            text-align:right;
+          }
+          .show_keys {
+            text-align:left;
+          }
+        }
+        address, a, .description {
+        }
+        .keys {
+          display:none;
+          code {
+            color:#a00;
+            display: block;
+            position:relative;
+            word-wrap: break-word;
+            span {
+              position:absolute;
+              top:0;
+              text-align:right;
+              left:-110px;
+              width:100px;
+            }
+          }
+          code.public {
+            color:#080;
+          }
+        }
+        .description {
+          font-family: Palatino, 'Times New Roman', serif;
+        }
       }
     }
-    #bitcoin_addresses {
-      article {
-        position:relative;
-        border-top: 1px solid #aaa;
-        header {
-          position:absolute;
-          top:0;
-          left:-60px;
-          width:50px;
-          text-align:right;
-          background:#fff;
-          color:#FF7F00;
-        }
-        .email {
-          font-weight:200;
-        }
-        .name {
-          font-weight:bold;
-        }
-        .details {
-          position:relative;
-          .show_keys {
-            position:absolute;
-            top:0; 
-            right: -110px;
-            width:100px;
-          }
-          .description {
-            font-family: Palatino, 'Times New Roman', serif;
-          }
-          .keys {
-            display:none;
-            code {
-              color:#a00;
-              display: block;
-              position:relative;
-              word-wrap: break-word;
-              span {
-                position:absolute;
-                top:0;
-                text-align:right;
-                left:-110px;
-                width:100px;
-              }
-              
-            }
-            code.public {
-              color:#080;
-            }
-          }
-        }
+
+    article {
+      position:relative;
+      header {
+        position:absolute;
+        top:0;
+        left:-60px;
+        width:50px;
+        text-align:right;
+        background:#fff;
       }
     }
   }
