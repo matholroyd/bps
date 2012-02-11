@@ -16,7 +16,7 @@
           <% payments.forEach(function(payment) { %>
             <tr>
               <td><%= payment.get('created_at') %></td>
-              <td><%= BPS.simple_format(payment.get('bitcoin_address').description) %></td>
+              <td class="description"><%= BPS.simple_format(payment.get('bitcoin_address').description) %></td>
               <td><%= payment.get('amount') %></td>
             </tr>
           <% }); %>
@@ -27,21 +27,21 @@
     <% } %>
   </section>
 
-  <section id="bitcoin_addresses">
-    <h2 class="prepend-2">Bitcoin addresses</h2>
+  <section id="bitcoin_addresses" class="span-17 append-1 last">
+    <h2>Bitcoin addresses</h2>
     <% if(bitcoin_addresses !== undefined && bitcoin_addresses.length > 0) { %>
       <ol>
         <% bitcoin_addresses.forEach(function(bitcoin_address) { %>
           <li>
-            <hr class="push-2 last">
+            <hr class="push-2">
             <header>
               <div class="id span-2">#<%= bitcoin_address.get('id') %></div>
               <address class="bitcoin_address span-8">
                 <%= bitcoin_address.get('address') %>
               </address>
-              <a href="#" class="show_keys span-8 last">show keys</a>
+              <a href="#" class="show_keys span-7 last">show keys</a>
             </header>
-            <div class="keys prepend-2 span-16 last">
+            <div class="keys prepend-2 span-15 last">
               <code>
                 <span>Private</span>
                 <%= bitcoin_address.get('private_key') %>

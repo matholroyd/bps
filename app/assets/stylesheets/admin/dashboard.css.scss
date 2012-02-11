@@ -12,6 +12,8 @@ body.admin {
         overflow:hidden;
         hr {
           margin-bottom:0;
+          background:#aaa;
+          color:#aaa;
         }
         header {
           position:relative;
@@ -44,21 +46,6 @@ body.admin {
             color:#080;
           }
         }
-        .description {
-          font-family: Palatino, 'Times New Roman', serif;
-        }
-      }
-    }
-
-    article {
-      position:relative;
-      header {
-        position:absolute;
-        top:0;
-        left:-60px;
-        width:50px;
-        text-align:right;
-        background:#fff;
       }
     }
   }
