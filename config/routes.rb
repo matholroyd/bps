@@ -19,9 +19,9 @@ BPS::Application.routes.draw do
   end
   
   # Actions handy when developing
-  if Rails.env.development?
+  if BPS::Services.demo_mode? 
     %w{blank_slate setup_site sign_in add_bitcoin_address add_payment}.each do |action|
-      match "dev/#{action}" => "dev##{action}", as: "#{action}_dev"
+      match "demo/#{action}" => "demo##{action}", as: "#{action}_demo"
     end
   end
 end

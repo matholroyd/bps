@@ -15,6 +15,10 @@ module BPS
         end
       end
       
+      def demo_mode?
+        Rails.env.development? || (ENV['BPS_DEMO_MODE'] == 'TRUE')
+      end
+      
     end
   end
 end

@@ -1,10 +1,11 @@
-class DevController < ApplicationController
-  if Rails.env.development?
+class DemoController < ApplicationController
+  if BPS::Services.demo_mode?
     
     def blank_slate(options = {redirect: true})
       User.destroy_all
       Site.destroy_all
       BitcoinAddress.destroy_all
+      Payment.destroy_all
       
       if options[:redirect]
         redirect_to root_path
@@ -33,7 +34,7 @@ class DevController < ApplicationController
     end
     
     def sign_in(options = {redirect: true})
-      setup_site redirect: false
+      setup_site redirect: false unless Site.locked_to_owner?
       
       session[:user_id] = User.first.id
       
@@ -63,5 +64,6 @@ class DevController < ApplicationController
         redirect_to admin_dashboard_path
       end
     end
+    
   end
 end

@@ -1,0 +1,27 @@
+#demo-bar {
+  font-family: 'Courier New', monospace;
+  text-align:center;
+  margin:0 auto;
+  overflow:hidden;
+  font-size: 14px;
+  background-color:#ccc;
+  strong {
+    text-shadow: 0px 1px 1px #fff;
+  }
+  a {
+    color:#00c;
+    text-shadow: 0px 1px 1px #ddf;
+  }
+  ul {
+    margin:0;
+    li { 
+      display:inline;
+      padding: 3px;
+    }
+  }
+  footer, header {
+    height:10px;
+    background: transparent image-url('warning-stripes.jpg') 0 0 repeat;
+  }
+}
+

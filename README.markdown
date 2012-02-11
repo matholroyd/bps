@@ -35,7 +35,10 @@ There are a bunch of free add-ons that need to be enabled:
      heroku addons:add ssl:piggyback
      heroku addons:add pgbackups:auto-month
      heroku addons:add scheduler:standard
-     
+
+The app can also be run in a **demo mode**. This allows anyone to log in, wipe the data, etc. Obviously **do not run** this if you intend to actually use the site for yourself. 
+
+    heroku config:add BPS_DEMO_MODE=TRUE
 
      
 

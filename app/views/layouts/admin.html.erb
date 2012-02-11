@@ -1,6 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=820">
   <title>BPS</title>
 
   <%= stylesheet_link_tag 'application' %>
@@ -14,6 +17,7 @@
   <%= csrf_meta_tags %>
 </head>
 <body class="admin">
+  <%= render partial: 'layouts/demo_bar' if show_demo_bar? %>
   <div class="container">
     <div class="prepend-1 span-18 append-1 last">
       <header id="header">
@@ -40,7 +44,6 @@
         <%= yield %>
       </section>
       <footer>
-        <%= render partial: 'layouts/dev_bar' if Rails.env.development? %>
       </footer>
     </div>
   </div>

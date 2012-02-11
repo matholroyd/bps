@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
-  helper_method :current_user
+  helper_method :current_user, :show_demo_bar?
   
   protected
   
@@ -18,6 +18,10 @@ class ApplicationController < ActionController::Base
       flash[:error] = "That action cannot be performed as the site has been locked."
       redirect_to root_path
     end
+  end
+  
+  def show_demo_bar?
+    BPS::Services.demo_mode?
   end
 
 end
