@@ -6,7 +6,7 @@ Sham.full_name  { Faker::Name.name }
 Sham.email { Faker::Internet.email }
 Sham.title { Faker::Lorem.sentence }
 Sham.body  { Faker::Lorem.paragraph }
-Sham.address { Bitcoin.random_address }
+Sham.address { BPS::Bitcoin.random_address }
 
 User.blueprint do
   full_name 
@@ -20,9 +20,9 @@ Site.blueprint do
 end
 
 BitcoinAddress.blueprint do
-  address      { Bitcoin.random_address.address }
-  private_key  { Bitcoin.random_address.private_key }
-  public_key   { Bitcoin.random_address.public_key }
+  address      { BPS::Bitcoin.random_address.address }
+  private_key  { BPS::Bitcoin.random_address.private_key }
+  public_key   { BPS::Bitcoin.random_address.public_key }
   description  { Sham.body }
 end
 
