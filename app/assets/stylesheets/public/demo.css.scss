@@ -1,27 +1,37 @@
+@import "../config";
+
 #demo-bar {
-  font-family: 'Courier New', monospace;
+  background: transparent image-url('warning-stripes.jpg') 0 0 repeat;
   text-align:center;
-  margin:0 auto;
-  overflow:hidden;
-  font-size: 14px;
-  background-color:#ccc;
+  margin:0 0 $baseline;
+  padding:$baseline/2 0;
+  border-bottom: 1px solid #666;
+  -webkit-box-shadow: 0px 3px 10px 3px rgba(0, 0, 0, 1);
+  -moz-box-shadow: 0px 3px 10px 3px rgba(0, 0, 0, 1);
+  box-shadow: 0px 3px 10px 3px rgba(0, 0, 0, 1);
+  div {
+    border-top: 1px solid #333;
+    border-bottom: 1px solid #333;
+    background-color:#FFC1C1;
+    -webkit-box-shadow: 0px 3px 10px 3px rgba(0, 0, 0, 1);
+    -moz-box-shadow: 0px 3px 10px 3px rgba(0, 0, 0, 1);
+    box-shadow: 0px 3px 10px 3px rgba(0, 0, 0, 0.8);
+  }
   strong {
-    text-shadow: 0px 1px 1px #fff;
+    text-shadow: 0px 1px 1px #fcc ;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
   }
   a {
-    color:#00c;
-    text-shadow: 0px 1px 1px #ddf;
+    color:#a00;
+    text-decoration: none;
   }
   ul {
     margin:0;
     li { 
       display:inline;
-      padding: 3px;
+      padding: 0 10px;
     }
-  }
-  footer, header {
-    height:10px;
-    background: transparent image-url('warning-stripes.jpg') 0 0 repeat;
   }
 }
 
