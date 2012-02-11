@@ -14,6 +14,14 @@ GIT
       railties (>= 3.1.0)
 
 GIT
+  remote: https://github.com/mhanne/bitcoin-ruby.git
+  revision: 0c974eb06a652407fcc3d23f0a3166411031e1e6
+  specs:
+    bitcoin-ruby (0.0.1)
+      eventmachine
+      rake (>= 0.8.0)
+
+GIT
   remote: https://github.com/raganwald/andand.git
   revision: f048eb5543404414d97de4228640c22278cd8a29
   specs:
@@ -75,6 +83,7 @@ GEM
     diff-lcs (1.1.3)
     ejs (1.0.0)
     erubis (2.7.0)
+    eventmachine (0.12.10)
     execjs (1.3.0)
       multi_json (~> 1.0)
     faker (1.0.1)
@@ -176,6 +185,7 @@ DEPENDENCIES
   aasm
   andand!
   bcrypt-ruby
+  bitcoin-ruby!
   capybara
   coffee-rails
   database_cleaner

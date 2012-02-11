@@ -12,6 +12,7 @@ gem 'rails-backbone', git: 'https://github.com/codebrew/backbone-rails.git'
 # andand master branch directly
 gem "andand",       :git => "https://github.com/raganwald/andand.git" 
 gem "aasm"
+gem "bitcoin-ruby", :git => "https://github.com/mhanne/bitcoin-ruby.git"
 
 # Gems used only for assets and not required
 # in production environments by default.
