@@ -46,7 +46,7 @@ class DemoController < ApplicationController
     def add_bitcoin_address(options = {redirect: true})
       sign_in redirect: false unless Site.locked_to_owner?
       
-      bitcoin = BPS::Bitcoin.random_address
+      bitcoin = BitcoinAddress.generate
       bitcoin.description = "1x socks\n2x red shirts - medium size"
       bitcoin.save!
 

@@ -190,6 +190,7 @@ DEPENDENCIES
   coffee-rails
   database_cleaner
   faker
+  ffi
   formtastic
   ir_b
   jquery-rails
