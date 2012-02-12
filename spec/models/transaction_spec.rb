@@ -1,5 +1,15 @@
 require 'spec_helper'
 
 describe Transaction do
-  # key = Bitcoin.open_key("1e2e0bc6893d42a462b0039b5c15c3da3378c8d0ec44556b9608efdb2b3caff1")
+  describe 'validations' do
+    it 'blueprint should be valid' do
+      Transaction.make
+    end
+
+    %w{raw_in_hex}.each do |field|
+      it "requires #{field}" do
+        Transaction.make_unsaved(field => nil).should_not be_valid
+      end
+    end
+  end
 end
