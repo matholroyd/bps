@@ -2,6 +2,7 @@ class Payment < ActiveRecord::Base
   belongs_to :transaction
   belongs_to :bitcoin_address
   
+  validates :transaction,     presence: true
   validates :bitcoin_address, presence: true
   validates :amount,          presence: true
 
