@@ -9,9 +9,9 @@ describe TransactionImporter do
       TransactionImporter.pull_transactions(address_nothing).should == []
     end
     
-    # it "should import transaction data" do
-    #   txs = TransactionImporter.pull_transactions(address_in_and_out)
-    #   txs.count.should == 2
-    # end
+    it "should import transaction data" do
+      txs = TransactionImporter.pull_transactions(address_in_and_out)
+      txs.count.should == 2
+    end
   end
 end
