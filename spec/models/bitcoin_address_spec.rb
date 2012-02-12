@@ -1,8 +1,7 @@
 require 'spec_helper'
 
 describe BitcoinAddress do
-  let(:keyA) { Bitcoin::Key.generate }
-  let(:keyB) { Bitcoin::Key.generate }
+  let(:other_key) { Bitcoin::Key.generate }
   
   describe 'validations' do
     it 'blueprint should be valid' do
@@ -16,9 +15,11 @@ describe BitcoinAddress do
     end
     
     it "should require a valid public/private key pair" do
-      BitcoinAddress.make_unsaved(
-        public_key: keyA.pub, private_key: keyB.priv
-      ).should_not be_valid
+      BitcoinAddress.make_unsaved(public_key: other_key.pub).should_not be_valid
+    end
+    
+    it "should require a valid address/private key pair" do
+      BitcoinAddress.make_unsaved(address: other_key.addr).should_not be_valid
     end
     
   end
