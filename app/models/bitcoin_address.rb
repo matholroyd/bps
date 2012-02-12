@@ -6,10 +6,11 @@ class BitcoinAddress < ActiveRecord::Base
 
   validates_each :public_key do |record, attr, public_key|
     if record.private_key.present?
-       pub = Bitcoin::Key.new(record.private_key).pub
-       record.errors.add(:public_key, 'does not match private key') if public_key != pub
-     end
-  end
+      k = Bitcoin::Key.new(record.private_key)
+      record.errors.add(:public_key, 'does not match private key') if public_key != k.pub
+      record.errors.add(:address, 'does not match private key') if record.address != k.addr
+    end
+ end
   
   default_scope order: 'updated_at DESC'
   
