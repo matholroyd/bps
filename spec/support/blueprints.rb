@@ -26,6 +26,11 @@ BitcoinAddress.blueprint do
 end
 
 Payment.blueprint do
+  transaction
   bitcoin_address
   amount { rand * 10 }
+end
+
+Transaction.blueprint do
+  raw_in_hex { "a" }
 end
