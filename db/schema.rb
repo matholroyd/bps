@@ -38,7 +38,7 @@ ActiveRecord::Schema.define(:version => 20120212100659) do
   end
 
   create_table "transactions", :force => true do |t|
-    t.text     "raw_in_hex", :null => false
+    t.binary   "binary",     :null => false
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end

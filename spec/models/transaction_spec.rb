@@ -6,10 +6,14 @@ describe Transaction do
       Transaction.make
     end
 
-    %w{raw_in_hex}.each do |field|
+    %w{binary}.each do |field|
       it "requires #{field}" do
         Transaction.make_unsaved(field => nil).should_not be_valid
       end
+    end
+    
+    it "requires a proper bitcoin transaction" do
+      Transaction.make_unsaved(binary: "garbage data").should_not be_valid
     end
   end
 end

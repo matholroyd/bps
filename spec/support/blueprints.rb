@@ -32,5 +32,5 @@ Payment.blueprint do
 end
 
 Transaction.blueprint do
-  raw_in_hex { "a" }
+  binary { BPS::Bitcoin.parse_transaction_json(BitcoinHelpers::Data.transaction_json_1).to_payload }
 end

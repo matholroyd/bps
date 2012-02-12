@@ -1,3 +1,3 @@
 class Transaction < ActiveRecord::Base
-  validates :raw_in_hex, presence: true
+  validates :binary, presence: true, bitcoin_transaction_in_hex: true
 end
