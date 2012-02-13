@@ -25,6 +25,9 @@ describe TransactionImporter do
       txs[1].payments.length.should == 1
       txs[1].payments[0].should be_new_record
       txs[1].payments[0].amount.should == -0.1
+
+      txs[1].payments[0].bitcoin_address.should be_new_record
+      txs[1].payments[0].bitcoin_address.address.should == address_in_and_out
     end
   end
 end

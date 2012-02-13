@@ -21,9 +21,12 @@ class TransactionImporter
 
         tx.in.select { |tx_in| json[tx_in.previous_output].present? }.each do |tx_in|
           node = json[tx_in.previous_output]['out'][tx_in.prev_out_index]
-          # Bitcoin::Script.new(node['scriptPubKey']).get_address
+
+          addr = node['address'] || Bitcoin::Script.new(node['scriptPubKey']).get_address
+          ba = BitcoinAddress.new address: addr
+          amount = -BigDecimal(node['value'])
           
-          transaction.payments.build amount: -BigDecimal(node['value'])
+          transaction.payments.build amount: amount, bitcoin_address: ba
         end
         
         transaction
