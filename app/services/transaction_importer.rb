@@ -28,25 +28,35 @@ class TransactionImporter
       transaction = Transaction.new binary: tx.to_payload
 
       tx.out.each do |tx_out|
-        addr = Bitcoin::Script.new(tx_out.pk_script).get_address
-        if addresses.include? addr
-          ba = BitcoinAddress.find_or_create_by_address addr
-          amount = BigDecimal(tx_out.value) / (10**8)
-          transaction.payments.build amount: amount, bitcoin_address: ba, transaction: transaction
-        end
+        process_out transaction, tx_out, addresses
       end
 
       tx.in.select { |tx_in| json[tx_in.previous_output].present? }.each do |tx_in|
-        node = json[tx_in.previous_output]['out'][tx_in.prev_out_index]
-
-        addr = node['address'] || Bitcoin::Script.new(node['scriptPubKey']).get_address
-        ba = BitcoinAddress.find_or_create_by_address addr
-        amount = -BigDecimal(node['value'])
-        
-        transaction.payments.build amount: amount, bitcoin_address: ba, transaction: transaction
+        process_in transaction, tx_in, addresses, json
       end
       
       transaction
+    end
+    
+    private
+    
+    def process_out(transaction, tx_out, addresses)
+      addr = Bitcoin::Script.new(tx_out.pk_script).get_address
+      if addresses.include? addr
+        ba = BitcoinAddress.find_or_create_by_address addr
+        amount = BigDecimal(tx_out.value) / (10**8)
+        transaction.payments.build amount: amount, bitcoin_address: ba, transaction: transaction
+      end
+    end
+    
+    def process_in(transaction, tx_in, addresses, json)
+      node = json[tx_in.previous_output]['out'][tx_in.prev_out_index]
+
+      addr = node['address'] || Bitcoin::Script.new(node['scriptPubKey']).get_address
+      ba = BitcoinAddress.find_or_create_by_address addr
+      amount = -BigDecimal(node['value'])
+      
+      transaction.payments.build amount: amount, bitcoin_address: ba, transaction: transaction
     end
  
   end
