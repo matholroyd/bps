@@ -7,13 +7,17 @@ class TransactionImporter
       extract_transactions Api::BlockExplorer.mytransactions(bitcoin_addresses),  bitcoin_addresses 
     end
     
+    def pull_transaction(hash, bitcoin_addresses)
+      extract_transaction Api::BlockExplorer.rawtx(hash), bitcoin_addresses
+    end
+    
     def extract_transactions(json, bitcoin_addresses)
       json.collect do |k, transaction_json|
-        extract_transaction(json, bitcoin_addresses, transaction_json)
+        extract_transaction transaction_json, bitcoin_addresses, json
       end
     end
     
-    def extract_transaction(json, bitcoin_addresses, tx_hash)
+    def extract_transaction(tx_hash, bitcoin_addresses, json = {})
       transaction = Transaction.new
       tx = Bitcoin::Protocol::Tx.from_hash(tx_hash)
 
