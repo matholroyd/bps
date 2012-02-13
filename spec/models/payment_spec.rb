@@ -11,6 +11,11 @@ describe Payment do
         Payment.make_unsaved(field => nil).should_not be_valid
       end
     end
+    
+    it "must be unique payment" do
+      p = Payment.make
+      Payment.new(p.attributes).should_not be_valid
+    end
   end
   
 end
