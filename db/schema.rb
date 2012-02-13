@@ -38,9 +38,10 @@ ActiveRecord::Schema.define(:version => 20120212100659) do
   end
 
   create_table "transactions", :force => true do |t|
-    t.binary   "binary",     :null => false
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.binary   "binary",          :null => false
+    t.string   "bitcoin_tx_hash", :null => false
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
   end
 
   create_table "users", :force => true do |t|

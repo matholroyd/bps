@@ -15,5 +15,11 @@ describe Transaction do
     it "requires a proper bitcoin transaction" do
       Transaction.make_unsaved(binary: "garbage data").should_not be_valid
     end
+    
+    it "requires the transaction to be unique" do
+      Transaction.make
+      t = Transaction.make_unsaved
+      t.should_not be_valid
+    end
   end
 end
