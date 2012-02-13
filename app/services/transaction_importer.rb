@@ -10,7 +10,7 @@ class TransactionImporter
     def pull_transactions(addresses)
       DBC.require(addresses)
       
-      extract_transactions Api::BlockExplorer.mytransactions(addresses),  addresses 
+      extract_transactions Api::BlockExplorer.mytransactions(addresses), addresses 
     end
     
     def pull_transaction(hash, addresses)
@@ -45,6 +45,7 @@ class TransactionImporter
       if addresses.include? addr
         ba = BitcoinAddress.find_or_create_by_address addr
         amount = BigDecimal(tx_out.value) / (10**8)
+        
         transaction.payments.build amount: amount, bitcoin_address: ba, transaction: transaction
       end
     end

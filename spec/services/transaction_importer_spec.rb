@@ -41,7 +41,6 @@ describe TransactionImporter do
       txs.count.should == 2
 
       txs[0].should be_new_record
-
       txs[0].payments.length.should == 1
       txs[0].payments[0].should be_new_record
       txs[0].payments[0].amount.should == 0.1
@@ -49,6 +48,7 @@ describe TransactionImporter do
       txs[0].payments[0].bitcoin_address.should be_new_record
       txs[0].payments[0].bitcoin_address.address.should == internal_address
 
+      txs[1].should be_new_record
       txs[1].payments.length.should == 1
       txs[1].payments[0].should be_new_record
       txs[1].payments[0].amount.should == -0.1
@@ -67,7 +67,7 @@ describe TransactionImporter do
     end
   end
   
-  describe "import" do
+  describe "import_for" do
     let(:bitcoin_address) { BitcoinAddress.make private_key: internal_private_key }
     
     before :each do
@@ -79,6 +79,21 @@ describe TransactionImporter do
       TransactionImporter.import_for bitcoin_address
       
       Transaction.count.should == 2
+      txs = Transaction.all
+
+      txs[0].should_not be_new_record
+      txs[0].payments.length.should == 1
+      txs[0].payments[0].should_not be_new_record
+      txs[0].payments[0].amount.should == 0.1
+      
+      txs[0].payments[0].bitcoin_address.should == bitcoin_address
+
+      txs[1].should_not be_new_record
+      txs[1].payments.length.should == 1
+      txs[1].payments[0].should_not be_new_record
+      txs[1].payments[0].amount.should == -0.1
+
+      txs[1].payments[0].bitcoin_address.should == bitcoin_address
     end
   end
 end
