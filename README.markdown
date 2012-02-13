@@ -27,21 +27,24 @@ Finally, BPS intends to define a simple API for 3rd-parties to fulfil payments, 
 
 ## Heroku
 
-     heroku create <app-name> --stack cedar 
+To deploy the app to Heroku, you will need a **free** account with Heroku.  
+
+After setting up your account and getting your computer setup to use Heroku,  you will need to `git clone` this source code + create a Heroku app for yourself. Note that BPS requires the *cedar* stack.
+
+    git clone git://github.com/matholroyd/bps.git
+    heroku create <app-name> --stack cedar
+    
+After you have a Heroku app setup, you can deploy for the first time.
+
+    git push heroku master
      
-There are a bunch of free add-ons that need to be enabled:
+There are a bunch of free add-ons that need to be enabled.
 
-     heroku addons:add mailgun:starter          # Email plugin
-     heroku addons:add ssl:piggyback            # SSL support
-     heroku addons:add pgbackups:auto-month     # Backups
-     heroku addons:add scheduler:standard       # Background processing
-
-The app can also be run in a **demo mode**. This allows anyone to log in, wipe the data, etc. Obviously **do not run** this if you intend to actually use the site for yourself. 
-
-    heroku config:add BPS_DEMO_MODE=TRUE
-    heroku config:remove BPS_DEMO_MODE      # turn off demo mode
+    heroku addons:add mailgun:starter          # Email plugin
+    heroku addons:add ssl:piggyback            # SSL support
+    heroku addons:add pgbackups:auto-month     # Backups
      
-After having deployed the app, the database needs to be migrated
+After having deployed the app, the database needs to be migrated.
 
     heroku run rake db:migrate
     
@@ -54,11 +57,17 @@ Additionally you may need to migrate (and then restart the server after the migr
 
     heroku run rake db:migrate  # Migrate database after update, if necessary
     heroku restart              # If a migration was necessary, a restart is likely needed
-    
+
+## Misc Heroku tasks
+
 If you need to reset the database for some reason, use the following. Note you will **lose all data**, meaning that if your bitcoin addresses (and their associated private keys) have unspent bitcoins associated with them, you will lose those bitcoins!
 
     heroku pg:reset DATABASE_URL --confirm bps
 
+The app can also be run in a **demo mode**. This allows anyone to log in, wipe the data, etc. Obviously **do not run** this if you intend to actually use the site for yourself. 
+
+    heroku config:add BPS_DEMO_MODE=TRUE
+    heroku config:remove BPS_DEMO_MODE      # turn off demo mode
 
 # Roadmap
 
