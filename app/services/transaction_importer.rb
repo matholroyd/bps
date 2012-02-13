@@ -13,7 +13,9 @@ class TransactionImporter
         tx.out.each do |tx_out|
           addr = Bitcoin::Script.new(tx_out.pk_script).get_hash160_address
           if bitcoin_addresses.include? addr
-            transaction.payments.build amount: BigDecimal(tx_out.value) / (10**8)
+            ba = BitcoinAddress.new address: addr
+            amount = BigDecimal(tx_out.value) / (10**8)
+            transaction.payments.build amount: amount, bitcoin_address: ba
           end
         end
 
