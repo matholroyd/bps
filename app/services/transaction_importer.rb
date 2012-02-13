@@ -45,7 +45,7 @@ class TransactionImporter
       addr = Bitcoin::Script.new(tx_out.pk_script).get_address
       if addresses.include? addr
         ba = BitcoinAddress.find_or_create_by_address addr
-        amount = BigDecimal(tx_out.value) / (10**8)
+        amount = BigDecimal(tx_out.value.to_s) / BigDecimal((10**8).to_s)
 
         find_or_build_payment transaction, ba, amount
       end
