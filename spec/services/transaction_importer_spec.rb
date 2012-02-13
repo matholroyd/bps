@@ -71,14 +71,14 @@ describe TransactionImporter do
     let(:bitcoin_address) { BitcoinAddress.make private_key: internal_private_key }
     
     before :each do
-      # @ba = 
-      # 
-      # Bitcoin::Key.new(private_key).addr.should == address_internal
-      
+      # Check that actually have the right private key
+      bitcoin_address.address.should == internal_address
     end
     
     it "should create the transactions and payments" do
       TransactionImporter.import_for bitcoin_address
+      
+      Transaction.count.should == 2
     end
   end
 end

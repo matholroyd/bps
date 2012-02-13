@@ -1,6 +1,10 @@
 class TransactionImporter
   class << self
+
     def import_for(bitcoin_address)
+      pull_transactions(bitcoin_address.address).each do |transaction|
+        transaction.save!
+      end
     end
 
     def pull_transactions(addresses)
@@ -20,15 +24,15 @@ class TransactionImporter
     end
     
     def extract_transaction(tx_hash, addresses, json = {})
-      transaction = Transaction.new
       tx = Bitcoin::Protocol::Tx.from_hash(tx_hash)
+      transaction = Transaction.new binary: tx.to_payload
 
       tx.out.each do |tx_out|
         addr = Bitcoin::Script.new(tx_out.pk_script).get_address
         if addresses.include? addr
-          ba = BitcoinAddress.new address: addr
+          ba = BitcoinAddress.find_or_create_by_address addr
           amount = BigDecimal(tx_out.value) / (10**8)
-          transaction.payments.build amount: amount, bitcoin_address: ba
+          transaction.payments.build amount: amount, bitcoin_address: ba, transaction: transaction
         end
       end
 
@@ -36,10 +40,10 @@ class TransactionImporter
         node = json[tx_in.previous_output]['out'][tx_in.prev_out_index]
 
         addr = node['address'] || Bitcoin::Script.new(node['scriptPubKey']).get_address
-        ba = BitcoinAddress.new address: addr
+        ba = BitcoinAddress.find_or_create_by_address addr
         amount = -BigDecimal(node['value'])
         
-        transaction.payments.build amount: amount, bitcoin_address: ba
+        transaction.payments.build amount: amount, bitcoin_address: ba, transaction: transaction
       end
       
       transaction
