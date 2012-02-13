@@ -9,6 +9,8 @@ window.BPS =
   Collections: {}
   Routers: {}
   Views: {}
+  Admin: {}
+  
   simple_format: (text) ->
     lines = text.split("\n")
     break_lines = (formatted, line) ->

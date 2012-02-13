@@ -6,10 +6,15 @@ describe Payment do
       Payment.make
     end
 
-    %w{bitcoin_address description}.each do |field|
+    %w{transaction bitcoin_address amount}.each do |field|
       it "requires #{field}" do
         Payment.make_unsaved(field => nil).should_not be_valid
       end
+    end
+    
+    it "must be unique payment" do
+      p = Payment.make
+      Payment.new(p.attributes).should_not be_valid
     end
   end
   

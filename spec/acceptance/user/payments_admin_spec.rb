@@ -9,11 +9,11 @@ feature "Payments administration", %q{
   let!(:user) { User.make }
   let!(:site) { Site.make.tap(&:lock_to_owner!) }
 
-  scenario "No bitcoin addresses or transactions", js: true do
+  scenario "No bitcoin addresses or payments", js: true do
     sign_in user
     
-    page.should have_content "Transactions"
-    page.should have_content "No transactions have been recorded"
+    page.should have_content "Payments"
+    page.should have_content "No payments have been recorded"
 
     page.should have_content "Bitcoin addresses"
     page.should have_content "No bitcoin addresses have been generated"
@@ -49,14 +49,14 @@ feature "Payments administration", %q{
     end
     
     # No money come in yet
-    page.should have_content "No transactions have been recorded"
+    page.should have_content "No payments have been recorded"
     
-    # send_bitcoins to: bitcoin_address, amount: 12.34
-    # click_link "dashboard"
-    #     
-    # within '#transactions' do
-    #   page.should have_content "12.34 BTC"
-    # end
+    send_bitcoins to: bitcoin_address, amount: 12.34
+    click_link "dashboard"
+        
+    within '#payments' do
+      page.should have_content "12.34"
+    end
     
   end
   

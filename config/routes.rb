@@ -7,20 +7,21 @@ BPS::Application.routes.draw do
   resource :session
 
   namespace :admin do
-    match "/dashboard", to: "dashboard#index"
     resources :bitcoin_addresses
-    resources :users do
-      resource :check_password, only: [:new, :create]
-    end
+    resources :payments
+    match "/dashboard", to: "dashboard#index"
     resource :site do
       get :setup_successful, on: :member
+    end
+    resources :users do
+      resource :check_password, only: [:new, :create]
     end
   end
   
   # Actions handy when developing
-  if Rails.env.development?
-    %w{blank_slate setup_site sign_in add_payment}.each do |action|
-      match "dev/#{action}" => "dev##{action}", as: "#{action}_dev"
+  if BPS::Services.demo_mode? 
+    %w{blank_slate setup_site sign_in add_bitcoin_address add_payment}.each do |action|
+      match "demo/#{action}" => "demo##{action}", as: "#{action}_demo"
     end
   end
 end

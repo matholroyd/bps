@@ -1,60 +1,49 @@
+@import "../config";
+
 body.admin {
 
   #dashboard {
     ol {
       list-style-type: none;
-      padding-left: 0;
+      padding: 0;
+      margin:0;
       li {
         padding-left: 0;
-      }
-    }
-    #bitcoin_addresses {
-      article {
-        position:relative;
-        border-top: 1px solid #aaa;
+        overflow:hidden;
+        hr {
+          margin-bottom:0;
+          background:#aaa;
+          color:#aaa;
+        }
         header {
-          position:absolute;
-          top:0;
-          left:-60px;
-          width:50px;
-          text-align:right;
-          background:#fff;
-          color:#FF7F00;
-        }
-        .email {
-          font-weight:200;
-        }
-        .name {
-          font-weight:bold;
-        }
-        .details {
           position:relative;
-          .show_keys {
-            position:absolute;
-            top:0; 
-            right: -110px;
-            width:100px;
+          .id {
+            color:#FF7F00;
+            text-align:right;
           }
-          .keys {
-            display:none;
-            code {
-              color:#a00;
-              display: block;
-              position:relative;
-              word-wrap: break-word;
-              span {
-                position:absolute;
-                top:0;
-                text-align:right;
-                left:-110px;
-                width:100px;
-              }
-              
+          .show_keys {
+            text-align:left;
+          }
+        }
+        address, a, .description {
+        }
+        .keys {
+          display:none;
+          code {
+            color:#a00;
+            display: block;
+            position:relative;
+            word-wrap: break-word;
+            span {
+              position:absolute;
+              top:0;
+              text-align:right;
+              left:-110px;
+              width:100px;
             }
-            code.public {
-              color:#080;
-            }
-            
+          }
+          code.public {
+            color:#080;
           }
         }
       }

@@ -10,6 +10,7 @@ if defined?(Bundler)
 end
 
 require 'ejs'
+require 'bitcoin'
 
 yaml = ERB.new(File.expand_path('../config.yml', __FILE__)).result
 AppConfig = YAML.load_file(yaml)[Rails.env]

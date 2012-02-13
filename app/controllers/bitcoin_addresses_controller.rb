@@ -18,7 +18,7 @@ class BitcoinAddressesController < ApplicationController
   end
   
   def create
-    @bitcoin_address = Bitcoin.random_address
+    @bitcoin_address = BitcoinAddress.generate
     @bitcoin_address.description = params[:bitcoin_address][:description]
 
     if @bitcoin_address.save
