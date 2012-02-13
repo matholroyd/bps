@@ -10,7 +10,15 @@ class BitcoinAddress < ActiveRecord::Base
       record.errors.add(:public_key, 'does not match private key') if public_key != k.pub
       record.errors.add(:address, 'does not match private key') if record.address != k.addr
     end
- end
+  end
+ 
+  def private_key=(value)
+    key = Bitcoin::Key.new(value)
+    self.public_key = key.pub
+    self.address    = key.addr
+    
+    super
+  end
   
   default_scope order: 'updated_at DESC'
   
