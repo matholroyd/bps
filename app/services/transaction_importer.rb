@@ -25,7 +25,8 @@ class TransactionImporter
     
     def extract_transaction(tx_hash, addresses, json = {})
       tx = Bitcoin::Protocol::Tx.from_hash(tx_hash)
-      transaction = Transaction.new binary: tx.to_payload
+      transaction = Transaction.find_or_create_by_bitcoin_tx_hash tx.hash
+      transaction.binary = tx.to_payload
 
       tx.out.each do |tx_out|
         process_out transaction, tx_out, addresses
