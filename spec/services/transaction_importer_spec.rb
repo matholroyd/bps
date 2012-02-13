@@ -18,6 +18,10 @@ describe TransactionImporter do
       txs[0].payments.length.should == 1
       txs[0].payments[0].should be_new_record
       txs[0].payments[0].amount.should == 0.1
+
+      txs[1].payments.length.should == 1
+      txs[1].payments[0].should be_new_record
+      txs[1].payments[0].amount.should == -0.1
     end
   end
 end
