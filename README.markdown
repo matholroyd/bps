@@ -31,16 +31,34 @@ Finally, BPS intends to define a simple API for 3rd-parties to fulfil payments, 
      
 There are a bunch of free add-ons that need to be enabled:
 
-     heroku addons:add mailgun:starter
-     heroku addons:add ssl:piggyback
-     heroku addons:add pgbackups:auto-month
-     heroku addons:add scheduler:standard
+     heroku addons:add mailgun:starter          # Email plugin
+     heroku addons:add ssl:piggyback            # SSL support
+     heroku addons:add pgbackups:auto-month     # Backups
+     heroku addons:add scheduler:standard       # Background processing
 
 The app can also be run in a **demo mode**. This allows anyone to log in, wipe the data, etc. Obviously **do not run** this if you intend to actually use the site for yourself. 
 
     heroku config:add BPS_DEMO_MODE=TRUE
     heroku config:remove BPS_DEMO_MODE      # turn off demo mode
      
+After having deployed the app, the database needs to be migrated
+
+    heroku run rake db:migrate
+    
+If an update for the site is available, you will need to manually push it to Heroku. 
+
+    git pull origin master      # Pull updates from the original source code
+    git push heroku master      # Deploy latest changes to running site
+
+Additionally you may need to migrate (and then restart the server after the migration).
+
+    heroku run rake db:migrate  # Migrate database after update, if necessary
+    heroku restart              # If a migration was necessary, a restart is likely needed
+    
+If you need to reset the database for some reason, use the following. Note you will **lose all data**, meaning that if your bitcoin addresses (and their associated private keys) have unspent bitcoins associated with them, you will lose those bitcoins!
+
+    heroku pg:reset DATABASE_URL --confirm bps
+
 
 # Roadmap
 
