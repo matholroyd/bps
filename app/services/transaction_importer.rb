@@ -46,8 +46,8 @@ class TransactionImporter
       if addresses.include? addr
         ba = BitcoinAddress.find_or_create_by_address addr
         amount = BigDecimal(tx_out.value) / (10**8)
-        
-        transaction.payments.build amount: amount, bitcoin_address: ba, transaction: transaction
+
+        find_or_build_payment transaction, ba, amount
       end
     end
     
@@ -58,7 +58,16 @@ class TransactionImporter
       ba = BitcoinAddress.find_or_create_by_address addr
       amount = -BigDecimal(node['value'])
       
-      transaction.payments.build amount: amount, bitcoin_address: ba, transaction: transaction
+      find_or_build_payment transaction, ba, amount
+    end
+ 
+    def find_or_build_payment(transaction, ba, amount)
+      if transaction.id.present? && ba.id.present?
+        p = transaction.payments.find_by_bitcoin_address_id(ba.id)
+        p.amount = amount
+      else
+        transaction.payments.build amount: amount, bitcoin_address: ba, transaction: transaction
+      end
     end
  
   end

@@ -99,9 +99,11 @@ describe TransactionImporter do
     it "should be idempotent" do
       TransactionImporter.import_for bitcoin_address
       Transaction.count.should == 2
+      Payment.count.should == 2
 
       TransactionImporter.import_for bitcoin_address
       Transaction.count.should == 2
+      Payment.count.should == 2
     end
   end
 end
