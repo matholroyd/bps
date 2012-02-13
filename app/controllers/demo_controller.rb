@@ -6,6 +6,7 @@ class DemoController < ApplicationController
       Site.destroy_all
       BitcoinAddress.destroy_all
       Payment.destroy_all
+      Transaction.destroy_all
       
       if options[:redirect]
         redirect_to root_path
@@ -57,10 +58,11 @@ class DemoController < ApplicationController
     
     def add_payment(options = {redirect: true})
       sign_in redirect: false
-      add_bitcoin_address redirect: false unless BitcoinAddress.count > 0
       
-      Payment.create! bitcoin_address: BPS::Services.random(BitcoinAddress), 
-        amount: (rand * 100)
+      ba = BitcoinAddress.find_or_create_by_private_key "1e2e0bc6893d42a462b0039b5c15c3da3378c8d0ec44556b9608efdb2b3caff1"
+      ba.description = "Hardcoded bitcoin address for demo"
+      ba.save!
+      TransactionImporter.import_for ba
       
       if options[:redirect]
         redirect_to admin_dashboard_path
