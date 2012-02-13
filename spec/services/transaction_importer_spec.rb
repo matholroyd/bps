@@ -12,6 +12,12 @@ describe TransactionImporter do
     it "should import transaction data" do
       txs = TransactionImporter.pull_transactions(address_in_and_out)
       txs.count.should == 2
+
+      txs[0].should be_new_record
+
+      txs[0].payments.length.should == 1
+      txs[0].payments[0].should be_new_record
+      txs[0].payments[0].amount.should == 0.1
     end
   end
 end
