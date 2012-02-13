@@ -1,3 +1,5 @@
+@import "../config";
+
 #container {
   
 }
@@ -24,19 +26,19 @@
     margin-right: 10px;
     border: 1px solid #b0b0b0;
   }
-  padding-top:18px;
+  padding-top:$baseline;
   a {
     text-decoration: none;
   }
-  margin-bottom:18px
+  margin-bottom:$baseline;
 }
 
-#footer {
-  
-}
 
 #main {
-  min-height: 30*18px;
-  
+  min-height: 30*$baseline;
+}
+
+footer {
+  text-align:center;
 }
 
