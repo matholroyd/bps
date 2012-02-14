@@ -7,15 +7,13 @@ describe BitcoinAddressesController do
   shared_examples_for PublicBitcoinAddressJSON do
     %w{id_alias address public_key description}.each do |field|
       it "should have #{field}" do
-        data = JSON.parse(response.body)
-        data[field].to_s.should be_present
+        JSON.parse(response.body)[field].to_s.should be_present
       end
     end
 
     %w{id private_key}.each do |field|
       it "should not have #{field}" do
-        @data = JSON.parse(response.body)
-        @data[field].should be_nil
+        JSON.parse(response.body)[field].should be_nil
       end
     end
   end
