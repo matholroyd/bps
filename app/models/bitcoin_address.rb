@@ -14,9 +14,7 @@ class BitcoinAddress < ActiveRecord::Base
   end
 
   before_validation do
-    # Generate random numnber that is hard to brute force. Just so happens 
-    # bitcoin addresses are random and hard to guess!
-    self.id_alias = Bitcoin::Key.generate.addr if new_record?
+    self.id_alias = BPS::Services.random_alphanum(30) if new_record?
   end
  
   def private_key=(value)
