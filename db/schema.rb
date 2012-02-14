@@ -14,6 +14,7 @@
 ActiveRecord::Schema.define(:version => 20120212100659) do
 
   create_table "bitcoin_addresses", :force => true do |t|
+    t.string   "id_alias"
     t.string   "address",     :null => false
     t.string   "private_key", :null => false
     t.string   "public_key",  :null => false

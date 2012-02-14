@@ -3,6 +3,17 @@ require 'spec_helper'
 describe BitcoinAddress do
   let(:other_key) { Bitcoin::Key.generate }
   
+  describe 'auto-generated fields' do
+    it do
+      ba = BitcoinAddress.create private_key: other_key.priv, description: "something"
+      ba.should be_valid
+      ba.public_key.should == other_key.pub
+      ba.address.should == other_key.addr
+      ba.id_alias.should_not be_nil
+    end
+  end
+  
+  
   describe 'validations' do
     it 'blueprint should be valid' do
       BitcoinAddress.make
@@ -14,16 +25,24 @@ describe BitcoinAddress do
       end
     end
     
-    it "should require a valid public/private key pair" do
-      ba = BitcoinAddress.make
-      ba.public_key = other_key.pub
-      ba.should_not be_valid
-    end
+    describe "auto-generated" do
+      let(:bitcoin_address) { BitcoinAddress.make }
     
-    it "should require a valid address/private key pair" do
-      ba = BitcoinAddress.make
-      ba.address = other_key.addr
-      ba.should_not be_valid
+      it "should require a valid public/private key pair" do
+        bitcoin_address.public_key = other_key.pub
+        bitcoin_address.should_not be_valid
+      end
+    
+      it "should require a valid address/private key pair" do
+        bitcoin_address.address = other_key.addr
+        bitcoin_address.should_not be_valid
+      end
+    
+      it "should require id_alias" do
+        bitcoin_address.id_alias = nil
+        bitcoin_address.should_not be_valid
+      end
+      
     end
     
   end

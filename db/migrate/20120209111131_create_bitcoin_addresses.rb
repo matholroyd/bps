@@ -1,6 +1,8 @@
 class CreateBitcoinAddresses < ActiveRecord::Migration
   def change
     create_table :bitcoin_addresses do |t|
+      t.string  :id_alias,      length: 34,   nulll: false
+
       t.string  :address,       length: 34,   null: false
       t.string  :private_key,   length: 64,   null: false
       t.string  :public_key,    length: 130,  null: false
