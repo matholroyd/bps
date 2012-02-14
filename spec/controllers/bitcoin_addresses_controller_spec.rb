@@ -1,19 +1,20 @@
 require 'spec_helper'
 
-PublicBitcoinAddressJSON = Hash
 
 describe BitcoinAddressesController do
+  let(:result) { JSON.parse(response.body) }
 
+  PublicBitcoinAddressJSON = Hash
   shared_examples_for PublicBitcoinAddressJSON do
     %w{id_alias address public_key description}.each do |field|
       it "should have #{field}" do
-        JSON.parse(response.body)[field].to_s.should be_present
+        result[field].to_s.should be_present
       end
     end
 
     %w{id private_key}.each do |field|
       it "should not have #{field}" do
-        JSON.parse(response.body)[field].should be_nil
+        result[field].should be_nil
       end
     end
   end
@@ -37,8 +38,7 @@ describe BitcoinAddressesController do
 
     %w{id_alias address public_key description}.each do |field|
       it "should have #{field}" do
-        @data = JSON.parse(response.body)
-        @data[field].to_s.should == bitcoin_address.send(field).to_s
+        result[field].to_s.should == bitcoin_address.send(field).to_s
       end
     end
   end
