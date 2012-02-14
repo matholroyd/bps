@@ -33,16 +33,33 @@ describe BitcoinAddressesController do
 
   describe '#show' do
     let(:bitcoin_address) { BitcoinAddress.make }
+    
+    context "normal" do
 
-    before :each do
-      get :show, id: bitcoin_address.id_alias, format: :json
+      before :each do
+        get :show, id: bitcoin_address.id_alias, format: :json
+      end
+
+      it_behaves_like PublicBitcoinAddressJSON
+
+      %w{id_alias address public_key description}.each do |field|
+        it "should have #{field}" do
+          result[field].to_s.should == bitcoin_address.send(field).to_s
+        end
+      end
     end
-
-    it_behaves_like PublicBitcoinAddressJSON
-
-    %w{id_alias address public_key description}.each do |field|
-      it "should have #{field}" do
-        result[field].to_s.should == bitcoin_address.send(field).to_s
+    
+    context "hacking" do
+      it "using id does not work" do
+        lambda {
+          get :show, id: bitcoin_address.id, format: :json  
+        }.should raise_error(ActiveRecord::RecordNotFound)
+      end
+      
+      it "using address does not work" do
+        lambda {
+          get :show, id: bitcoin_address.address, format: :json  
+        }.should raise_error(ActiveRecord::RecordNotFound)
       end
     end
   end
