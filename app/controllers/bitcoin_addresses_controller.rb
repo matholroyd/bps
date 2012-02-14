@@ -14,7 +14,6 @@ class BitcoinAddressesController < ApplicationController
   
   def show
     @bitcoin_address = BitcoinAddress.find(params[:id])
-    render json: @bitcoin_address.to_json
   end
   
   def create
@@ -22,11 +21,10 @@ class BitcoinAddressesController < ApplicationController
     @bitcoin_address.description = params[:bitcoin_address][:description]
 
     if @bitcoin_address.save
-      render json: @bitcoin_address, status: :created
+      render "show"
     else
       render json: @bitcoin_address.errors, status: :unprocessable_entity 
     end
-    
   end
   
   private 
