@@ -18,7 +18,7 @@ class BitcoinAddressesController < ApplicationController
   
   def create
     @bitcoin_address = BitcoinAddress.generate
-    @bitcoin_address.description = params[:bitcoin_address][:description]
+    @bitcoin_address.description = filterd_params(:bitcoin_address)[:description]
 
     if @bitcoin_address.save
       render "show"
@@ -31,6 +31,10 @@ class BitcoinAddressesController < ApplicationController
   
   def find_user
     @user = User.first
+  end
+  
+  def allowed_params(context)
+    %w{description}
   end
   
 end

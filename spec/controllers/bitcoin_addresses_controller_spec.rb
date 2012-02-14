@@ -20,14 +20,26 @@ describe BitcoinAddressesController do
   end
 
   describe '#create' do
-    before :each do
-      post :create, bitcoin_address: {description: "payment for dinner"}, format: :json
-    end
+    context "normal" do
+      before :each do
+        post :create, bitcoin_address: {description: "payment for dinner"}, format: :json
+      end
 
-    it_behaves_like PublicBitcoinAddressJSON
+      it_behaves_like PublicBitcoinAddressJSON
     
-    it "should have correct description" do
-      JSON.parse(response.body)['description'].should == "payment for dinner"
+      it "should have correct description" do
+        JSON.parse(response.body)['description'].should == "payment for dinner"
+      end
+    end
+    
+    context "hacking" do
+      let(:private_key) { Bitcoin::Key.generate.priv }
+      
+      it "fails if try to set private key" do
+        lambda {
+          post :create, bitcoin_address: {description: "payment for dinner", private_key: private_key}, format: :json  
+        }.should raise_error
+      end
     end
   end
 
