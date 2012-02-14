@@ -5,9 +5,9 @@ describe BitcoinAddressesController do
 
   describe '#show' do
     it do
-      get :show, id: bitcoin_address.id, format: :json
-
+      get :show, id: bitcoin_address.id_alias, format: :json
       data = JSON.parse(response.body)
+      
       %w{address public_key description}.each do |field|
         data[field].to_s.should == bitcoin_address.send(field).to_s
       end

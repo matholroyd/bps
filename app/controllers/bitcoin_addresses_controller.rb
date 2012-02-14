@@ -13,7 +13,7 @@ class BitcoinAddressesController < ApplicationController
   end
   
   def show
-    @bitcoin_address = BitcoinAddress.find(params[:id])
+    @bitcoin_address = BitcoinAddress.find_by_id_alias(params[:id])
   end
   
   def create
