@@ -22,8 +22,7 @@ class BPS.Views.BitcoinAddresses.NewView extends Backbone.View
     @collection.create(@model.toJSON(),
       success: (post) =>
         @model = post
-        window.location.hash = "/bitcoin_addresses/#{@model.id}"
-
+        window.location.hash = "/bitcoin_addresses/#{@model.attributes.id_alias}"
       error: (post, jqXHR) =>
         @model.set({errors: $.parseJSON(jqXHR.responseText)})
     )    

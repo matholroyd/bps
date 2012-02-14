@@ -24,4 +24,24 @@ class ApplicationController < ActionController::Base
     BPS::Services.demo_mode?
   end
 
+  def allowed_params(context)
+    raise "Must be overriden in subclasses to use #filtered_params"
+  end
+
+  def filterd_params(key, context = nil)
+    hash = params[key]
+
+    if hash.respond_to?(:slice)
+      extra_keys = hash.keys - allowed_params(context)
+      unless extra_keys.empty?
+        raise "Params supplied that will be filtered: #{extra_keys.join(', ')}"
+      end
+
+      hash.slice(*allowed_params(context)).with_indifferent_access
+    else
+      {}
+    end
+  end
+
+
 end

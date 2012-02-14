@@ -1,8 +1,9 @@
-# Be sure to restart your server when you modify this file.
-
-BPS::Application.config.session_store :cookie_store, key: '_pay_session'
-
-# Use the database for sessions instead of the cookie-based default,
-# which shouldn't be used to store highly confidential information
-# (create the session table with "rails generate session_migration")
-# BPS::Application.config.session_store :active_record_store
+# http://clearcove.ca/2010/11/how-to-secure-a-rails-app-on-heroku-with-ssl-firesheep/
+# Force cookies only sent over SSL
+# Disable cookies from being accessible via javascript
+BPS::Application.config.session_store(
+  :cookie_store,
+  :key => '_bps_app_session',
+  :secure => Rails.env.production?, # Only send cookie over SSL when in production mode
+  :http_only => true # Don't allow Javascript to access the cookie (mitigates cookie-based XSS exploits)
+)
