@@ -1,11 +1,31 @@
 require 'spec_helper'
 
+PublicBitcoinAddressJSON = Hash
+
 describe BitcoinAddressesController do
 
-  describe '#create' do
-    it "should create a " do
-      
+  shared_examples_for PublicBitcoinAddressJSON do
+    %w{id_alias address public_key description}.each do |field|
+      it "should have #{field}" do
+        data = JSON.parse(response.body)
+        data[field].to_s.should be_present
+      end
     end
+
+    %w{id private_key}.each do |field|
+      it "should not have #{field}" do
+        @data = JSON.parse(response.body)
+        @data[field].should be_nil
+      end
+    end
+  end
+
+  describe '#create' do
+    before :each do
+      post :create, bitcoin_address: {description: "payment for dinner"}, format: :json
+    end
+
+    it_behaves_like PublicBitcoinAddressJSON
   end
 
   describe '#show' do
@@ -13,21 +33,16 @@ describe BitcoinAddressesController do
 
     before :each do
       get :show, id: bitcoin_address.id_alias, format: :json
-      @data = JSON.parse(response.body)
     end
-    
+
+    it_behaves_like PublicBitcoinAddressJSON
+
     %w{id_alias address public_key description}.each do |field|
       it "should have #{field}" do
+        @data = JSON.parse(response.body)
         @data[field].to_s.should == bitcoin_address.send(field).to_s
       end
     end
-    
-    %w{id private_key}.each do |field|
-      it "should not have #{field}" do
-        @data[field].should be_nil
-      end
-    end
-    
   end
 
 end
