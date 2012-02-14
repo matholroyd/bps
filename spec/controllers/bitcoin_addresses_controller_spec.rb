@@ -25,6 +25,10 @@ describe BitcoinAddressesController do
     end
 
     it_behaves_like PublicBitcoinAddressJSON
+    
+    it "should have correct description" do
+      JSON.parse(response.body)['description'].should == "payment for dinner"
+    end
   end
 
   describe '#show' do
