@@ -33,11 +33,17 @@ describe BitcoinAddressesController do
     end
     
     context "hacking" do
-      let(:private_key) { Bitcoin::Key.generate.priv }
+      let(:key) { Bitcoin::Key.generate }
       
       it "fails if try to set private key" do
         lambda {
-          post :create, bitcoin_address: {description: "payment for dinner", private_key: private_key}, format: :json  
+          post :create, bitcoin_address: {description: "payment for dinner", private_key: key.priv}, format: :json  
+        }.should raise_error
+      end
+
+      it "fails if try to set address" do
+        lambda {
+          post :create, bitcoin_address: {description: "payment for dinner", address: key.addr}, format: :json  
         }.should raise_error
       end
     end
