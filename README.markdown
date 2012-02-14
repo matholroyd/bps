@@ -33,16 +33,20 @@ After setting up your account and getting your computer setup to use Heroku,  yo
 
     git clone git://github.com/matholroyd/bps.git
     heroku create <app-name> --stack cedar
-    
-After you have a Heroku app setup, you can deploy for the first time.
 
-    git push heroku master
-     
 There are a bunch of free add-ons that need to be enabled.
 
     heroku addons:add mailgun:starter          # Email plugin
     heroku addons:add ssl:piggyback            # SSL support
     heroku addons:add pgbackups:auto-month     # Backups
+
+Each BPS should use a unique `config.secret_token`. Currently the app forces you to set a secret token before it will run in production.  There is a helper script to do this. Note the script assumes you are using Heroku. From the app direction, run:
+
+    ./script/random_secret_token
+    
+After you have a Heroku app setup, you can deploy for the first time.
+
+    git push heroku master
      
 After having deployed the app, the database needs to be migrated.
 
