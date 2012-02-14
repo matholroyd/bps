@@ -68,4 +68,8 @@ BPS::Application.configure do
   }  
   
   ActionMailer::Base.delivery_method = :smtp
+
+  # http://clearcove.ca/2010/11/how-to-secure-a-rails-app-on-heroku-with-ssl-firesheep/
+  # Force SSL since in production
+  config.middleware.use "Middleware::ForceSSL"
 end
