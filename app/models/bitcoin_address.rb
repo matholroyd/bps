@@ -1,7 +1,7 @@
 class BitcoinAddress < ActiveRecord::Base
   validates :id_alias,    presence: true
   validates :address,     presence: true
-  validates :description, presence: true
+  validates :description, presence: true, no_html: true
   validates :private_key, presence: true
   validates :public_key,  presence: true
 
