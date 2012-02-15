@@ -2,8 +2,65 @@
 
 .formtastic {
   .input, .buttons {
-    padding-left:5%;
+    padding-left:0;
   }
+  input, textarea {
+    border: 2px inset;
+
+    color: #454A4E;
+    font: normal 16px/24px "helvetica neue",helvetica,arial,sans-serif;
+    border: 1px solid #AEAEAE;
+    border-top-color: #929293;
+    border-bottom-color: #BDBDBD;
+    -moz-box-shadow: inset 0 2px 2px -1px rgba(0,0,0,0.2),0 1px rgba(255,255,255,0.3);
+    -webkit-box-shadow: inset 0 2px 2px -1px rgba(0,0,0,0.2),0 1px rgba(255,255,255,0.3);
+    -o-box-shadow: inset 0 2px 2px -1px rgba(0,0,0,0.2),0 1px rgba(255,255,255,0.3);
+    box-shadow: inset 0 2px 2px -1px rgba(0,0,0,0.2),0 1px rgba(255,255,255,0.3);
+    background: white;
+    
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -o-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -khtml-border-radius: 5px;
+    border-radius: 5px;
+    
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    box-sizing: border-box;
+
+    padding: 4px 8px 4px 8px;
+  }
+  
+  input[type=submit] {
+    min-width:200px;
+    cursor: pointer;
+    text-align: center;
+    white-space: nowrap;
+    
+    text-rendering: optimizelegibility;
+    -webkit-font-smoothing: antialiased;
+    line-height: 18px;
+    
+    text-shadow: 0 -1px rgba(15, 89, 153, 0.5);
+    color: white;
+    border-color: #347FC6;
+    background: #77C2FD;
+    background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #77C2FD), color-stop(50%, #5EAEF5), color-stop(51%, #57A8F1), color-stop(100%, #4296E7));
+    background: -webkit-linear-gradient(#77C2FD,#5EAEF5 50%,#57A8F1 51%,#4296E7);
+    background: -moz-linear-gradient(#77C2FD,#5EAEF5 50%,#57A8F1 51%,#4296E7);
+    background: -o-linear-gradient(#77C2FD,#5EAEF5 50%,#57A8F1 51%,#4296E7);
+    background: -ms-linear-gradient(#77C2FD,#5EAEF5 50%,#57A8F1 51%,#4296E7);
+    background: linear-gradient(#77C2FD,#5EAEF5 50%,#57A8F1 51%,#4296E7);
+    -moz-box-shadow: inset 0 0 0 1px rgba(255,255,255,0.1),0 1px rgba(255,255,255,0.18),inset 0 1px #a2dffe;
+    -webkit-box-shadow: inset 0 0 0 1px rgba(255,255,255,0.1),0 1px rgba(255,255,255,0.18),inset 0 1px #a2dffe;
+    -o-box-shadow: inset 0 0 0 1px rgba(255,255,255,0.1),0 1px rgba(255,255,255,0.18),inset 0 1px #a2dffe;
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.1),0 1px rgba(255,255,255,0.18),inset 0 1px #a2dffe;
+
+    padding: 7px 8px 7px 8px;
+  }
+  
   .input {
     .label {
       display:block;
