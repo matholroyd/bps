@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
-  helper_method :current_user, :show_demo_bar?
+  helper_method :current_user, :show_demo_bar?, :site_data, :site_locked?
   
   protected
   
@@ -22,6 +22,14 @@ class ApplicationController < ActionController::Base
   
   def show_demo_bar?
     BPS::Services.demo_mode?
+  end
+
+  def site_locked?
+    site_data.present? && site_data.locked_to_owner?
+  end
+
+  def site_data
+    @site_data ||= Site.data
   end
 
   def allowed_params(context)

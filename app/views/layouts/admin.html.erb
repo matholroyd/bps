@@ -27,8 +27,8 @@
         </figure>
         <%= link_to root_path do %>
           <h2>
-            <% if Site.locked_to_owner? %>
-              <%= Site.data.name %>
+            <% if site_locked? %>
+              <%= site_data.name %>
             <% else %>
               Bitcoin Payment Service
             <% end %>
