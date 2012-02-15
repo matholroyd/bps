@@ -8,7 +8,10 @@ feature "Payments administration", %q{
 
   let!(:user) { User.make }
   let!(:site) { Site.make.tap(&:lock_to_owner!) }
-  let(:ba_several_transactions) { BitcoinAddress.make private_key: "1e2e0bc6893d42a462b0039b5c15c3da3378c8d0ec44556b9608efdb2b3caff1" }
+  let(:ba_several_transactions) { 
+    BitcoinAddress.make private_key: "1e2e0bc6893d42a462b0039b5c15c3da3378c8d0ec44556b9608efdb2b3caff1",
+    description: "demo address with 2 transactions" 
+  }
 
   scenario "No bitcoin addresses or payments", js: true do
     sign_in user
@@ -66,7 +69,14 @@ feature "Payments administration", %q{
     sign_in user
     
     page.should have_content ba_several_transactions.address
-    page.should have_content "No payments have been recorded"
+    
+    within '#payments' do
+      page.should have_content "No payments have been recorded"
+    
+      click_link 'Refresh'
+      page.should have_content "demo address with 2 transactions"
+      page.should have_no_content "No payments have been recorded"
+    end
   end
   
 end
