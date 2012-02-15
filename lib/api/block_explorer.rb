@@ -9,7 +9,7 @@ module Api
     
     class << self
       
-      def mytransactions(*addresses)
+      def mytransactions(addresses)
         get_json "#{MyTransactions}/#{addresses.join('.')}"
       end
 

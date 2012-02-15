@@ -7,9 +7,11 @@ BPS::Application.routes.draw do
   resource :session
 
   namespace :admin do
-    resources :bitcoin_addresses
-    resources :payments
     match "/dashboard", to: "dashboard#index"
+    resources :bitcoin_addresses
+    resources :payments do
+      get :refresh, on: :collection
+    end
     resource :site do
       get :setup_successful, on: :member
     end

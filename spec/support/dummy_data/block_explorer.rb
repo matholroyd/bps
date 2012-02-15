@@ -550,6 +550,10 @@ module DummyData
               "blocknumber":"166580",
               "time":"2012-02-13 03:25:10"
             }
+          }',
+          
+          'https://blockexplorer.com/q/mytransactions/12LDktNb5cmANNmXzhCZfRkN8j8MqsBgts' => '{
+            
           }'
           
         }

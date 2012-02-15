@@ -17,5 +17,9 @@ class BPS.Admin.Routers.Dashboard extends Backbone.Router
       success: =>
         @payments.fetch
           success: => 
-            new BPS.Admin.Views.Dashboard.Index(el: "#admin").render(@payments, @bitcoin_addresses)
+            new BPS.Admin.Views.Dashboard.Index(
+              el: "#admin", 
+              payments: @payments, 
+              bitcoin_addresses: @bitcoin_addresses
+            ).render()
         

@@ -1,8 +1,13 @@
 class TransactionImporter
   class << self
 
-    def import_for(bitcoin_address)
-      pull_transactions(bitcoin_address.address).each do |transaction|
+    def import_for(bitcoin_addresses)
+      addresses = bitcoin_addresses.collect do |ba|
+        DBC.require(ba.valid?)
+        ba.address
+      end
+      
+      pull_transactions(addresses).each do |transaction|
         transaction.save!
       end
     end
@@ -10,20 +15,34 @@ class TransactionImporter
     def pull_transactions(addresses)
       DBC.require(addresses)
       
-      extract_transactions Api::BlockExplorer.mytransactions(addresses), addresses 
+      if addresses.count > 0
+        extract_transactions Api::BlockExplorer.mytransactions(addresses), addresses 
+      else
+        []
+      end
     end
     
     def pull_transaction(hash, addresses)
+      DBC.require(hash)
+      DBC.require(addresses)
+      
       extract_transaction Api::BlockExplorer.rawtx(hash), addresses
     end
     
     def extract_transactions(json, addresses)
+      DBC.require(json)
+      DBC.require(addresses)
+
       json.collect do |k, transaction_json|
         extract_transaction transaction_json, addresses, json
       end
     end
     
     def extract_transaction(tx_hash, addresses, json = {})
+      DBC.require(tx_hash)
+      DBC.require(addresses)
+      DBC.require(json)
+
       tx = Bitcoin::Protocol::Tx.from_hash(tx_hash)
       transaction = Transaction.find_or_create_by_bitcoin_tx_hash tx.hash
       transaction.binary = tx.to_payload
