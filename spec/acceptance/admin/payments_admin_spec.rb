@@ -8,6 +8,7 @@ feature "Payments administration", %q{
 
   let!(:user) { User.make }
   let!(:site) { Site.make.tap(&:lock_to_owner!) }
+  let(:ba_several_transactions) { BitcoinAddress.make private_key: "1e2e0bc6893d42a462b0039b5c15c3da3378c8d0ec44556b9608efdb2b3caff1" }
 
   scenario "No bitcoin addresses or payments", js: true do
     sign_in user
@@ -58,6 +59,14 @@ feature "Payments administration", %q{
       page.should have_content "12.34"
     end
     
+  end
+  
+  scenario "download new transactions", js: true do
+    ba_several_transactions
+    sign_in user
+    
+    page.should have_content ba_several_transactions.address
+    page.should have_content "No payments have been recorded"
   end
   
 end
