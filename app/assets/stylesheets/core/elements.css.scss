@@ -1,6 +1,13 @@
+pre, code, address.bitcoin_address {
+  font-family: 'andale mono', 'lucida console', monospace;
+  color:#373E43;
+  letter-spacing:-1px;
+}
+
 address.bitcoin_address {
-  font-family: 'Courier New', monospace;
-  color:#666;
+  font-size:18px;
+  font-weight:600;
+  letter-spacing:-1px;
 }
 
 .description {

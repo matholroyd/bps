@@ -7,3 +7,24 @@ form#new-payment {
     }
   }
 }
+
+div#bitcoin_address-show {
+  address {
+    font-size:26px;
+    
+    text-align:center;
+    
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -o-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -khtml-border-radius: 5px;
+    border-radius: 5px;
+    
+    border: 1px solid #AEAEAE;
+    border-top-color: #929293;
+    border-bottom-color: #BDBDBD;
+    
+    padding: 22px 0;
+  }
+}
