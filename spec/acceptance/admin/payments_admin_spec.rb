@@ -2,7 +2,7 @@ require File.expand_path(File.dirname(__FILE__) + '/../acceptance_helper')
 
 feature "Payments administration", %q{
   In order to understand and react to transactions on my BPS 
-  As a User
+  As a Admin User
   I want to be able to view and manage my transactions
 } do
 

@@ -2,7 +2,7 @@ require File.expand_path(File.dirname(__FILE__) + '/../acceptance_helper')
 
 feature "Sign in", %q{
   In order to manage my BPS 
-  As a User
+  As an Admin User
   I want to be able to sign in
 } do
 

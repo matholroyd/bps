@@ -2,7 +2,7 @@ require File.expand_path(File.dirname(__FILE__) + '/../acceptance_helper')
 
 feature "Get bitcoin address", %q{
   In order to send bitcoins to the owner
-  As a guest
+  As a Public Guest
   I want the to be able to request a unique bitcoin address
 } do
 
