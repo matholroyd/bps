@@ -15,13 +15,19 @@ Finally, BPS intends to define a simple API for 3rd-parties to fulfil payments, 
 
 # Method
 
+***Implemented***
+
 - Run as a web app, i.e. a 24-hour service that the owner does not have to babysit.
 - Generate a unique bitcoin address for each payment.
 - Allow payers to add additional information for payments, e.g. name, description, address.
+- Provide basic API so 3rd-parties can request a unique bitcoin payment address, and allow the 3rd-party to provide additional information such as a description and their name.
+
+***Coming***
+
 - Provide by default a beautiful, user-friendly, payment experience.
 - Automatically forward payments onto the owner.
-- Private keys can be encrypted in the database, so the host (e.g. Heroku) does not need to be trusted.
-- Provide basic API so 3rd-parties can request a unique bitcoin payment address, and allow the 3rd-party to provide additional information such as a description and their name.
+- Private keys can be encrypted, to add that extra layer of security
+
 
 # Hosting on Heroku
 
