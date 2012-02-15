@@ -23,9 +23,9 @@ Finally, BPS intends to define a simple API for 3rd-parties to fulfil payments, 
 - Private keys can be encrypted in the database, so the host (e.g. Heroku) does not need to be trusted.
 - Provide basic API so 3rd-parties can request a unique bitcoin payment address, and allow the 3rd-party to provide additional information such as a description and their name.
 
-# Deploying
+# Hosting on Heroku
 
-## Heroku
+## Deloying
 
 To deploy the app to Heroku, you will need a **free** account with Heroku.  
 
@@ -40,6 +40,7 @@ There are a bunch of free add-ons that need to be enabled.
     heroku addons:add ssl:piggyback            # SSL support
     heroku addons:add pgbackups:auto-month     # Backups
 
+
 Each BPS should use a unique `config.secret_token`. Currently the app forces you to set a secret token before it will run in production.  There is a helper script to do this. Note the script assumes you are using Heroku. From the app direction, run:
 
     ./script/random_secret_token
@@ -51,6 +52,26 @@ After you have a Heroku app setup, you can deploy for the first time.
 After having deployed the app, the database needs to be migrated.
 
     heroku run rake db:migrate
+
+## Auto pulling of transaction data
+
+It is possible to manually refresh the transaction data from the dashboard when logged in, but for ease of use its worth the extra effort to turn on automatic background checking. 
+ 
+To enable Heroku to automatically check for incoming bitcoins, the `scheduler` plugin needs to be enabled. Note that unlike the other plugins, it is *possible* the `scheduler` plugin will cost money to run, but this can be avoided by setting a lower frequency of checking (*see the note below*). 
+
+To get started, install the scheduler plugin.
+
+    heroku addons:add scheduler:standard       # Background task support
+
+The next step requires manually logging into Heroku. Unfortunately there is no command line support for setting up background tasks. To open a browser window to the scheduler settings page, type:
+
+    heroku addons:open scheduler
+    
+You may need to log in before you can see the scheduler page. Once on the settings page, click `Add Job...`, then in the first field type in the command `rake import_transactions`. Next choose how often and what time you would like to run the task. If you are concerned about being charged, run it once a day, otherwise, choose every 1 hour or every 10 minutes.  Click `Save` when you are done.
+
+**Note** At the time of writing, a basic free account with Heroku comes with 30 hours of free background processing time per month, which is used up by the `scheduler` + any `rake` commands or `log` commands you might run. The only way to tell whether your BPS hosting is costing you money is to look under `My Account` and then click on the link next to `Current Usage`.
+
+## Upgrading the site
     
 If an update for the site is available, you will need to manually push it to Heroku. 
 
@@ -62,7 +83,7 @@ Additionally you may need to migrate (and then restart the server after the migr
     heroku run rake db:migrate  # Migrate database after update, if necessary
     heroku restart              # If a migration was necessary, a restart is likely needed
 
-## Misc Heroku tasks
+## Miscellaneous tasks
 
 If you need to reset the database for some reason, use the following. Note you will **lose all data**, meaning that if your bitcoin addresses (and their associated private keys) have unspent bitcoins associated with them, you will lose those bitcoins!
 
