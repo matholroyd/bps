@@ -27,6 +27,8 @@ describe BitcoinAddress do
     
     it "cannot have < or > in the description" do
       BitcoinAddress.make_unsaved(description: "I am a <hacker").should_not be_valid
+      BitcoinAddress.make_unsaved(description: "I am a hacker>").should_not be_valid
+      BitcoinAddress.make_unsaved(description: "I am a <scrrip>alert('muhaha!');</script>").should_not be_valid
     end
     
     describe "auto-generated" do
