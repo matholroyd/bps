@@ -6,8 +6,6 @@ class Payment < ActiveRecord::Base
   validates :bitcoin_address_id,  presence: true, uniqueness: {scope: :transaction_id}
   validates :amount,              presence: true
   
-  # validates_uniqueness_of :bitcoin_address_id, scope: :transaction
-  
   default_scope order: 'updated_at DESC'
   
   def as_json(options = {})
