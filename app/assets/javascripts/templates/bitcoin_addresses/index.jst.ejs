@@ -3,7 +3,15 @@ Anyone can use this site to send bitcoins to <%= user_full_name %>.</p>
 
 <p>What would you like to do?</p>
 
-<ul>
-  <li><a href="#/bitcoin_addresses/new" class="button">Make payment</a></li>
-  <li><a href="#/bitcoin_addresses/new">Make anonymous payment</a></li>
-</ul>
+<form class="formtastic" action="#/bitcoin_addresses/new">
+  <fieldset class="buttons">
+    <ol>
+      <li class="button">
+        <input type="submit" value="Make a payment" />
+      </li>
+      <li>
+        <a href="#/bitcoin_addresses/new">Make anonymous payment</a>
+      </li>
+    </ol>
+  </fieldset>
+</form>

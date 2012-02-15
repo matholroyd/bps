@@ -79,7 +79,7 @@ caption {background:#eee;}
 .bottom {margin-bottom:0;padding-bottom:0;}
 
 /* forms.css */
-label {font-weight:bold;}
+/*label {font-weight:bold;}
 fieldset {padding:0 1.4em 1.4em 1.4em;margin:0 0 1.5em 0;border:1px solid #ccc;}
 legend {font-weight:bold;font-size:1.2em;margin-top:-0.2em;margin-bottom:1em;}
 fieldset, #IE8#HACK {padding-top:1.4em;}
@@ -102,7 +102,7 @@ form.inline p {margin-bottom:0;}
 .notice a {color:#514721;}
 .success a {color:#264409;}
 .info a {color:#205791;}
-
+*/
 /* grid.css */
 .container {width:800px;margin:0 auto;}
 .showgrid {background:url(src/grid.png);}
