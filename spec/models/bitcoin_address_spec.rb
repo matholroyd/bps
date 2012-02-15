@@ -31,6 +31,13 @@ describe BitcoinAddress do
       BitcoinAddress.make_unsaved(description: "I am a <scrrip>alert('muhaha!');</script>").should_not be_valid
     end
     
+    it "id_alias must be unique" do
+      ba1 = BitcoinAddress.make
+      ba2 = BitcoinAddress.make
+      ba2.id_alias = ba1.id_alias
+      ba2.should_not be_valid
+    end
+    
     describe "auto-generated" do
       let(:bitcoin_address) { BitcoinAddress.make }
     
