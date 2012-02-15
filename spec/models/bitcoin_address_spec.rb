@@ -25,6 +25,10 @@ describe BitcoinAddress do
       end
     end
     
+    it "cannot have < or > in the description" do
+      BitcoinAddress.make_unsaved(description: "I am a <hacker").should_not be_valid
+    end
+    
     describe "auto-generated" do
       let(:bitcoin_address) { BitcoinAddress.make }
     
