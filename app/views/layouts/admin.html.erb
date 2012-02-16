@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=820">
-  <title>BPS</title>
+  <title><%= site_locked? ? site_data.name : "BPS" %></title>
 
   <%= stylesheet_link_tag 'application' %>
   <%= stylesheet_link_tag 'admin' %>
