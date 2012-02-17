@@ -20,20 +20,39 @@ h1 {
   
 }
 
-#header {
-  overflow:hidden;
+#banner {
   position: relative;
-  #nav {
-    position: absolute;
-    top:0px;
-    right: 0px;
-    ul {
-      li {
-        float:left;
-        margin-left:20px;
+  a {
+    text-decoration: none;
+  }
+}
+
+#nav {
+  display:block;
+  overflow:hidden;
+  ul {
+    li {
+      float:right;
+      margin-left:5px;
+      background-color: $c_primary_3;
+      padding:2px 4px;
+      width:80px;
+      text-align:center;
+      a {
+        color: white;
+        text-shadow: 0 1px 1px $c_primary_2;
+        font-weight:200;
       }
+      margin-bottom: 1px;
     }
   }
+}
+
+#header {
+  background-color: $c_primary_4;
+  
+  overflow:hidden;
+  position: relative;
   figure {
     overflow:hidden;
     width: 50px;
@@ -43,9 +62,6 @@ h1 {
     border: 1px solid #b0b0b0;
   }
   padding-top:$baseline;
-  a {
-    text-decoration: none;
-  }
   margin-bottom:$baseline;
 }
 
