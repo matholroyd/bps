@@ -19,32 +19,32 @@
 <body class="admin">
   <%= render partial: 'layouts/demo_bar' if show_demo_bar? %>
   <div class="container">
-    <div class="prepend-1 span-18 append-1 last">
+    <section id="banner">
+      <%= render partial: "layouts/nav_bar" %>
       <header id="header">
-        <%= render partial: "layouts/nav_bar" %>
-        <figure>
-          <img src="<%= gravatar_url %>"></img>
-        </figure>
         <%= link_to root_path do %>
-          <h2>
+          <figure>
+            <img src="<%= gravatar_url %>"></img>
+          </figure>
+          <h1>
             <% if site_locked? %>
               <%= site_data.name %>
             <% else %>
               Bitcoin Payment Service
             <% end %>
-          </h2>
+          </h1>
         <% end %>
       </header>
+    </section>
+    <section id="main">
       <% [:success, :notice, :error, :alert].each do |flash_type| %>
         <% if flash[flash_type] %>
           <p class="flash <%= flash_type.to_s %>"><%= flash[flash_type] %></p>
         <% end %>
       <% end %>
-      <section id="main">
-        <%= yield %>
-      </section>
-      <%= render partial: "layouts/footer" %>
-    </div>
+      <%= yield %>
+    </section>
+    <%= render partial: "layouts/footer" %>
   </div>
 </body>
 </html>

@@ -4,24 +4,19 @@ body {
   font: normal 16px "helvetica neue",helvetica,arial,sans-serif;
   line-height: 24px;
   color: #52585D;
-}
+  background:transparent image-url('pattern_127.gif') 0 0 repeat;
+  background:transparent image-url('lgrey011.jpg') 0 0 repeat;
+  background:transparent image-url('pattern_23.gif') 0 0 repeat;
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: "agb","helvetica neue",helvetica,arial,sans-serif;
-  -webkit-font-smoothing: antialiased;
-  color:#373E43;
-}
-h1 {
-  font-size: 40px;
-  line-height: 48px;
 }
 
 #container {
-  
 }
 
 #banner {
+  padding-top:$baseline;
   position: relative;
+  border-bottom:1px solid #000;
   a {
     text-decoration: none;
   }
@@ -49,29 +44,45 @@ h1 {
 }
 
 #header {
-  background-color: $c_primary_4;
-  
+  background-color: $c_primary_4; 
+  background-image: linear-gradient(left , rgb(253,189,110) 2%, rgb(247,148,26) 51%);
+  background-image: -o-linear-gradient(left , rgb(253,189,110) 2%, rgb(247,148,26) 51%);
+  background-image: -moz-linear-gradient(left , rgb(253,189,110) 2%, rgb(247,148,26) 51%);
+  background-image: -webkit-linear-gradient(left , rgb(253,189,110) 2%, rgb(247,148,26) 51%);
+  background-image: -ms-linear-gradient(left , rgb(253,189,110) 2%, rgb(247,148,26) 51%);
+   
   overflow:hidden;
   position: relative;
+  padding-top:$baseline;
+  h1 {
+    padding-left:$column-width;
+    float:left;
+  }
   figure {
     overflow:hidden;
-    width: 50px;
-    height:50px;
-    float:left;
-    margin-right: 10px;
-    border: 1px solid #b0b0b0;
+    height:64px;
+    float:right;
   }
-  padding-top:$baseline;
-  margin-bottom:$baseline;
 }
 
 
 #main {
+  padding-top: $baseline;
   min-height: 30*$baseline;
+  background-color:#eee;
 }
 
 footer {
+  color:#fff;
   text-align:center;
   font-size:85%;
+  text-shadow:0px 0px 3px rgba(0, 0, 0, 0.8);
+  a {
+    text-decoration:none;
+    color:$c_primary_5;
+    &:hover {
+      color:$c_primary_4;
+    }
+  }
 }
 
