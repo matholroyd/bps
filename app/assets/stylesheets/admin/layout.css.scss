@@ -18,6 +18,28 @@ body {
   background-color:$c_grey;
 }
 
+#banner {
+  overflow:hidden;
+  a {
+    text-decoration:none;
+  }
+  #header {
+    float:left;
+  }
+  h1 {
+    font-size:$baseline*2;
+    line-height:$baseline*2;
+    color:$c_primary_1;
+    text-shadow: 1px 1px 1px $c_primary_3;
+    font-family: 'Gill Sans', 'My Gill Sans', sans-serif;
+    font-weight:200;
+  }
+  
+  #nav {
+    float:right;
+  }
+}
+
 .panel > header {
   background-color:rgb(40, 40, 40);
   line-height:16px;
@@ -31,7 +53,7 @@ body {
   background-image: -webkit-linear-gradient(top , rgb(100,100,100) 40%, rgb(60, 60, 60) 60%);
   background-image: linear-gradient(top , rgb(100,100,100) 40%, rgb(60, 60, 60) 60%);
 
-  h1, h2 {
+  h1, h2, h3 {
     line-height:$baseline*2;
     color:#fff;
     text-shadow:0px -1px 1px #000;

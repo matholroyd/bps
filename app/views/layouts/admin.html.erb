@@ -19,19 +19,28 @@
 <body class="admin">
   <%= render partial: 'layouts/demo_bar' if show_demo_bar? %>
   <div class="container">
-    <%= render partial: "layouts/nav_bar" %>
+    <div id="banner">
+      <nav id="nav">
+        <ul>
+          <li><%= link_to "sign out", session_path, method: :delete %></li>
+        </ul>
+      </nav>
+      <header id="header">
+        <%= link_to root_path do %>
+          <h1>
+            <% if site_locked? %>
+              <%= site_data.name %>
+            <% else %>
+              Bitcoin Payment Service
+            <% end %>
+          </h1>
+        <% end %>
+      </header>
+    </div>
     <div id="admin-panel">
       <section id="side-menu" class="panel">
         <header>
-          <%= link_to root_path do %>
-            <h1>
-              <% if site_locked? %>
-                <%= site_data.name %>
-              <% else %>
-                Bitcoin Payment Service
-              <% end %>
-            </h1>
-          <% end %>
+          <h2>Dashboard</h2>
         </header>
         <nav id="side-menu">
           <ul class="touchable">
@@ -45,7 +54,7 @@
       </section>
       <section id="main-panel" class="panel">
         <header>
-          <h2>Payments</h2>
+          <h3>Payments</h3>
         </header>
         <div id="main">
           <%= yield %>

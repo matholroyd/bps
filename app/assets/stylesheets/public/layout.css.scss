@@ -4,7 +4,6 @@ body.public {
 
   #banner {
     padding-top:$baseline;
-    position: relative;
     border-bottom:1px solid $c_primary_1;
     a {
       text-decoration: none;
@@ -18,10 +17,6 @@ body.public {
     h1 {
       padding-left:$column-width;
       float:left;
-      color:$c_primary_1;
-      text-shadow: 1px 1px 1px $c_primary_3;
-      font-family: 'Gill Sans', 'My Gill Sans', sans-serif;
-      font-weight:200;
     }
     figure {
       overflow:hidden;

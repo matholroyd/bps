@@ -7,8 +7,23 @@ body {
   background-color:#fff;
 }
 
-#container {
+#banner {
+  padding-top:$baseline;
+  a {
+    text-decoration: none;
+  }
 }
+
+#header {
+  overflow:hidden;
+  h1 {
+    color:$c_primary_1;
+    text-shadow: 1px 1px 1px $c_primary_3;
+    font-family: 'Gill Sans', 'My Gill Sans', sans-serif;
+    font-weight:200;
+  }
+}
+
 
 
 #nav {
