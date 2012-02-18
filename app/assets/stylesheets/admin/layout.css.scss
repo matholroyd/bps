@@ -5,39 +5,31 @@ body {
 }
 
 #admin-panel {
+  @include border-box; 
+  
+  width:$ipad_width;
+  box-sizing: border-box;
+  
   border-left:1px solid #000;
   border-bottom:1px solid #000;
   border-right:1px solid #000;
   overflow:hidden;
-  
-  #side-menu {
-    width:$column_width*4 - 1px;
-    float:left;
-  }
-  
-  #main-panel {
-    width:$column_width*16 - 2px;
-    float:left;
-    border-left:1px solid #000;
-  }
-}
 
-#nav {
-  ul {
-  }
+  background-color:$c_grey;
 }
 
 .panel > header {
-  padding-left:$baseline/2;
   background-color:rgb(40, 40, 40);
   line-height:16px;
-  height:$baseline*2;
+  height:$baseline_touch;
+  
+  text-align:center;
 
-  background-image: linear-gradient(left , rgb(253,189,110) 2%, rgb(247,148,26) 51%);
-  background-image: -o-linear-gradient(left , rgb(253,189,110) 2%, rgb(247,148,26) 51%);
-  background-image: -moz-linear-gradient(left , rgb(253,189,110) 2%, rgb(247,148,26) 51%);
-  background-image: -ms-linear-gradient(left , rgb(253,189,110) 2%, rgb(247,148,26) 51%);
+  background-image: -o-linear-gradient(top , rgb(100,100,100) 40%, rgb(60, 60, 60) 60%);
+  background-image: -moz-linear-gradient(top , rgb(100,100,100) 40%, rgb(60, 60, 60) 60%);
+  background-image: -ms-linear-gradient(top , rgb(100,100,100) 40%, rgb(60, 60, 60) 60%);
   background-image: -webkit-linear-gradient(top , rgb(100,100,100) 40%, rgb(60, 60, 60) 60%);
+  background-image: linear-gradient(top , rgb(100,100,100) 40%, rgb(60, 60, 60) 60%);
 
   h1, h2 {
     line-height:$baseline*2;
@@ -51,4 +43,44 @@ body {
     text-decoration:none;
   }
 }
+
+#side-menu {
+  width: 180px;
+  float:left;
+  ul {
+    li {
+      a {
+        display:block;
+        padding-left:$baseline/2;
+        text-decoration:none;
+        color:#555;
+      }
+      border-bottom:1px solid $c_grey - #111;
+      border-top:1px solid $c_grey + #111;
+      font-weight:bold;
+    }
+    li.first {
+      border-top:none;
+    }
+    li.trail {
+      border-bottom:none
+    }
+  }
+}
+
+#main-panel {
+  width:$ipad_width - 180px - 3px;
+  float:left;
+  border-left:1px solid #000;
+}
+
+ul.touchable {
+  li {
+    height:$baseline_touch;
+    line-height:$baseline_touch;
+  }
+}
+
+
+
 

@@ -1,10 +1,21 @@
+@import 'mixins';
+
 $baseline: 18px;
+$baseline_touch: $baseline * 2;
 
 $column_width: 40px;
+
+$ipad_width:768px;
+
+
+
 
 /* 
 #F7931A
 */
+
+
+$c_grey: #eee;
 
 $c_primary_1: #F7941A;
 $c_primary_2: #B6803E;

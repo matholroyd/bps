@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <meta name="viewport" content="width=820">
+  <meta name="viewport" content="width=768">
   <title><%= site_locked? ? site_data.name : "BPS" %></title>
 
   <%= stylesheet_link_tag 'application' %>
@@ -34,9 +34,12 @@
           <% end %>
         </header>
         <nav id="side-menu">
-          <ul>
-            <li>Payments</li>
-            <li>Bitcoin Addresses</li>
+          <ul class="touchable">
+            <li class="first"><a href="#">Payments</a></li>
+            <li><a href="#">Bitcoin Addresses</a></li>
+            <li><a href="#">Site</a></li>
+            <li><a href="#">Account</a></li>
+            <li class="trail"></li>
           </ul>
         </nav>
       </section>
