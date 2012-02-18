@@ -19,32 +19,31 @@
 <body class="admin">
   <%= render partial: 'layouts/demo_bar' if show_demo_bar? %>
   <div class="container">
-    <section id="banner">
-      <%= render partial: "layouts/nav_bar" %>
-      <header id="header">
-        <%= link_to root_path do %>
-          <figure>
-            <img src="<%= gravatar_url %>"></img>
-          </figure>
-          <h1>
-            <% if site_locked? %>
-              <%= site_data.name %>
-            <% else %>
-              Bitcoin Payment Service
-            <% end %>
-          </h1>
+    <section id="admin-panel">
+      <section id="banner">
+        <%= render partial: "layouts/nav_bar" %>
+        <header id="header">
+          <%= link_to root_path do %>
+            <h1>
+              <% if site_locked? %>
+                <%= site_data.name %>
+              <% else %>
+                Bitcoin Payment Service
+              <% end %>
+            </h1>
+          <% end %>
+        </header>
+      </section>
+      <section id="main">
+        <% [:success, :notice, :error, :alert].each do |flash_type| %>
+          <% if flash[flash_type] %>
+            <p class="flash <%= flash_type.to_s %>"><%= flash[flash_type] %></p>
+          <% end %>
         <% end %>
-      </header>
-    </section>
-    <section id="main">
-      <% [:success, :notice, :error, :alert].each do |flash_type| %>
-        <% if flash[flash_type] %>
-          <p class="flash <%= flash_type.to_s %>"><%= flash[flash_type] %></p>
-        <% end %>
-      <% end %>
-      <%= yield %>
-    </section>
-    <%= render partial: "layouts/footer" %>
+        <%= yield %>
+      </section>
+      <%= render partial: "layouts/footer" %>
+    </section>    
   </div>
 </body>
 </html>

@@ -1,0 +1,16 @@
+@import "../config";
+
+body {
+  background:transparent image-url('background/pattern_26.gif') 0 0 repeat;
+}
+
+#admin-panel {
+  background-color:#000;
+}
+#header {
+  background-color:#000;
+  color:$c_primary_3;
+  h1 {
+    text-shadow:0px 1px 1px #fff;
+  }
+}

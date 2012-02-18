@@ -23,8 +23,10 @@ body {
   display:block;
   overflow:hidden;
   ul {
+    float:right;
     border-bottom:1px solid $c_primary_1;
     overflow:hidden;
+    padding:0 $column_width;
     li {
       float:right;
       margin-left:5px;
@@ -33,7 +35,7 @@ body {
       a {
         display:block;
         padding:2px 4px;
-        width:80px;
+        width:$column_width * 2.5;
         color: white;
         text-shadow: 0 1px 1px $c_primary_2;
         font-weight:200;
