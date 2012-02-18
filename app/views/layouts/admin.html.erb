@@ -19,10 +19,10 @@
 <body class="admin">
   <%= render partial: 'layouts/demo_bar' if show_demo_bar? %>
   <div class="container">
-    <section id="admin-panel">
-      <section id="banner">
-        <%= render partial: "layouts/nav_bar" %>
-        <header id="header">
+    <%= render partial: "layouts/nav_bar" %>
+    <div id="admin-panel">
+      <section id="side-menu" class="panel">
+        <header>
           <%= link_to root_path do %>
             <h1>
               <% if site_locked? %>
@@ -33,17 +33,23 @@
             </h1>
           <% end %>
         </header>
+        <nav id="side-menu">
+          <ul>
+            <li>Payments</li>
+            <li>Bitcoin Addresses</li>
+          </ul>
+        </nav>
       </section>
-      <section id="main">
-        <% [:success, :notice, :error, :alert].each do |flash_type| %>
-          <% if flash[flash_type] %>
-            <p class="flash <%= flash_type.to_s %>"><%= flash[flash_type] %></p>
-          <% end %>
-        <% end %>
-        <%= yield %>
+      <section id="main-panel" class="panel">
+        <header>
+          <h2>Payments</h2>
+        </header>
+        <div id="main">
+          <%= yield %>
+        </div>
       </section>
-      <%= render partial: "layouts/footer" %>
-    </section>    
+    </div>    
+    <%= render partial: "layouts/footer" %>
   </div>
 </body>
 </html>

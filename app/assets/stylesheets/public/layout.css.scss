@@ -1,0 +1,62 @@
+@import "../config";
+
+body.public {
+
+  #banner {
+    padding-top:$baseline;
+    position: relative;
+    border-bottom:1px solid $c_primary_1;
+    a {
+      text-decoration: none;
+    }
+  }
+
+  #header {
+    overflow:hidden;
+    position: relative;
+    padding-top:$baseline;
+    h1 {
+      padding-left:$column-width;
+      float:left;
+      color:$c_primary_1;
+      text-shadow: 1px 1px 1px $c_primary_3;
+      font-family: 'Gill Sans', 'My Gill Sans', sans-serif;
+      font-weight:200;
+    }
+    figure {
+      overflow:hidden;
+      height:64px;
+      float:right;
+    }
+  }
+
+  #nav {
+    display:block;
+    overflow:hidden;
+    ul {
+      float:right;
+      border-bottom:1px solid $c_primary_1;
+      overflow:hidden;
+      padding:0 $column_width;
+      li {
+        float:right;
+        margin-left:5px;
+        background-color: $c_primary_3;
+        text-align:center;
+        a {
+          display:block;
+          padding:2px 4px;
+          width:$column_width * 2.5;
+          color: white;
+          text-shadow: 0 1px 1px $c_primary_2;
+          font-weight:200;
+          &:hover {
+           background-color:$c_primary_1; 
+          }
+        }
+        margin-bottom: 1px;
+      }
+    }
+  }
+
+}
