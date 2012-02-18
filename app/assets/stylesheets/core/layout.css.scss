@@ -4,7 +4,7 @@ body {
   font: normal 16px "helvetica neue",helvetica,arial,sans-serif;
   line-height: 24px;
   color: #52585D;
-  background:transparent image-url('background/pattern_26.gif') 0 0 repeat;
+  background-color:#fff;
 }
 
 #container {
@@ -13,7 +13,7 @@ body {
 #banner {
   padding-top:$baseline;
   position: relative;
-  border-bottom:1px solid #000;
+  border-bottom:1px solid $c_primary_1;
   a {
     text-decoration: none;
   }
@@ -23,6 +23,8 @@ body {
   display:block;
   overflow:hidden;
   ul {
+    border-bottom:1px solid $c_primary_1;
+    overflow:hidden;
     li {
       float:right;
       margin-left:5px;
@@ -35,6 +37,9 @@ body {
         color: white;
         text-shadow: 0 1px 1px $c_primary_2;
         font-weight:200;
+        &:hover {
+         background-color:$c_primary_1; 
+        }
       }
       margin-bottom: 1px;
     }
@@ -42,21 +47,14 @@ body {
 }
 
 #header {
-  background-color: $c_primary_4; 
-  background-image: linear-gradient(left , rgb(253,189,110) 2%, rgb(247,148,26) 51%);
-  background-image: -o-linear-gradient(left , rgb(253,189,110) 2%, rgb(247,148,26) 51%);
-  background-image: -moz-linear-gradient(left , rgb(253,189,110) 2%, rgb(247,148,26) 51%);
-  background-image: -webkit-linear-gradient(left , rgb(253,189,110) 2%, rgb(247,148,26) 51%);
-  background-image: -ms-linear-gradient(left , rgb(253,189,110) 2%, rgb(247,148,26) 51%);
-   
   overflow:hidden;
   position: relative;
   padding-top:$baseline;
   h1 {
     padding-left:$column-width;
     float:left;
-    color:#fff;
-    text-shadow: 0px 1px 2px $c_primary_3;
+    color:$c_primary_1;
+    text-shadow: 1px 1px 1px $c_primary_3;
     font-family: 'Gill Sans', 'My Gill Sans', sans-serif;
     font-weight:200;
   }
@@ -71,21 +69,21 @@ body {
 #main {
   padding-top: $baseline;
   min-height: 30*$baseline;
-  background-color:#ddd;
+  background-color:#eee;
   text-shadow:0px 1px 1px rgba(255, 255, 255, 1);
   font-weight:3 00;
 }
 
 footer {
-  color:#fff;
+  color: #52585D;
   text-align:center;
   font-size:85%;
-  text-shadow:0px 0px 3px rgba(0, 0, 0, 0.8);
+  text-shadow:0px 1px 1px #fff;
   a {
     text-decoration:none;
-    color:$c_primary_5;
+    color:$c_primary_2;
     &:hover {
-      color:$c_primary_4;
+      color:$c_primary_1;
     }
   }
 }
