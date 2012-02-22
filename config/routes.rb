@@ -2,7 +2,9 @@ BPS::Application.routes.draw do
   root to: "bitcoin_addresses#index"
   get "setup_site" => "sessions#owner_setup_site", as: "owner_setup_site"
 
-  resources :bitcoin_addresses, only: [:index, :new, :create, :show]
+  scope 'api' do
+    resources :bitcoin_addresses, only: [:index, :new, :create, :show]
+  end
   resources :users, only: [:new, :create]
   resource :session
 
@@ -19,6 +21,7 @@ BPS::Application.routes.draw do
       resource :check_password, only: [:new, :create]
     end
   end
+  
   
   # Actions handy when developing
   if BPS::Services.demo_mode? 
