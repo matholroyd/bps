@@ -4,7 +4,6 @@ body.public {
 
   #banner {
     padding-top:$baseline;
-    border-bottom:1px solid $c_primary_1;
     a {
       text-decoration: none;
     }
@@ -52,6 +51,11 @@ body.public {
         margin-bottom: 1px;
       }
     }
+  }
+  
+  #main {
+    border-top:1px solid $c_primary_1;
+    border-bottom:1px solid $c_primary_1;
   }
 
 }

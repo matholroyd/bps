@@ -11,7 +11,7 @@ feature "Get bitcoin address", %q{
   scenario "Guest request a bitcoin address so send bitcoins to the owner", js: true do
     visit root_path
     page.should have_content "This site is an online payment service for #{owner.full_name}."
-    click_link "Make payment"
+    click_link "Make a payment"
 
     page.should have_content "To make a payment to #{owner.full_name}"
   
@@ -24,6 +24,7 @@ feature "Get bitcoin address", %q{
     fill_in 'Description', with: "Some money for dinner last night"
     click_button "Finish payment"
 
+    # save_and_open_page
     page.should have_content "send your payment to the following address"
     page.should have_content last_bitcoin_address.address
   end
