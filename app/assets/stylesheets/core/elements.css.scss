@@ -1,8 +1,24 @@
+h1, h2, h3, h4, h5, h6 {
+  font-family: "agb","helvetica neue",helvetica,arial,sans-serif;
+  -webkit-font-smoothing: antialiased;
+  color:#373E43;
+}
+
+h1 {
+  font-size: 40px;
+  line-height: 48px;
+}
+
+pre, code, address.bitcoin_address {
+  font-family: 'andale mono', 'lucida console', monospace;
+  color:#373E43;
+  letter-spacing:-1px;
+}
+
 address.bitcoin_address {
-  font-family: 'Courier New', monospace;
-  font-size:1.1em;
-  line-height:18px;
-  color:#666;
+  font-size:18px;
+  font-weight:600;
+  letter-spacing:-1px;
 }
 
 .description {

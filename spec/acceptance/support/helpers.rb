@@ -11,7 +11,7 @@ module HelperMethods
     fill_in "Password", with: "super secret"
     click_button "Sign in"
 
-    page.should have_content "Admin dashboard"
+    page.should have_content "Dashboard"
   end
 end
 

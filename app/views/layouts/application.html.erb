@@ -4,8 +4,10 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=820">
-  <title>BPS</title>
+  <title><%= site_locked? ? site_data.name : "BPS" %></title>
 
+  <link rel="icon" type="image/png" href="/favicon.png">
+        
   <%= stylesheet_link_tag 'application' %>
   <!--[if lt IE 8]><%= stylesheet_link_tag '/blueprint/ie'%><![endif]-->
   <!--[if IE 6]><%= stylesheet_link_tag 'ie6' %><![endif]-->
@@ -14,40 +16,39 @@
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
-<body>
+<body class="public">
   <%= render partial: 'layouts/demo_bar' if show_demo_bar? %>
   <div class="container">
-    <div class="prepend-1 span-18 append-1 last">
+    <section id="banner" class="span-20 last">
+      <%= render partial: "layouts/nav_bar" %>
       <header id="header">
-        <%= render partial: "layouts/nav_bar" %>
-        <figure>
-          <img src="<%= gravatar_url %>"></img>
-        </figure>
         <%= link_to root_path do %>
-          <h2>
+          <!-- <figure>
+            <img src="<%= gravatar_url %>"></img>
+          </figure> -->
+          <h1>
             <% if site_locked? %>
               <%= site_data.name %>
             <% else %>
               Bitcoin Payment Service
             <% end %>
-          </h2>
-        <% end %>
+          </h1>
+          <% end %>
+        <figure>
+          <%#= image_tag "BC_nBG_64px.png" %>
+          <%= image_tag "BC_nBG_64px.png" %>
+        </figure>
       </header>
+    </section>
+    <section id="main" class="prepend-1 span-18 append-1 last">
       <% [:success, :notice, :error, :alert].each do |flash_type| %>
         <% if flash[flash_type] %>
           <p class="flash <%= flash_type.to_s %>"><%= flash[flash_type] %></p>
         <% end %>
       <% end %>
-      <section id="main">
-        <%= yield %>
-      </section>
-      <footer>
-        <p>The source code + instructions on how to deploy BPS yourself can be found at <%= link_to 'github.com/matholroyd/bps', 'https://github.com/matholroyd/bps' %></p>
-        <p>
-          BPS was written by <%= link_to "Mat Holroyd", "http://www.linkedin.com/in/matholroyd" %>. Find me on Twitter <%= link_to '@matholroyd', 'http://twitter.com/#!/matholroyd' %>. Copyright &copy; <%= Date.today.year %>
-        </p>
-      </footer>
-    </div>
+      <%= yield %>
+    </section>
+    <%= render partial: "layouts/footer" %>
   </div>
 </body>
 </html>

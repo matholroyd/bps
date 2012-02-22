@@ -31,7 +31,7 @@ feature "Payments administration", %q{
     
     using_session 'payer' do
       visit root_path
-      click_link "Make payment"
+      click_link "Make a payment"
       
       fill_in 'Description', with: "Some money for dinner last night"
       click_button "Finish payment"
@@ -40,7 +40,7 @@ feature "Payments administration", %q{
     end
     
     # Reload page
-    click_link "dashboard"
+    visit(current_path)
     
     page.should have_no_content "No bitcoin addresses have been generated" 
     within "#bitcoin_addresses" do
@@ -56,7 +56,7 @@ feature "Payments administration", %q{
     page.should have_content "No payments have been recorded"
     
     send_bitcoins to: bitcoin_address, amount: 12.34
-    click_link "dashboard"
+    visit(current_path)
         
     within '#payments' do
       page.should have_content "12.34"

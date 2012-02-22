@@ -1,0 +1,108 @@
+@import "../config";
+
+body {
+/*  background:transparent image-url('background/pattern_26.gif') 0 0 repeat;*/
+}
+
+#admin-panel {
+  @include border-box; 
+  
+  width:$ipad_width;
+  box-sizing: border-box;
+  
+  border-left:1px solid #000;
+  border-bottom:1px solid #000;
+  border-right:1px solid #000;
+  overflow:hidden;
+
+  background-color:$c_grey;
+}
+
+#banner {
+  overflow:hidden;
+  a {
+    text-decoration:none;
+  }
+  #header {
+    float:left;
+  }
+  h1 {
+    font-size:$baseline*2;
+    line-height:$baseline*2;
+    color:$c_primary_1;
+    text-shadow: 1px 1px 1px $c_primary_3;
+    font-family: 'Gill Sans', 'My Gill Sans', sans-serif;
+    font-weight:200;
+  }
+  
+  #nav {
+    float:right;
+  }
+}
+
+.panel > header {
+  background-color:rgb(40, 40, 40);
+  line-height:16px;
+  height:$baseline_touch;
+  
+  text-align:center;
+
+  background-image: -o-linear-gradient(top , rgb(100,100,100) 40%, rgb(60, 60, 60) 60%);
+  background-image: -moz-linear-gradient(top , rgb(100,100,100) 40%, rgb(60, 60, 60) 60%);
+  background-image: -ms-linear-gradient(top , rgb(100,100,100) 40%, rgb(60, 60, 60) 60%);
+  background-image: -webkit-linear-gradient(top , rgb(100,100,100) 40%, rgb(60, 60, 60) 60%);
+  background-image: linear-gradient(top , rgb(100,100,100) 40%, rgb(60, 60, 60) 60%);
+
+  h1, h2, h3 {
+    line-height:$baseline*2;
+    color:#fff;
+    text-shadow:0px -1px 1px #000;
+    font-size:16px;
+    font-family: Arial;
+    font-weight:700;
+  }
+  a {
+    text-decoration:none;
+  }
+}
+
+#side-menu {
+  width: 180px;
+  float:left;
+  ul {
+    li {
+      a {
+        display:block;
+        padding-left:$baseline/2;
+        text-decoration:none;
+        color:#555;
+      }
+      border-bottom:1px solid $c_grey - #111;
+      border-top:1px solid $c_grey + #111;
+      font-weight:bold;
+    }
+    li.first {
+      border-top:none;
+    }
+    li.trail {
+      border-bottom:none
+    }
+  }
+}
+
+#main-panel {
+  width:$ipad_width - 180px - 3px;
+  float:left;
+  border-left:1px solid #000;
+}
+
+ul.touchable {
+  li {
+    height:$baseline_touch;
+    line-height:$baseline_touch;
+  }
+}
+
+
+
+
