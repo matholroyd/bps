@@ -24,7 +24,6 @@ feature "Get bitcoin address", %q{
     fill_in 'Description', with: "Some money for dinner last night"
     click_button "Finish payment"
 
-    # save_and_open_page
     page.should have_content "send your payment to the following address"
     page.should have_content last_bitcoin_address.address
   end
