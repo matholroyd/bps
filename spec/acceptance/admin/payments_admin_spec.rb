@@ -40,7 +40,7 @@ feature "Payments administration", %q{
     end
     
     # Reload page
-    visit(current_path)
+    visit current_path
     
     page.should have_no_content "No bitcoin addresses have been generated" 
     within "#bitcoin_addresses" do
@@ -56,7 +56,7 @@ feature "Payments administration", %q{
     page.should have_content "No payments have been recorded"
     
     send_bitcoins to: bitcoin_address, amount: 12.34
-    visit(current_path)
+    visit current_path
         
     within '#payments' do
       page.should have_content "12.34"

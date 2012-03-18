@@ -22,7 +22,7 @@ class BPS.Admin.Views.Dashboard.Index extends Backbone.View
   
   refresh_payments: (event) =>
     $.ajax 
-      url: '/admin/payments/refresh'
+      url: '/admin/api/payments/refresh'
       success: (data) =>
         @bitcoin_addresses.fetch
           success: =>

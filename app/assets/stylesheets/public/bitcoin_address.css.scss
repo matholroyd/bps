@@ -26,5 +26,13 @@ div#bitcoin_address-show {
     border-bottom-color: #BDBDBD;
     
     padding: 22px 0;
+    margin-bottom:$baseline;
   }
+  #qrcode {
+    margin-bottom:$baseline;
+    > img {
+      display:block;
+      margin:0 auto;
+    }
+  } 
 }
