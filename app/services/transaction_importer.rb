@@ -8,7 +8,7 @@ class TransactionImporter
       end
       
       pull_transactions(addresses).each do |transaction|
-        transaction.save!
+        DBC.assert(transaction.save, transaction.errors)
       end
     end
 
@@ -74,10 +74,12 @@ class TransactionImporter
       node = json[tx_in.previous_output]['out'][tx_in.prev_out_index]
 
       addr = node['address'] || Bitcoin::Script.new(node['scriptPubKey']).get_address
-      ba = BitcoinAddress.find_or_create_by_address addr
-      amount = -BigDecimal(node['value'])
+      if addresses.include? addr
+        ba = BitcoinAddress.find_or_create_by_address addr
+        amount = -BigDecimal(node['value'])
       
-      find_or_build_payment transaction, ba, amount
+        find_or_build_payment transaction, ba, amount
+      end
     end
  
     def find_or_build_payment(transaction, ba, amount)
