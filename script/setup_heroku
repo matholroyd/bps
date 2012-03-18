@@ -1,0 +1,27 @@
+#!/usr/bin/env ruby
+# This command will setup up a new site on heroku
+
+name = ARGV.first
+if name.nil?
+  puts "Error: No name specified"
+  Process.exit
+end
+
+domain = "#{name}.herokuapp.com"
+
+command "heroku create #{name} --stack cedar"
+
+command "heroku addons:add mailgun:starter"
+command "heroku addons:add ssl:piggyback"
+command "heroku addons:add pgbackups:auto-month"
+
+command "./script/random_secret_token"
+
+command "git add ."
+command %{git commit -m "updated token for #{domain}"}
+command "git push heroku master"
+
+command "heroku run rake db:migrate"
+command "heroku addons:add scheduler:standard"
+
+command "heroku addons:open scheduler"
