@@ -22,19 +22,17 @@ class Wallet
         amount += ba.balance
             
         if amount >= options[:amount]
-          if amount > options[:amount]
-            partial_paying_ba = ba
-          end
-        
           break
         end
       end
 
-      tx.add_out Bitcoin::Protocol::TxOut.value_to_address(amount * 10000000, options[:to])
-      if partial_paying_ba 
+      tx.add_out Bitcoin::Protocol::TxOut.value_to_address(options[:amount] * 10000000, options[:to])
+      if amount > options[:amount] 
+        diff = amount - options[:amount]
         remainder_ba = BitcoinAddress.generate
+        remainder_ba.description = "Auto generated for remainder"
         remainder_ba.save!
-        tx.add_out Bitcoin::Protocol::TxOut.value_to_address(amount * 10000000, remainder_ba.address)
+        tx.add_out Bitcoin::Protocol::TxOut.value_to_address(diff * 10000000, remainder_ba.address)
       end
       
       bas.each_with_index do |ba, i|
