@@ -1,5 +1,7 @@
 class Wallet
   class << self
+    Offset = 100000000
+    
     def balance
       Payment.sum(:amount)
     end
@@ -25,22 +27,26 @@ class Wallet
           break
         end
       end
-
-      tx.add_out Bitcoin::Protocol::TxOut.value_to_address(options[:amount] * 10000000, options[:to])
+      
+      tx.add_out Bitcoin::Protocol::TxOut.value_to_address(options[:amount] * Offset, options[:to])
       if amount > options[:amount] 
         diff = amount - options[:amount]
         remainder_ba = BitcoinAddress.generate
         remainder_ba.description = "Auto generated for remainder"
         remainder_ba.save!
-        tx.add_out Bitcoin::Protocol::TxOut.value_to_address(diff * 10000000, remainder_ba.address)
+        tx.add_out Bitcoin::Protocol::TxOut.value_to_address(diff * Offset, remainder_ba.address)
       end
       
       bas.each_with_index do |ba, i|
         prev_tx = Bitcoin::Protocol::Tx.new(ba.most_recent_transaction.binary)
         sig = Bitcoin.sign_data(Bitcoin.open_key(ba.private_key), tx.signature_hash_for_input(i, prev_tx))
         tx.in[i].script_sig = Bitcoin::Script.to_signature_pubkey_script(sig, [ba.public_key].pack("H*"))
+        
+        DBC.assert(tx.verify_input_signature(i, prev_tx))
       end
       
+      tx_fees = amount - tx.out.sum {|o| o.value / Offset }
+      DBC.ensure(tx_fees <= 0.01)
       tx
     end
     
