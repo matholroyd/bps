@@ -5,6 +5,9 @@ class BitcoinAddress < ActiveRecord::Base
   validates :private_key, presence: true
   validates :public_key,  presence: true
 
+  has_many :payments
+  has_many :transactions, through: :payments
+
   validates_each :public_key do |record, attr, public_key|
     if record.private_key.present?
       k = Bitcoin::Key.new(record.private_key)
@@ -26,6 +29,18 @@ class BitcoinAddress < ActiveRecord::Base
   end
   
   default_scope order: 'updated_at DESC'
+  
+  def balance
+    payments.sum(:amount)
+  end
+  
+  def most_recent_transaction
+    transactions.order_by_most_recent.first
+  end
+    
+  def self.sorted_by_balance
+    all.sort {|a, b| b.balance <=> a.balance}
+  end
   
   def self.generate
     k = Bitcoin::Key.generate
