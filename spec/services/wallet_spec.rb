@@ -8,12 +8,20 @@ describe Wallet do
     end
   end
   
-  
   context "sending bitcoins" do
-    let(:address) { Bitcoin::Key.generate.addr }
+    let(:address) { BitcoinAddress.create!( 
+        private_key: "1e2e0bc6893d42a462b0039b5c15c3da3378c8d0ec44556b9608efdb2b3caff1",
+        description: "test"
+    ) }
+    
+    before :each do
+      TransactionImporter.import_for [address]
+      address.transactions.first.destroy
+      address.payments.first.destroy
+    end
     
     it "creates a transaction" do
-      Wallet.send_bitcoins(to: address, amount: BigDecimal("10"))
+      Wallet.send_bitcoins_tx(to: BitcoinAddress.generate.address, amount: BigDecimal("10"))
     end
     
     it "transmits the transaction"

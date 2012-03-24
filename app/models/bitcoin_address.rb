@@ -38,10 +38,10 @@ class BitcoinAddress < ActiveRecord::Base
     transactions.order_by_most_recent.first
   end
     
-  def self.sorted_by_balance
-    all.sort {|a, b| b.balance <=> a.balance}
-  end
-  
+  def self.sorted_and_non_zero_balance
+    all.select {|ba| ba.balance > 0 }.sort {|a, b| b.balance <=> a.balance}
+  end  
+      
   def self.generate
     k = Bitcoin::Key.generate
     new private_key: k.priv, public_key: k.pub, address: k.addr
