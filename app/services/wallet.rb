@@ -22,20 +22,17 @@ class Wallet
         tx.add_in get_tx_in(ba)
       
         amount += ba.balance
+        remainder = amount - options[:amount]
             
-        if amount >= options[:amount]
+        if remainder >= 0
+          if remainder > 0
+            send_reminder_to_self tx, remainder
+          end
           break
         end
       end
       
       tx.add_out Bitcoin::Protocol::TxOut.value_to_address(options[:amount] * Offset, options[:to])
-      if amount > options[:amount] 
-        diff = amount - options[:amount]
-        remainder_ba = BitcoinAddress.generate
-        remainder_ba.description = "Auto generated for remainder"
-        remainder_ba.save!
-        tx.add_out Bitcoin::Protocol::TxOut.value_to_address(diff * Offset, remainder_ba.address)
-      end
       
       bas.each_with_index do |ba, i|
         prev_tx = Bitcoin::Protocol::Tx.new(ba.most_recent_transaction.binary)
@@ -51,6 +48,15 @@ class Wallet
     end
     
     private
+    
+    def send_reminder_to_self(tx, remainder)
+      DBC.require(remainder > 0)
+      
+      ba = BitcoinAddress.generate
+      ba.description = "Auto generated for remainder"
+      ba.save!
+      tx.add_out Bitcoin::Protocol::TxOut.value_to_address(remainder * Offset, ba.address)
+    end
     
     def get_tx_in(bitcoin_address)
       prev_tx = Bitcoin::Protocol::Tx.new(bitcoin_address.most_recent_transaction.binary)
