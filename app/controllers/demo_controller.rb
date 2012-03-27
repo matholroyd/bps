@@ -62,7 +62,7 @@ class DemoController < ApplicationController
       ba = BitcoinAddress.find_or_create_by_private_key "1e2e0bc6893d42a462b0039b5c15c3da3378c8d0ec44556b9608efdb2b3caff1"
       ba.description = "Hardcoded bitcoin address for demo"
       ba.save!
-      TransactionImporter.import_for [ba]
+      TransactionImporter.refresh_for [ba]
       
       if options[:redirect]
         redirect_to admin_dashboard_path

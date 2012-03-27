@@ -71,7 +71,7 @@ describe TransactionImporter do
     end
   end
   
-  describe "import_for" do
+  describe "refresh_for" do
     let(:ba_several_transactions) { BitcoinAddress.make private_key: internal_private_key }
     let(:ba_no_transactions) { BitcoinAddress.make private_key: no_transactions_private_key }
     
@@ -81,15 +81,15 @@ describe TransactionImporter do
     end
     
     it "should hande when nothing to import" do
-      TransactionImporter.import_for []
+      TransactionImporter.refresh_for []
       Transaction.count.should == 0
       
-      TransactionImporter.import_for [ba_no_transactions]
+      TransactionImporter.refresh_for [ba_no_transactions]
       Transaction.count.should == 0
     end
     
     it "should create the transactions and payments" do
-      TransactionImporter.import_for [ba_several_transactions]
+      TransactionImporter.refresh_for [ba_several_transactions]
       
       Transaction.count.should == 2
       txs = Transaction.all
@@ -110,11 +110,11 @@ describe TransactionImporter do
     end
     
     it "should be idempotent" do
-      TransactionImporter.import_for [ba_several_transactions]
+      TransactionImporter.refresh_for [ba_several_transactions]
       Transaction.count.should == 2
       Payment.count.should == 2
 
-      TransactionImporter.import_for [ba_several_transactions]
+      TransactionImporter.refresh_for [ba_several_transactions]
       Transaction.count.should == 2
       Payment.count.should == 2
     end

@@ -15,7 +15,7 @@ describe Wallet do
     ) }
     
     before :each do
-      TransactionImporter.import_for [address]
+      TransactionImporter.refresh_for [address]
       address.transactions.first.destroy
       address.payments.first.destroy
     end

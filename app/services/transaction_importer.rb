@@ -1,7 +1,7 @@
 class TransactionImporter
   class << self
 
-    def import_for(bitcoin_addresses)
+    def refresh_for(bitcoin_addresses)
       addresses = bitcoin_addresses.collect do |ba|
         DBC.require(ba.valid?)
         ba.address
