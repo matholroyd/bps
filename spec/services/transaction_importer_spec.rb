@@ -52,9 +52,25 @@ describe TransactionImporter do
       txs = TransactionImporter.import_for [internal_address]
       txs.should == Transaction.all
     end
+  end
 
-    describe "process_payments_for" do
+  describe "process_payments_for" do
+    before :each do
+      BitcoinAddress.create! private_key: internal_private_key, description: "Internal key"
+    end
+    
+    it "does nothing if passed nothing" do
+      lambda {
+        TransactionImporter.process_payments_for []
+      }.should_not change(Payment, :count)
+    end
+    
+    it "creates payments and links to bitcoin addresses that are relevant" do
+      transactions = TransactionImporter.import_for [internal_address]
       
+      lambda {
+        TransactionImporter.process_payments_for transactions
+      }.should change(Payment, :count).by(2)
     end
   end
   

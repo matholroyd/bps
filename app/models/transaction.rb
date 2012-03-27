@@ -17,4 +17,8 @@ class Transaction < ActiveRecord::Base
     super
   end
   
+  def bitcoin_tx
+    @bitcoin_tx ||= Bitcoin::Protocol::Tx.new(binary)
+  end
+  
 end

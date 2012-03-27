@@ -23,7 +23,19 @@ class TransactionImporter
         end
       end
     end
-  
+    
+    def process_payments_for(transactions)
+      addresses = BitcoinAddress.all.collect(&:address)
+      transactions.each do |transaction|
+        transaction.bitcoin_tx.in.each do |txin|
+          process_in_tx transaction, txin, addresses
+        end
+
+        transaction.bitcoin_tx.out.each do |txout|
+          process_out_tx transaction, txout, addresses
+        end
+      end
+    end
 
     def pull_transactions(addresses)
       DBC.require(addresses)
@@ -73,16 +85,37 @@ class TransactionImporter
     
     private
     
-    def process_out(transaction, tx_out, addresses)
-      addr = Bitcoin::Script.new(tx_out.pk_script).get_address
-      if addresses.include? addr
-        ba = BitcoinAddress.find_or_create_by_address addr
-        amount = BigDecimal(tx_out.value.to_s) / BigDecimal((10**8).to_s)
-
-        find_or_build_payment transaction, ba, amount
+    def process_in_tx(transaction, txin, addresses)
+      prev_transaction = Transaction.find_by_bitcoin_tx_hash(txin.previous_output)
+      if prev_transaction
+        prev_tx_out = prev_transaction.bitcoin_tx.out[txin.prev_out_index]
+        addr = Bitcoin::Script.new(prev_tx_out.pk_script).get_address
+        
+        if addresses.include? addr
+          ba = BitcoinAddress.find_by_address! addr
+          amount = -BigDecimal(prev_tx_out.value.to_s) / Wallet::Offset
+        
+          find_or_create_payment transaction, ba, amount
+        end
       end
     end
     
+    def process_out_tx(transaction, txout, addresses)
+      addr = Bitcoin::Script.new(txout.pk_script).get_address
+      if addresses.include? addr
+        ba = BitcoinAddress.find_by_address! addr
+        amount = BigDecimal(txout.value.to_s) / Wallet::Offset
+      
+        find_or_create_payment transaction, ba, amount
+      end
+    end
+ 
+    def find_or_create_payment(transaction, ba, amount)
+      if transaction.payments.find_by_bitcoin_address_id(ba.id).nil?
+        transaction.payments.create! amount: amount, bitcoin_address: ba, transaction: transaction
+      end
+    end
+      
     def process_in(transaction, tx_in, addresses, json)
       node = json[tx_in.previous_output]['out'][tx_in.prev_out_index]
 
@@ -91,6 +124,16 @@ class TransactionImporter
         ba = BitcoinAddress.find_or_create_by_address addr
         amount = -BigDecimal(node['value'])
       
+        find_or_build_payment transaction, ba, amount
+      end
+    end
+ 
+    def process_out(transaction, tx_out, addresses)
+      addr = Bitcoin::Script.new(tx_out.pk_script).get_address
+      if addresses.include? addr
+        ba = BitcoinAddress.find_or_create_by_address addr
+        amount = BigDecimal(tx_out.value.to_s) / BigDecimal((10**8).to_s)
+
         find_or_build_payment transaction, ba, amount
       end
     end

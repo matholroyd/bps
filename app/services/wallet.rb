@@ -1,6 +1,7 @@
 class Wallet
+  Offset = BigDecimal((10**8).to_s)
+
   class << self
-    Offset = 100000000
     
     def balance
       Payment.sum(:amount)
