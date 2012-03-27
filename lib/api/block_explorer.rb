@@ -10,7 +10,11 @@ module Api
     class << self
       
       def mytransactions(addresses)
-        get_json "#{MyTransactions}/#{addresses.join('.')}"
+        if addresses.length > 0
+          get_json "#{MyTransactions}/#{addresses.join('.')}"
+        else
+          []
+        end
       end
 
       def rawtx(hash)
