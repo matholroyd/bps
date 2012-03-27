@@ -32,14 +32,37 @@ describe TransactionImporter do
 
   end
   
-  describe "pull_transactions" do
+  describe "import_for" do
     let(:address_nothing)     { "1BDnQ3UCwTTkL4jKLZabaiu9qd9566kJKf" }
     let(:address_in_and_out)  { "1VayNert3x1KzbpzMGt2qdqrAThiRovi8" }
     
-    it "should return nil if no transactions" do
-      TransactionImporter.pull_transactions([address_nothing]).should == []
+    it "does nothing if no related transactions" do
+      lambda {
+        TransactionImporter.import_for([address_nothing])
+      }.should_not change(Transaction, :count)
+    end
+    
+    it "imports transactions when related to address" do
+      lambda {
+        TransactionImporter.import_for [internal_address]
+      }.should change(Transaction, :count)
+    end
+    
+    it "returns the new transactions" do
+      txs = TransactionImporter.import_for [internal_address]
+      txs.should == Transaction.all
     end
 
+    describe "process_payments_for" do
+      
+    end
+  end
+  
+  
+  describe "pull_transactions" do
+    let(:address_nothing)     { "1BDnQ3UCwTTkL4jKLZabaiu9qd9566kJKf" }
+    let(:address_in_and_out)  { "1VayNert3x1KzbpzMGt2qdqrAThiRovi8" }
+  
     it "pulls raw data into transactions/payments/addresses" do
       txs = TransactionImporter.pull_transactions [internal_address]
       txs.count.should == 2

@@ -12,6 +12,19 @@ class TransactionImporter
       end
     end
 
+    def import_for(addresses)
+      json = Api::BlockExplorer.mytransactions(addresses)
+      json.collect do |tx_hash, tx_json|
+        begin
+          Transaction.find_by_bitcoin_tx_hash!(tx_hash)
+        rescue ActiveRecord::RecordNotFound
+          tx = Bitcoin::Protocol::Tx.from_hash(tx_json)
+          Transaction.create!(binary: tx.to_payload, bitcoin_tx_hash: tx_hash )
+        end
+      end
+    end
+  
+
     def pull_transactions(addresses)
       DBC.require(addresses)
       
