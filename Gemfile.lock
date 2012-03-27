@@ -85,6 +85,12 @@ GEM
     ffi (1.0.11)
     formtastic (2.0.2)
       rails (~> 3.0)
+    guard (1.0.0)
+      ffi (>= 0.5.0)
+      thor (~> 0.14.6)
+    guard-spork (0.5.2)
+      guard (>= 0.10.0)
+      spork (>= 0.8.4)
     hike (1.2.1)
     i18n (0.6.0)
     ir_b (1.4.0)
@@ -156,6 +162,7 @@ GEM
       ffi (~> 1.0.9)
       multi_json (~> 1.0.4)
       rubyzip
+    spork (0.9.0)
     sprockets (2.1.2)
       hike (~> 1.2)
       rack (~> 1.0)
@@ -188,6 +195,7 @@ DEPENDENCIES
   faker
   ffi
   formtastic
+  guard-spork
   ir_b
   jquery-rails
   launchy
