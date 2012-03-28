@@ -20,15 +20,18 @@ describe Wallet do
       # balance is 0.1
       address.transactions.first.destroy
       address.payments.first.destroy
-
-      Wallet.send_bitcoins(to: BitcoinAddress.generate.address, amount: 0.02)
     end
     
     it "reduces the balance" do
+      Wallet.send_bitcoins(to: BitcoinAddress.generate.address, amount: 0.02)
       Wallet.balance.should == 0.08
     end
     
-    it "transmits the transaction" 
+    it "transmits the transaction" do
+      Api::TransactionTransmitter.should_receive(:transmit)
+      Wallet.send_bitcoins(to: BitcoinAddress.generate.address, amount: 0.02)
+    end
+    
     it "errors out if there is not enough balance"
   end
   

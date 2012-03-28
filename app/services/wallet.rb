@@ -17,6 +17,7 @@ class Wallet
       tx = send_bitcoins_tx(options)
       transaction = TransactionImporter.import_tx tx
       TransactionImporter.process_payments_for [transaction]
+      Api::TransactionTransmitter.transmit(tx)
     end
         
     private
