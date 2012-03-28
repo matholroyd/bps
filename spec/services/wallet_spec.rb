@@ -21,7 +21,7 @@ describe Wallet do
     end
     
     it "creates a transaction" do
-      Wallet.send_bitcoins_tx(to: BitcoinAddress.generate.address, amount: BigDecimal("10"))
+      Wallet.send_bitcoins(to: BitcoinAddress.generate.address, amount: BigDecimal("10"))
     end
     
     it "transmits the transaction"

@@ -7,6 +7,14 @@ class Wallet
       Payment.sum(:amount)
     end
     
+    def send_bitcoins(options)
+      tx = send_bitcoins_tx(options)
+      transaction = TransactionImporter.import_tx tx
+      TransactionImporter.process_payments_for [transaction]
+    end
+        
+    private
+    
     def send_bitcoins_tx(options)
       DBC.require(balance > 0, "Balance must be greater then 0")
       DBC.require(options[:to])
@@ -47,8 +55,6 @@ class Wallet
       DBC.ensure(tx_fees <= 0.01)
       tx
     end
-    
-    private
     
     def send_reminder_to_self(tx, remainder)
       DBC.require(remainder > 0)
