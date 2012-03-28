@@ -15,7 +15,7 @@ module Api
         if Rails.env.test?
           # do nothing
         else
-          open("#{Domain}/?transaction=#{data_in_hex}")
+          open("#{Domain}/?transaction=#{data_in_hex}").read
         end
       end
       
