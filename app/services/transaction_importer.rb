@@ -14,12 +14,7 @@ class TransactionImporter
     def import_for(addresses)
       json = Api::BlockExplorer.mytransactions(addresses)
       json.collect do |tx_hash, tx_json|
-        begin
-          Transaction.find_by_bitcoin_tx_hash!(tx_hash)
-        rescue ActiveRecord::RecordNotFound
-          tx = Bitcoin::Protocol::Tx.from_hash(tx_json)
-          Transaction.create!(binary: tx.to_payload, bitcoin_tx_hash: tx_hash )
-        end
+        import tx_hash, tx_json
       end
     end
     
@@ -35,8 +30,25 @@ class TransactionImporter
         end
       end
     end
-
+    
+    def import_tx(tx)
+      tx = Bitcoin::Protocol::Tx.new(tx.to_payload)
+      tx_hash = tx.hash
+      tx_json = tx.to_hash
+      import tx_hash, tx_json
+    end
+    
     private
+    
+    def import(tx_hash, tx_json)
+      begin
+        Transaction.find_by_bitcoin_tx_hash!(tx_hash)
+      rescue ActiveRecord::RecordNotFound
+        tx = Bitcoin::Protocol::Tx.from_hash(tx_json)
+        Transaction.create!(binary: tx.to_payload, bitcoin_tx_hash: tx_hash )
+      end
+    end
+    
     
     def process_in_tx(transaction, txin, addresses)
       prev_transaction = Transaction.find_by_bitcoin_tx_hash(txin.previous_output)
