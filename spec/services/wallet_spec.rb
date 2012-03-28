@@ -16,15 +16,19 @@ describe Wallet do
     
     before :each do
       TransactionImporter.refresh_for [address]
+      # Pretend the last transaction (spending bitcoins) hasn't happened, so appears
+      # balance is 0.1
       address.transactions.first.destroy
       address.payments.first.destroy
+
+      Wallet.send_bitcoins(to: BitcoinAddress.generate.address, amount: 0.02)
     end
     
-    it "creates a transaction" do
-      Wallet.send_bitcoins(to: BitcoinAddress.generate.address, amount: BigDecimal("10"))
+    it "reduces the balance" do
+      Wallet.balance.should == 0.08
     end
     
-    it "transmits the transaction"
+    it "transmits the transaction" 
     it "errors out if there is not enough balance"
   end
   
