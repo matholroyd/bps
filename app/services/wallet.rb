@@ -14,9 +14,13 @@ class Wallet
       DBC.require(options[:amount] > 0, "Must send amount greater then 0")
       DBC.require(options[:amount] <= balance, "Must send amount less than or equal to balance")
 
-      tx = send_bitcoins_tx(options)
-      transaction = TransactionImporter.import_tx tx
-      TransactionImporter.process_payments_for [transaction]
+      tx = nil
+
+      ActiveRecord::Base.transaction do
+        tx = send_bitcoins_tx(options)
+        transaction = TransactionImporter.import_tx tx
+        TransactionImporter.process_payments_for [transaction]
+      end
       Api::TransactionTransmitter.transmit(tx)
     end
         
@@ -30,12 +34,14 @@ class Wallet
       tx = Bitcoin::Protocol::Tx.new
       bas = []
 
-      amount = add_inputs_and_outputs(tx, bas, options[:amount], options[:to])
+      ActiveRecord::Base.transaction do
+        amount = add_inputs_and_outputs(tx, bas, options[:amount], options[:to])
       
-      sign_inputs(tx, bas)
+        sign_inputs(tx, bas)
       
-      tx_fees = amount - tx.out.sum {|o| o.value / Offset }
-      DBC.ensure(tx_fees == 0, "fees of #{tx_fees} did not equal 0")
+        tx_fees = amount - (tx.out.sum {|o| BigDecimal(o.value.to_s) }  / Offset)
+        DBC.ensure(tx_fees <= 0.01, "fees of #{tx_fees} too big")
+      end
       tx
     end
     
@@ -50,8 +56,8 @@ class Wallet
         amount += ba.balance
         remainder = amount - sending_amount
             
-        if remainder >= 0
-          if remainder > 0
+        if remainder >= BigDecimal("0")
+          if remainder > BigDecimal("0")
             send_reminder_to_self tx, remainder
           end
           break
