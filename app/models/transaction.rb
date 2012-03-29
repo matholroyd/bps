@@ -7,6 +7,10 @@ class Transaction < ActiveRecord::Base
   def self.order_by_most_recent
     order('created_at DESC')
   end  
+  
+  def amount
+    payments.sum(:amount)
+  end
     
   def binary=(value)
     begin

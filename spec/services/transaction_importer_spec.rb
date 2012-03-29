@@ -63,6 +63,10 @@ describe TransactionImporter do
         it do
           subject.payments[0].bitcoin_address.address.should == internal_address
         end
+        
+        it do
+          subject.amount.should == 0.1
+        end
       end
       
       context "outoing transaction" do
@@ -78,6 +82,10 @@ describe TransactionImporter do
         
         it do
           subject.payments[0].bitcoin_address.address.should == internal_address
+        end
+        
+        it do
+          subject.amount.should == -0.1
         end
       end
     end
