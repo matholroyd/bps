@@ -45,20 +45,40 @@ describe TransactionImporter do
         TransactionImporter.process_payments_for txs
       end
 
-      it "creates payments" do
-        txs = Transaction.all
+      it "creates 2 payments" do
+        Transaction.all.count.should == 2
+      end
 
-        txs.count.should == 2
+      context "incoming transaction" do
+        subject { Transaction.first }
+        
+        it do
+          subject.payments.length.should == 1
+        end
 
-        txs[0].payments.length.should == 1
-        txs[0].payments[0].amount.should == 0.1
-
-        txs[0].payments[0].bitcoin_address.address.should == internal_address
-
-        txs[1].payments.length.should == 1
-        txs[1].payments[0].amount.should == -0.1
-
-        txs[1].payments[0].bitcoin_address.address.should == internal_address
+        it do
+          subject.payments[0].amount.should == 0.1
+        end
+        
+        it do
+          subject.payments[0].bitcoin_address.address.should == internal_address
+        end
+      end
+      
+      context "outoing transaction" do
+        subject { Transaction.last }
+        
+        it do
+          subject.payments.length.should == 1
+        end
+        
+        it do
+          subject.payments[0].amount.should == -0.1
+        end
+        
+        it do
+          subject.payments[0].bitcoin_address.address.should == internal_address
+        end
       end
     end
   end
