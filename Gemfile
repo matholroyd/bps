@@ -8,9 +8,6 @@ gem 'bcrypt-ruby', require: 'bcrypt'
 gem 'formtastic'
 gem 'rails-backbone', git: 'https://github.com/codebrew/backbone-rails.git'
 
-# Gem spec hasn't been updated, so to supress ruby 1.9 warnings, just reference 
-# andand master branch directly
-# gem 'andand',       :git => "https://github.com/raganwald/andand.git" 
 gem 'aasm'
 
 # FFI needed to regenerate public key from private key
