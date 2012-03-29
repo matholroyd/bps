@@ -40,7 +40,7 @@ describe TransactionImporter do
     
     context "after imported transactions" do
       before :each do
-        BitcoinAddress.create! private_key: internal_private_key, description: "Internal key"
+        BitcoinAddress.create! private_key: internal_private_key, description: "Pizza"
         txs = TransactionImporter.import_for [internal_address]
         TransactionImporter.process_payments_for txs
       end
@@ -67,6 +67,10 @@ describe TransactionImporter do
         it do
           subject.amount.should == 0.1
         end
+        
+        it do
+          subject.descriptions.should == ["Pizza"]
+        end
       end
       
       context "outoing transaction" do
@@ -86,6 +90,10 @@ describe TransactionImporter do
         
         it do
           subject.amount.should == -0.1
+        end
+        
+        it do
+          subject.descriptions.should == []
         end
       end
     end

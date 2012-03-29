@@ -1,5 +1,6 @@
 class Transaction < ActiveRecord::Base
   has_many :payments
+  has_many :bitcoin_addresses, through: :payments
   
   validates :binary, presence: true, bitcoin_transaction_in_hex: true
   validates :bitcoin_tx_hash, uniqueness: true
@@ -10,6 +11,10 @@ class Transaction < ActiveRecord::Base
   
   def amount
     payments.sum(:amount)
+  end
+  
+  def descriptions
+    payments.where('amount > 0').collect(&:bitcoin_address).collect(&:description)
   end
     
   def binary=(value)
