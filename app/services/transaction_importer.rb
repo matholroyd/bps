@@ -1,93 +1,83 @@
 class TransactionImporter
   class << self
 
-    def import_for(bitcoin_addresses)
+    def refresh_for(bitcoin_addresses)
       addresses = bitcoin_addresses.collect do |ba|
         DBC.require(ba.valid?)
         ba.address
       end
-      
-      pull_transactions(addresses).each do |transaction|
-        DBC.assert(transaction.save, transaction.errors)
-      end
+
+      transactions = import_for(addresses)
+      process_payments_for transactions
     end
 
-    def pull_transactions(addresses)
-      DBC.require(addresses)
-      
-      if addresses.count > 0
-        extract_transactions Api::BlockExplorer.mytransactions(addresses), addresses 
-      else
-        []
+    def import_for(addresses)
+      json = Api::BlockExplorer.mytransactions(addresses)
+      json.collect do |tx_hash, tx_json|
+        import tx_hash, tx_json
       end
     end
     
-    def pull_transaction(hash, addresses)
-      DBC.require(hash)
-      DBC.require(addresses)
-      
-      extract_transaction Api::BlockExplorer.rawtx(hash), addresses
-    end
-    
-    def extract_transactions(json, addresses)
-      DBC.require(json)
-      DBC.require(addresses)
+    def process_payments_for(transactions)
+      addresses = BitcoinAddress.all.collect(&:address)
+      transactions.each do |transaction|
+        transaction.bitcoin_tx.in.each do |txin|
+          process_in_tx transaction, txin, addresses
+        end
 
-      json.collect do |k, transaction_json|
-        extract_transaction transaction_json, addresses, json
+        transaction.bitcoin_tx.out.each do |txout|
+          process_out_tx transaction, txout, addresses
+        end
       end
     end
     
-    def extract_transaction(tx_hash, addresses, json = {})
-      DBC.require(tx_hash)
-      DBC.require(addresses)
-      DBC.require(json)
-
-      tx = Bitcoin::Protocol::Tx.from_hash(tx_hash)
-      transaction = Transaction.find_or_create_by_bitcoin_tx_hash tx.hash
-      transaction.binary = tx.to_payload
-
-      tx.out.each do |tx_out|
-        process_out transaction, tx_out, addresses
-      end
-
-      tx.in.select { |tx_in| json[tx_in.previous_output].present? }.each do |tx_in|
-        process_in transaction, tx_in, addresses, json
-      end
-      
-      transaction
+    def import_tx(tx)
+      tx = Bitcoin::Protocol::Tx.new(tx.to_payload)
+      tx_hash = tx.hash
+      tx_json = tx.to_hash
+      import tx_hash, tx_json
     end
     
     private
     
-    def process_out(transaction, tx_out, addresses)
-      addr = Bitcoin::Script.new(tx_out.pk_script).get_address
-      if addresses.include? addr
-        ba = BitcoinAddress.find_or_create_by_address addr
-        amount = BigDecimal(tx_out.value.to_s) / BigDecimal((10**8).to_s)
-
-        find_or_build_payment transaction, ba, amount
+    def import(tx_hash, tx_json)
+      begin
+        Transaction.find_by_bitcoin_tx_hash!(tx_hash)
+      rescue ActiveRecord::RecordNotFound
+        tx = Bitcoin::Protocol::Tx.from_hash(tx_json)
+        Transaction.create!(binary: tx.to_payload, bitcoin_tx_hash: tx_hash )
       end
     end
     
-    def process_in(transaction, tx_in, addresses, json)
-      node = json[tx_in.previous_output]['out'][tx_in.prev_out_index]
-
-      addr = node['address'] || Bitcoin::Script.new(node['scriptPubKey']).get_address
+    
+    def process_in_tx(transaction, txin, addresses)
+      prev_transaction = Transaction.find_by_bitcoin_tx_hash(txin.previous_output)
+      if prev_transaction
+        prev_tx_out = prev_transaction.bitcoin_tx.out[txin.prev_out_index]
+        addr = Bitcoin::Script.new(prev_tx_out.pk_script).get_address
+        
+        if addresses.include? addr
+          ba = BitcoinAddress.find_by_address! addr
+          amount = -BigDecimal(prev_tx_out.value.to_s) / Wallet::Offset
+        
+          find_or_create_payment transaction, ba, amount
+        end
+      end
+    end
+    
+    def process_out_tx(transaction, txout, addresses)
+      addr = Bitcoin::Script.new(txout.pk_script).get_address
       if addresses.include? addr
-        ba = BitcoinAddress.find_or_create_by_address addr
-        amount = -BigDecimal(node['value'])
+        ba = BitcoinAddress.find_by_address! addr
+        amount = BigDecimal(txout.value.to_s) / Wallet::Offset
       
-        find_or_build_payment transaction, ba, amount
+        find_or_create_payment transaction, ba, amount
       end
     end
  
-    def find_or_build_payment(transaction, ba, amount)
-      if transaction.id.present? && ba.id.present?
-        p = transaction.payments.find_by_bitcoin_address_id(ba.id)
-        p.amount = amount
-      else
-        transaction.payments.build amount: amount, bitcoin_address: ba, transaction: transaction
+    def find_or_create_payment(transaction, ba, amount)
+      if transaction.payments.find_by_bitcoin_address_id(ba.id).nil?
+        transaction.payments.create! amount: amount, bitcoin_address: ba, transaction: transaction
       end
     end
  

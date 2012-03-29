@@ -1,9 +1,12 @@
 class BitcoinAddress < ActiveRecord::Base
   validates :id_alias,    presence: true, uniqueness: true
-  validates :address,     presence: true
+  validates :private_key, presence: true, uniqueness: true
+  validates :public_key,  presence: true, uniqueness: true
+  validates :address,     presence: true, uniqueness: true
   validates :description, presence: true, no_html: true
-  validates :private_key, presence: true
-  validates :public_key,  presence: true
+
+  has_many :payments
+  has_many :transactions, through: :payments
 
   validates_each :public_key do |record, attr, public_key|
     if record.private_key.present?
@@ -27,6 +30,18 @@ class BitcoinAddress < ActiveRecord::Base
   
   default_scope order: 'updated_at DESC'
   
+  def balance
+    payments.sum(:amount)
+  end
+  
+  def most_recent_transaction
+    transactions.order_by_most_recent.first
+  end
+    
+  def self.sorted_and_non_zero_balance
+    all.select {|ba| ba.balance > 0 }.sort {|a, b| b.balance <=> a.balance}
+  end  
+      
   def self.generate
     k = Bitcoin::Key.generate
     new private_key: k.priv, public_key: k.pub, address: k.addr

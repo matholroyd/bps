@@ -27,6 +27,10 @@ group :assets do
   gem 'uglifier'
 end
 
+group :development do
+  gem 'guard-spork'
+end
+
 group :development, :test do
   gem 'ir_b'
   gem 'steak'
