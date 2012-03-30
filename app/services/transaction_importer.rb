@@ -31,14 +31,19 @@ class TransactionImporter
       end
     end
     
+    def import_and_process_tx(tx)
+      transaction = import_tx tx
+      TransactionImporter.process_payments_for [transaction]
+    end
+    
+    private
+
     def import_tx(tx)
       tx = Bitcoin::Protocol::Tx.new(tx.to_payload)
       tx_hash = tx.hash
       tx_json = tx.to_hash
       import tx_hash, tx_json
     end
-    
-    private
     
     def import(tx_hash, tx_json)
       begin
