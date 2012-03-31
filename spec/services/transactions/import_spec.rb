@@ -1,3 +1,5 @@
+require 'spec_helper'
+
 describe Transactions::Import do
   let(:internal_address)  { "1JDfUiJHZ6pDY6wWYTx86RYjDCW7QxCofs" }
   let(:address_nothing)     { "1BDnQ3UCwTTkL4jKLZabaiu9qd9566kJKf" }
