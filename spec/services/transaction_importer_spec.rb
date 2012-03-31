@@ -1,50 +1,35 @@
-require 'spec_helper'
+require  'spec_helper'
 
 describe TransactionImporter do
-  let(:internal_private_key) { "1e2e0bc6893d42a462b0039b5c15c3da3378c8d0ec44556b9608efdb2b3caff1" }
-  let(:no_transactions_private_key) {"923c4c20745b1f933c52261d307ea1b8db054a9586be6cc9270ad4317368ec73"}
+  let(:addresses) { stub} 
+
+  describe 'refresh' do
+    
+    it "calls refresh_for with all bitcoin address" do
+      BitcoinAddress.stub_chain(:all, :collect).and_return(addresses)
+      TransactionImporter.should_receive(:refresh_for).with(addresses)
+      TransactionImporter.refresh
+    end
+  end
     
   describe "refresh_for" do
-    let(:ba_several_transactions) { BitcoinAddress.make private_key: internal_private_key }
-    let(:ba_no_transactions) { BitcoinAddress.make private_key: no_transactions_private_key }
+    let(:transactions) { stub }
     
-    it "should hande when nothing to import" do
-      TransactionImporter.refresh_for []
-      Transaction.count.should == 0
-      
-      TransactionImporter.refresh_for [ba_no_transactions.address]
-      Transaction.count.should == 0
+    it "get transactions from block explorer than imports them" do
+      Transactions::Import.should_receive(:from_blockexplorer).with(addresses) { transactions }
+      Transactions::ProcessPayments.should_receive(:for).with(transactions)
+      TransactionImporter.refresh_for addresses
     end
+  end
+  
+  describe "import_and_process_tx" do
+    let(:tx) { stub }
+    let(:transaction) { stub }
     
-    it "should create the transactions and payments" do
-      TransactionImporter.refresh_for [ba_several_transactions.address]
-      
-      Transaction.count.should == 2
-      txs = Transaction.all
-
-      txs[0].should_not be_new_record
-      txs[0].payments.length.should == 1
-      txs[0].payments[0].should_not be_new_record
-      txs[0].payments[0].amount.should == 0.1
-      
-      txs[0].payments[0].bitcoin_address.should == ba_several_transactions
-
-      txs[1].should_not be_new_record
-      txs[1].payments.length.should == 1
-      txs[1].payments[0].should_not be_new_record
-      txs[1].payments[0].amount.should == -0.1
-
-      txs[1].payments[0].bitcoin_address.should == ba_several_transactions
-    end
-    
-    it "should be idempotent" do
-      TransactionImporter.refresh_for [ba_several_transactions.address]
-      Transaction.count.should == 2
-      Payment.count.should == 2
-
-      TransactionImporter.refresh_for [ba_several_transactions.address]
-      Transaction.count.should == 2
-      Payment.count.should == 2
+    it "imports then process the said tx" do 
+      Transactions::Import.should_receive(:from_tx).with(tx) { transaction }
+      Transactions::ProcessPayments.should_receive(:for).with([transaction])
+      TransactionImporter.import_and_process_tx tx
     end
   end
 end
