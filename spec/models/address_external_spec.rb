@@ -13,5 +13,23 @@ describe AddressExternal do
     AddressExternal.make_unsaved(address: "blah").should_not be_valid
   end
   
-  it "can return a random forwardable"
+  it "can return all forwardable addresses" do
+    AddressExternal.make
+    forwardableA = AddressExternal.make(forwardable: true)
+    AddressExternal.make
+    forwardableB = AddressExternal.make(forwardable: true)
+    AddressExternal.make
+    
+    AddressExternal.forwardable.sort.should == [forwardableA, forwardableB].sort
+  end
+  
+  it "can return a random forwardable" do
+    5.times { AddressExternal.make }
+    forwardables = []
+    5.times { forwardables << AddressExternal.make(forwardable: true) }
+
+    10.times do
+      forwardables.should include(AddressExternal.random_forwardable)
+    end
+  end
 end
