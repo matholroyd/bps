@@ -25,6 +25,10 @@ BitcoinAddress.blueprint do
   description  { Sham.body }
 end
 
+AddressExternal.blueprint do
+  address      { Bitcoin::Key.generate.addr }
+end
+
 Payment.blueprint do
   transaction
   bitcoin_address
