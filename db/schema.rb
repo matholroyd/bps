@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120212100659) do
+ActiveRecord::Schema.define(:version => 20120331205550) do
 
   create_table "bitcoin_addresses", :force => true do |t|
     t.string   "id_alias"
@@ -43,6 +43,7 @@ ActiveRecord::Schema.define(:version => 20120212100659) do
     t.string   "bitcoin_tx_hash", :null => false
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
+    t.string   "comment"
   end
 
   create_table "users", :force => true do |t|
