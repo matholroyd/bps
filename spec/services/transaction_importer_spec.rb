@@ -9,27 +9,6 @@ describe TransactionImporter do
   let(:no_transactions_private_key) {"923c4c20745b1f933c52261d307ea1b8db054a9586be6cc9270ad4317368ec73"}
   let(:no_transactions_address) {"12LDktNb5cmANNmXzhCZfRkN8j8MqsBgts"}
   
-  describe "import_for" do
-    let(:address_nothing)     { "1BDnQ3UCwTTkL4jKLZabaiu9qd9566kJKf" }
-    let(:address_in_and_out)  { "1VayNert3x1KzbpzMGt2qdqrAThiRovi8" }
-    
-    it "does nothing if no related transactions" do
-      lambda {
-        TransactionImporter.import_for([address_nothing])
-      }.should_not change(Transaction, :count)
-    end
-    
-    it "imports transactions when related to address" do
-      lambda {
-        TransactionImporter.import_for [internal_address]
-      }.should change(Transaction, :count)
-    end
-    
-    it "returns the new transactions" do
-      txs = TransactionImporter.import_for [internal_address]
-      txs.should == Transaction.all
-    end
-  end
 
   describe "process_payments_for" do
     it "does nothing if passed nothing" do
@@ -41,7 +20,7 @@ describe TransactionImporter do
     context "after imported transactions" do
       before :each do
         BitcoinAddress.create! private_key: internal_private_key, description: "Pizza"
-        txs = TransactionImporter.import_for [internal_address]
+        txs = Transactions::Import.from_blockexplorer [internal_address]
         TransactionImporter.process_payments_for txs
       end
 
