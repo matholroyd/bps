@@ -25,11 +25,12 @@ describe TransactionImporter do
   describe "import_and_process_tx" do
     let(:tx) { stub }
     let(:transaction) { stub }
+    let(:comment) { stub }
     
     it "imports then process the said tx" do 
-      Transactions::Import.should_receive(:from_tx).with(tx) { transaction }
+      Transactions::Import.should_receive(:from_tx).with(tx, {comment: comment}) { transaction }
       Transactions::ProcessPayments.should_receive(:for).with([transaction])
-      TransactionImporter.import_and_process_tx tx
+      TransactionImporter.import_and_process_tx(tx, {comment: comment})
     end
   end
 end

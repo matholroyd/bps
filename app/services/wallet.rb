@@ -18,11 +18,10 @@ class Wallet
 
       ActiveRecord::Base.transaction do
         tx = SendingBitcoins.create_tx(options)
-        TransactionImporter.import_and_process_tx tx
+        TransactionImporter.import_and_process_tx tx, comment: options[:comment]
       end
       Api::TransactionTransmitter.transmit(tx)
     end
         
-
   end
 end

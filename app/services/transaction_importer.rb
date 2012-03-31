@@ -10,8 +10,8 @@ class TransactionImporter
       Transactions::ProcessPayments.for transactions
     end
     
-    def import_and_process_tx(tx)
-      transaction = Transactions::Import.from_tx tx
+    def import_and_process_tx(tx, options = {})
+      transaction = Transactions::Import.from_tx tx, options
       Transactions::ProcessPayments.for [transaction]
     end
  

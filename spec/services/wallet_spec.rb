@@ -32,9 +32,9 @@ describe Wallet do
       Wallet.send_bitcoins(to: BitcoinAddress.generate.address, amount: 0.02)
     end
     
-    it "assigns a description" do
-      Wallet.send_bitcoins(to: BitcoinAddress.generate.address, amount: 0.02, description: "payback")
-      Transaction.last.descriptions.should == ['payback']
+    it "sets a comment" do
+      Wallet.send_bitcoins(to: BitcoinAddress.generate.address, amount: 0.02, comment: "payback")
+      Transaction.last.comment.should == 'payback'
     end
   end
   
