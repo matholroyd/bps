@@ -43,15 +43,16 @@ describe Wallet do
   
   context "forward bitcoins to own addresses" do
     let(:address) { stub }
-    let(:balance) { stub }
-    
-    before :each do
-      Wallet.stub(:balance) { balance }
+        
+    it "does nothing if balance = 0" do
+      Wallet.stub(:balance) { 0 }
+      Wallet.forward_bitcoins_to_my_external_addresses 
     end
     
     it "picks an address from the pool of external address marked for forwarding" do
+      Wallet.stub(:balance) { 10 }
       AddressExternal.should_receive(:random_forwardable) { address }
-      Wallet.should_receive(:send_bitcoins).with(to: address, amount: balance, comment: "Auto forwarding of whole balance")
+      Wallet.should_receive(:send_bitcoins).with(to: address, amount: 10, comment: "Auto forwarding of whole balance")
       Wallet.forward_bitcoins_to_my_external_addresses 
     end
   end

@@ -24,7 +24,9 @@ class Wallet
     end
     
     def forward_bitcoins_to_my_external_addresses
-      send_bitcoins to: AddressExternal.random_forwardable, amount: balance, comment: "Auto forwarding of whole balance"
+      if balance > 0
+        send_bitcoins to: AddressExternal.random_forwardable, amount: balance, comment: "Auto forwarding of whole balance"
+      end
     end
     
   end
