@@ -9,17 +9,17 @@ describe Wallet do
   end
   
   context "sending bitcoins" do
-    let(:address) { BitcoinAddress.create!( 
+    let(:bitcoin_address) { BitcoinAddress.create!( 
         private_key: "1e2e0bc6893d42a462b0039b5c15c3da3378c8d0ec44556b9608efdb2b3caff1",
         description: "test"
     ) }
     
     before :each do
-      TransactionImporter.refresh_for [address]
+      TransactionImporter.refresh_for [bitcoin_address.address]
       # Pretend the last transaction (spending bitcoins) hasn't happened, so appears
       # balance is 0.1
-      address.transactions.first.destroy
-      address.payments.first.destroy
+      bitcoin_address.transactions.first.destroy
+      bitcoin_address.payments.first.destroy
     end
     
     it "reduces the balance" do
@@ -32,7 +32,10 @@ describe Wallet do
       Wallet.send_bitcoins(to: BitcoinAddress.generate.address, amount: 0.02)
     end
     
-    it "errors out if there is not enough balance"
+    it "assigns a description" do
+      Wallet.send_bitcoins(to: BitcoinAddress.generate.address, amount: 0.02, description: "payback")
+      Transaction.last.descriptions.should == ['payback']
+    end
   end
   
 end

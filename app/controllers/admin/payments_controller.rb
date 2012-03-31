@@ -5,7 +5,7 @@ class Admin::PaymentsController < Admin::AdminController
   end
   
   def refresh
-    TransactionImporter.refresh_for BitcoinAddress.all
+    TransactionImporter.refresh
     
     render text: 'success'
   end

@@ -12,12 +12,12 @@ describe TransactionImporter do
       TransactionImporter.refresh_for []
       Transaction.count.should == 0
       
-      TransactionImporter.refresh_for [ba_no_transactions]
+      TransactionImporter.refresh_for [ba_no_transactions.address]
       Transaction.count.should == 0
     end
     
     it "should create the transactions and payments" do
-      TransactionImporter.refresh_for [ba_several_transactions]
+      TransactionImporter.refresh_for [ba_several_transactions.address]
       
       Transaction.count.should == 2
       txs = Transaction.all
@@ -38,11 +38,11 @@ describe TransactionImporter do
     end
     
     it "should be idempotent" do
-      TransactionImporter.refresh_for [ba_several_transactions]
+      TransactionImporter.refresh_for [ba_several_transactions.address]
       Transaction.count.should == 2
       Payment.count.should == 2
 
-      TransactionImporter.refresh_for [ba_several_transactions]
+      TransactionImporter.refresh_for [ba_several_transactions.address]
       Transaction.count.should == 2
       Payment.count.should == 2
     end

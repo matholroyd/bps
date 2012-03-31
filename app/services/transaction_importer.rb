@@ -1,9 +1,11 @@
 class TransactionImporter
   class << self
 
-    def refresh_for(bitcoin_addresses)
-      addresses = bitcoin_addresses.collect(&:address)
+    def refresh
+      refresh_for BitcoinAddress.all.collect(&:address)
+    end
 
+    def refresh_for(addresses)
       transactions = Transactions::Import.from_blockexplorer addresses
       Transactions::ProcessPayments.for transactions
     end
