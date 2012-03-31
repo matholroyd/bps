@@ -22,6 +22,10 @@ class Wallet
       end
       Api::TransactionTransmitter.transmit(tx)
     end
-        
+    
+    def forward_bitcoins_to_my_external_addresses
+      send_bitcoins to: AddressExternal.random_forwardable, amount: balance, comment: "Auto forwarding of whole balance"
+    end
+    
   end
 end

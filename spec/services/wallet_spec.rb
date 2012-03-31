@@ -9,32 +9,50 @@ describe Wallet do
   end
   
   context "sending bitcoins" do
-    let(:bitcoin_address) { BitcoinAddress.create!( 
+    let(:address_with_bitcoins) { BitcoinAddress.create!( 
         private_key: "1e2e0bc6893d42a462b0039b5c15c3da3378c8d0ec44556b9608efdb2b3caff1",
         description: "test"
     ) }
+    let(:external_address) { BitcoinAddress.generate.address }
     
     before :each do
-      TransactionImporter.refresh_for [bitcoin_address.address]
+      TransactionImporter.refresh_for [address_with_bitcoins.address]
       # Pretend the last transaction (spending bitcoins) hasn't happened, so appears
       # balance is 0.1
-      bitcoin_address.transactions.first.destroy
-      bitcoin_address.payments.first.destroy
+      address_with_bitcoins.transactions.first.destroy
+      address_with_bitcoins.payments.first.destroy
     end
     
     it "reduces the balance" do
-      Wallet.send_bitcoins(to: BitcoinAddress.generate.address, amount: 0.02)
+      Wallet.send_bitcoins(to: external_address, amount: 0.02)
       Wallet.balance.should == 0.08
     end
     
     it "transmits the transaction" do
       Api::TransactionTransmitter.should_receive(:transmit)
-      Wallet.send_bitcoins(to: BitcoinAddress.generate.address, amount: 0.02)
+      Wallet.send_bitcoins(to: external_address, amount: 0.02)
     end
     
     it "sets a comment" do
-      Wallet.send_bitcoins(to: BitcoinAddress.generate.address, amount: 0.02, comment: "payback")
+      Wallet.send_bitcoins(to: external_address, amount: 0.02, comment: "payback")
       Transaction.last.comment.should == 'payback'
+    end
+  end
+  
+  class AddressExternal; end
+  
+  context "forward bitcoins to own addresses" do
+    let(:address) { stub }
+    let(:balance) { stub }
+    
+    before :each do
+      Wallet.stub(:balance) { balance }
+    end
+    
+    it "picks an address from the pool of external address marked for forwarding" do
+      AddressExternal.should_receive(:random_forwardable) { address }
+      Wallet.should_receive(:send_bitcoins).with(to: address, amount: balance, comment: "Auto forwarding of whole balance")
+      Wallet.forward_bitcoins_to_my_external_addresses 
     end
   end
   
