@@ -1,23 +1,21 @@
-<h1>Make a payment</h1>
-<p>To make a payment to <%= user_full_name %>, please fill out the details below.</p>
+<div class="page-header">
+  <h1>Describe your payment</h1>
+  <small>What is your payment for?</small>
+</div>
 
-<form id="new-bitcoin-address" class="formtastic">
-  <fieldset class="inputs">
-    <ol>
-      <li class="input" id="bitcoin_address_description_input">
-        <label class="label" for="description">Description:</label>
-        <textarea name="description" id="description"><%= description %></textarea>
-      </li>
-    </ol>
-  </fieldset>
-  <fieldset class="buttons">
-    <ol>
-      <li class="button">
-        <input type="submit" value="Finish payment" id="submit-bitcoin-address" />
-      </li>
-      <li>
-        <a href="#index">Cancel</a>
-      </li>
-    </ol>
+<form id="new-bitcoin-address" class="form-horizontal">
+  <fieldset>
+    <div id="bitcoin_address_description_input" class="control-group">
+      <label class="control-label" for="description">Description</label>
+      <div class="controls">
+        <textarea name="description" id="description" class="input-xlarge" rows="8"><%= description %></textarea>
+      </div>
+    </div>
+    <div class="form-actions">
+      <input type="submit" value="Finish payment" id="submit-bitcoin-address" class="btn btn-primary" />
+      <a href="#index" class="btn">Cancel</a>
+    </div>
   </fieldset>
 </form>
+
+

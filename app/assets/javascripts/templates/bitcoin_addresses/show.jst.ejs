@@ -1,12 +1,19 @@
-<div id="bitcoin_address-show">
+<div class="page-header">
   <h1>Finish payment</h1>
-  <p>Please send your payment to the following address:</p>
-  <p class="hint">Copy and paste this address into your bitcoin client</p>
-
-  <address class="bitcoin_address">
-    <%= address %>
-  </address>
-  <section id="qrcode">
-    <%= qrcode %>
-  </section>
 </div>
+<p>
+  Please send your payment to the following address
+</p>
+<p>
+  <em>
+    Copy and paste this address into your bitcoin client
+  </em>
+</p>
+<section class="bitcoin_address">
+  <code>
+    <%= address %>
+  </code>
+  <figure>
+    <%= qrcode %>
+  </figure>
+</section>

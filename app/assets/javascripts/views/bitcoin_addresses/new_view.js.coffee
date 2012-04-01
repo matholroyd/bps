@@ -42,6 +42,6 @@ class BPS.Views.BitcoinAddresses.NewView extends Backbone.View
   displayErrors: (errors) ->
     addError = (field) ->
      $("#bitcoin_address_#{field}_input").addClass('error')
-     $("#bitcoin_address_#{field}_input").append("<p class=\"inline-errors\">#{errors[field]}</p>")
+     $("#bitcoin_address_#{field}_input .controls").append("<span class=\"help-inline\">#{errors[field]}</span>")
     
     addError field for field in _.keys(errors)
