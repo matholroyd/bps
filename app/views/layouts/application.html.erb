@@ -19,6 +19,7 @@
 <body class="public">
   <%= render partial: 'layouts/nav_bar' %>
   <div class="container">
+    <%= render partial: 'layouts/demo_bar' if show_demo_bar? %>
     <%= yield %>
   </div>
 </body>

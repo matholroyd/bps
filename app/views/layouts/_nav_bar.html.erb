@@ -25,9 +25,6 @@
               <li><%= link_to "Source code", AppConfig["source"]["code"] %></li>
             </ul>
           </li>
-          <% if show_demo_bar? %>
-            <%= render partial: "/layouts/demo_bar" %>
-          <% end %>
           <li><%= link_to "Admin", admin_dashboard_path %></li>
           <% if current_user %>
             <li><%= link_to "Sign Out", session_path, method: :delete %></li>
