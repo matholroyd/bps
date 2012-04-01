@@ -2,6 +2,9 @@ defaults: &DEFAULTS
   domain: bps.herokuapp.com
   email_domain: bps.herokuapp.com
   protocol: https
+  source: 
+    code: https://github.com/matholroyd/bps
+    readme: https://github.com/matholroyd/bps#readme
 
 development:
   <<: *DEFAULTS

@@ -1,10 +1,39 @@
-<nav id="nav">
-  <ul>
-    <% if current_user %>
-      <li><%= link_to "sign out", session_path, method: :delete %></li>
-      <li><%= link_to "admin", admin_dashboard_path %></li>
-    <% else %>
-      <li><%= link_to "admin", new_session_path %></li>
-    <% end %>
-  </ul>
-</nav>
+<div class="navbar navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </a>
+      <a class="brand" href="/">
+        <% if site_locked? %>
+          <%= site_data.name %>
+        <% else %>
+          Bitcoin Payment Service
+        <% end %>
+      </a>
+      <div class="nav-collapse">
+        <ul class="nav">
+          <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+              Get BPS
+              <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+              <li><%= link_to "Introduction", AppConfig["source"]["readme"] %></li>
+              <li><%= link_to "Source code", AppConfig["source"]["code"] %></li>
+            </ul>
+          </li>
+          <% if show_demo_bar? %>
+            <%= render partial: "/layouts/demo_bar" %>
+          <% end %>
+          <li><%= link_to "Admin", admin_dashboard_path %></li>
+          <% if current_user %>
+            <li><%= link_to "Sign Out", session_path, method: :delete %></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

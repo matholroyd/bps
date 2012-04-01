@@ -1,12 +1,14 @@
-<section id="demo-bar" class="warning">
-  <div>
-    <strong>This site is running in DEMO MODE!</strong>
-    <ul>
-      <li><%= link_to 'blank slate', blank_slate_demo_path %></li>
-      <li><%= link_to 'setup site', setup_site_demo_path %></li>
-      <li><%= link_to 'sign in', sign_in_demo_path %></li>
-      <li><%= link_to 'add bitcoin address', add_bitcoin_address_demo_path %></li>
-      <li><%= link_to 'add demo payment (only one available)', add_payment_demo_path %></li>
-    </ul>
-  </div>
-</section>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+    Demo Actions
+    <b class="caret"></b>
+  </a>
+  <ul class="dropdown-menu">
+    <li><%= link_to 'blank slate', blank_slate_demo_path %></li>
+    <li><%= link_to 'setup site', setup_site_demo_path %></li>
+    <li><%= link_to 'sign in', sign_in_demo_path %></li>
+    <li><%= link_to 'add bitcoin address', add_bitcoin_address_demo_path %></li>
+    <li><%= link_to 'add demo payment (only one available)', add_payment_demo_path %></li>
+  </ul>
+</li>
+

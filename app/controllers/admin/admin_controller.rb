@@ -8,7 +8,7 @@ class Admin::AdminController < ApplicationController
   def ensure_signed_in
     if current_user.nil?
       flash[:error] = "You need to be signed in."
-      redirect_to root_path
+      redirect_to new_session_path
     end
   end
     

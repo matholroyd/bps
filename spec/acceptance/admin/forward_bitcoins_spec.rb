@@ -15,7 +15,7 @@ feature "Sign in", %q{
   }
 
   scenario "send bitcoins", js: true do
-    Wallet.send_bitcoins(to: BitcoinAddress.generate.address, amount: 0.1)
+    # Wallet.send_bitcoins(to: BitcoinAddress.generate.address, amount: 0.1)
   end
   
 end
