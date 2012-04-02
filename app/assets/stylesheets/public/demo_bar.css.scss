@@ -1,4 +1,4 @@
-@import "mixins";
+@import "config";
 
 #demo-bar .navbar-inner {
   @include background-gradient(#a00, #900, 30%, 80%);
