@@ -13,7 +13,7 @@ feature "Get bitcoin address", %q{
     page.should have_content "This site is an online payment service for #{owner.full_name}."
     click_link "Make a payment"
 
-    page.should have_content "To make a payment to #{owner.full_name}"
+    page.should have_content "Describe your payment"
   
     # Blank description
     fill_in 'Description', with: ""

@@ -20,6 +20,12 @@
   <%= render partial: 'layouts/nav_bar' %>
   <div class="container">
     <%= render partial: 'layouts/demo_bar' if show_demo_bar? %>
+    <% flash.each do |type, message| %>
+      <div class="alert alert-<%= type %>">
+        <a class="close" data-dismiss="alert">×</a>
+        <%= message %>
+      </div>
+    <% end %>
     <%= yield %>
   </div>
 </body>

@@ -12,7 +12,7 @@ feature "Sign in", %q{
   scenario "Signing in gives access to admin", js: true do
     visit root_path
     
-    click_link "admin"
+    click_link "Admin"
     
     page.should have_content "Admin sign in"
     

@@ -4,7 +4,7 @@ module HelperMethods
     DBC.require(Site.locked_to_owner?)
     
     visit root_path
-    click_link "admin"
+    click_link "Admin"
 
     # Correct details
     fill_in "Email",    with: user.email
